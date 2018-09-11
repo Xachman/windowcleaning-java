@@ -41,6 +41,7 @@ public class StorageMock implements StorageI {
             while(iter.hasNext()) {
                 JSONObject jobj = iter.next();
                 Customer customer = new Customer();
+                customer.setId(new Integer(jobj.get("id").toString()));
                 customer.setName(jobj.get("name").toString());
                 customer.setAddress(jobj.get("address").toString());
                 customer.setPhone(jobj.get("phone").toString());
