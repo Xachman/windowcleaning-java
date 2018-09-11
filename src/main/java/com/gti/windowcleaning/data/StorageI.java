@@ -12,7 +12,9 @@ import java.util.List;
  * @author xach
  */
 public interface StorageI {
-   public List<Customer> getCustomers();
-   public Customer getCustomer(int id);
+    public List<Customer> getCustomers();
+    public Customer getCustomer(int id);
+
+    public List<Customer> getCustomersByName(String name);
     
 }

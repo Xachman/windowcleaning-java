@@ -61,5 +61,16 @@ public class StorageMock implements StorageI {
     public Customer getCustomer(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Customer> getCustomersByName(String name) {
+        List<Customer> customers = new ArrayList<>();
+        for(Customer customer: getCustomers()) {
+            if(customer.getName().contains(name)) {
+                customers.add(customer);
+            }
+        }
+        return customers;
+    }
     
 }

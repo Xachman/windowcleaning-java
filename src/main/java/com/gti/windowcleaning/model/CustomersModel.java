@@ -18,5 +18,7 @@ public class CustomersModel extends Model {
         System.out.println(storage.getCustomers());
         return storage.getCustomers();
     } 
-
+    public List<Customer> findByName(String name) {
+        return storage.getCustomersByName(name);
+    }
 }

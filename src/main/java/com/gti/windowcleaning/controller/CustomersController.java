@@ -12,12 +12,10 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 
 /**
  *
@@ -27,9 +25,32 @@ public class CustomersController {
     private CustomersModel customers = new CustomersModel();
     @FXML
     public ScrollPane scrollPane;
+    @FXML
+    public TextField findText;
 
     @FXML
     public void initialize() {
+        setScrollPane(customers.getCustomers());
+        
+    } 
+    
+    private void highlightRow(GridPane gridPane, final int row) {
+        gridPane.getChildren().forEach(i -> {
+            int cRow = gridPane.getRowIndex(i);
+            i.setStyle(null);
+            if(row == cRow) {
+                i.setStyle("-fx-background-color:#0095ff;");
+            }
+        });
+    }
+
+    @FXML
+    private void findByName() {
+        setScrollPane(customers.findByName(findText.getText()));
+    }
+
+    private void setScrollPane(List<Customer> customersParam) {
+        
         int row = 1;
         GridPane gridPane = new GridPane();
         ColumnConstraints col1 = new ColumnConstraints();
@@ -43,7 +64,8 @@ public class CustomersController {
         gridPane.add(new Label("Name"),1,0);
         gridPane.add(new Label("Address"),2,0);
         gridPane.add(new Label("Phone"),3,0);
-        for(Customer customer: customers.getCustomers()) {
+            System.out.println("Set Customers");
+        for(Customer customer: customersParam) {
             Label cusName = new Label(customer.getName());
             cusName.setPadding(new Insets(5,5,5,5));
             Pane paneName = new Pane(cusName);
@@ -72,18 +94,7 @@ public class CustomersController {
 
             row++;
         };
+            System.out.println("end loop");
         scrollPane.setContent(gridPane);
-         
-        
-    } 
-    
-    private void highlightRow(GridPane gridPane, final int row) {
-        gridPane.getChildren().forEach(i -> {
-            int cRow = gridPane.getRowIndex(i);
-            i.setStyle(null);
-            if(row == cRow) {
-                i.setStyle("-fx-background-color:#0095ff;");
-            }
-        });
     }
 }
