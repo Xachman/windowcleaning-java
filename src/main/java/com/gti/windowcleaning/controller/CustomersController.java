@@ -69,10 +69,10 @@ public class CustomersController {
             Label cusName = new Label(customer.getName());
             cusName.setPadding(new Insets(5,5,5,5));
             Pane paneName = new Pane(cusName);
-            Label cusAdd = new Label(customer.getName());
+            Label cusAdd = new Label(customer.getAddress());
             cusAdd.setPadding(new Insets(5,5,5,5));
             Pane paneAdd = new Pane(cusAdd);
-            Label cusPane = new Label(customer.getName());
+            Label cusPane = new Label(customer.getPhone());
             cusPane.setPadding(new Insets(5,5,5,5));
             Pane panePhone = new Pane(cusPane);
             final int useRow = row;
