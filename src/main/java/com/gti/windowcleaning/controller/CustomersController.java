@@ -7,15 +7,20 @@ package com.gti.windowcleaning.controller;
 
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.model.CustomersModel;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.CacheHint;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -23,6 +28,8 @@ import javafx.scene.layout.Pane;
  */
 public class CustomersController {
     private CustomersModel customers = new CustomersModel();
+    private VBox vbox;
+
     @FXML
     public ScrollPane scrollPane;
     @FXML
@@ -34,14 +41,11 @@ public class CustomersController {
         
     } 
     
-    private void highlightRow(GridPane gridPane, final int row) {
-        gridPane.getChildren().forEach(i -> {
-            int cRow = gridPane.getRowIndex(i);
-            i.setStyle(null);
-            if(row == cRow) {
-                i.setStyle("-fx-background-color:#0095ff;");
-            }
+    private void highlightRow(HBox hbox) {
+        vbox.getChildren().forEach(i -> {
+            i.getStyleClass().remove("customer-list-highlight");
         });
+        hbox.getStyleClass().add("customer-list-highlight");
     }
 
     @FXML
@@ -59,42 +63,54 @@ public class CustomersController {
         col2.setPercentWidth(50);
         ColumnConstraints col3 = new ColumnConstraints();
         col3.setPercentWidth(25);
+
+        List<Node> items = new ArrayList<>();
         
+        HBox headers = new HBox();
         gridPane.setPadding(new Insets(10, 10, 10, 10));
-        gridPane.add(new Label("Name"),1,0);
-        gridPane.add(new Label("Address"),2,0);
-        gridPane.add(new Label("Phone"),3,0);
+        Label lName = new Label("Name");
+        lName.getStyleClass().add("customer-list-header");
+        headers.getChildren().add(lName);
+        Label lAddress = new Label("Address");
+        lAddress.getStyleClass().add("customer-list-header");
+        headers.getChildren().add(lAddress);
+        Label lPhone = new Label("Address");
+        lPhone.getStyleClass().add("customer-list-header");
+        headers.getChildren().add(lPhone);
+        headers.getStyleClass().add("row");
+        items.add(headers);
             System.out.println("Set Customers");
         for(Customer customer: customersParam) {
+            HBox hbox = new HBox();
+            hbox.getStyleClass().add("row");
             Label cusName = new Label(customer.getName());
-            cusName.setPadding(new Insets(5,5,5,5));
-            Pane paneName = new Pane(cusName);
+            cusName.getStyleClass().add("customer-list-item");
             Label cusAdd = new Label(customer.getAddress());
-            cusAdd.setPadding(new Insets(5,5,5,5));
-            Pane paneAdd = new Pane(cusAdd);
-            Label cusPane = new Label(customer.getPhone());
-            cusPane.setPadding(new Insets(5,5,5,5));
-            Pane panePhone = new Pane(cusPane);
-            final int useRow = row;
-            paneName.setOnMouseClicked(e -> {
+            cusAdd.getStyleClass().add("customer-list-item");
+            Label cusPhone = new Label(customer.getPhone());
+            cusPhone.getStyleClass().add("customer-list-item");
+            cusName.setOnMouseClicked(e -> {
+                highlightRow(hbox);
                 System.out.println("Customer "+customer.getId()); 
-                highlightRow(gridPane, useRow);
             });
-            paneAdd.setOnMouseClicked(e -> {
+            cusAdd.setOnMouseClicked(e -> {
+                highlightRow(hbox);
                 System.out.println("Customer "+customer.getId()); 
-                highlightRow(gridPane, useRow);
             });
-            panePhone.setOnMouseClicked(e -> {
+            cusPhone.setOnMouseClicked(e -> {
+                highlightRow(hbox);
                 System.out.println("Customer "+customer.getId()); 
-                highlightRow(gridPane, useRow);
             });
-            gridPane.add(paneName,1,row);
-            gridPane.add(paneAdd,2,row);
-            gridPane.add(panePhone,3,row);
-
-            row++;
+            hbox.getChildren().addAll(cusName, cusAdd, cusPhone);
+            
+            hbox.setCache(true);
+            hbox.setCacheHint(CacheHint.SPEED);
+            items.add(hbox);
         };
             System.out.println("end loop");
-        scrollPane.setContent(gridPane);
+            vbox = new VBox();
+            vbox.getStyleClass().add("row");
+            vbox.getChildren().addAll(items);
+            scrollPane.setContent(vbox);
     }
 }

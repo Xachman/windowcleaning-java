@@ -1,0 +1,13 @@
+
+.customer-list-header {
+    -fx-min-width: 200;
+    -fx-padding: 5 5 5 5;
+}
+.customer-list-item {
+    -fx-min-width: 200;
+    -fx-padding: 5 5 5 5;
+}
+.customer-list-highlight {
+    -fx-background-color: #4c99ff; 
+}
+
