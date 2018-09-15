@@ -34,7 +34,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
-        scene = new Scene(root, 1920, 1080);
+        scene = new Scene(root, 1000, 720);
         scene.getStylesheets().add(getClass().getResource("/css/main.css").toString());
         primaryStage.setScene(scene);
         primaryStage.show();

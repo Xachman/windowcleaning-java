@@ -79,7 +79,6 @@ public class CustomersController {
         headers.getChildren().add(lPhone);
         headers.getStyleClass().add("row");
         items.add(headers);
-            System.out.println("Set Customers");
         for(Customer customer: customersParam) {
             HBox hbox = new HBox();
             hbox.getStyleClass().add("row");
