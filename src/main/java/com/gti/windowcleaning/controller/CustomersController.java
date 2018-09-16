@@ -7,20 +7,28 @@ package com.gti.windowcleaning.controller;
 
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.model.CustomersModel;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  *
@@ -29,7 +37,10 @@ import javafx.scene.layout.VBox;
 public class CustomersController {
     private CustomersModel customers = new CustomersModel();
     private VBox vbox;
+    private int selectedItem = 0;
 
+    @FXML
+    private AnchorPane content; 
     @FXML
     public ScrollPane scrollPane;
     @FXML
@@ -79,7 +90,7 @@ public class CustomersController {
         headers.getChildren().add(lPhone);
         headers.getStyleClass().add("row");
         items.add(headers);
-        for(Customer customer: customersParam) {
+        customersParam.stream().map((customer) -> {
             HBox hbox = new HBox();
             hbox.getStyleClass().add("row");
             Label cusName = new Label(customer.getName());
@@ -89,27 +100,58 @@ public class CustomersController {
             Label cusPhone = new Label(customer.getPhone());
             cusPhone.getStyleClass().add("customer-list-item");
             cusName.setOnMouseClicked(e -> {
-                highlightRow(hbox);
-                System.out.println("Customer "+customer.getId()); 
+                selectItem(customer, hbox);
             });
             cusAdd.setOnMouseClicked(e -> {
-                highlightRow(hbox);
-                System.out.println("Customer "+customer.getId()); 
+                selectItem(customer, hbox);
             });
             cusPhone.setOnMouseClicked(e -> {
-                highlightRow(hbox);
-                System.out.println("Customer "+customer.getId()); 
+                selectItem(customer, hbox);
             });
             hbox.getChildren().addAll(cusName, cusAdd, cusPhone);
-            
+            return hbox;            
+        }).map((hbox) -> {
             hbox.setCache(true);
+            return hbox;
+        }).map((hbox) -> {
             hbox.setCacheHint(CacheHint.SPEED);
+            return hbox;
+        }).forEachOrdered((hbox) -> {
             items.add(hbox);
-        };
+        });
             System.out.println("end loop");
             vbox = new VBox();
             vbox.getStyleClass().add("row");
             vbox.getChildren().addAll(items);
             scrollPane.setContent(vbox);
+    }
+
+    private boolean isSelected(int itemId) {
+        return itemId == selectedItem;
+    }
+
+    private void openAddEdit(int id) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/view/customer/add_edit.fxml"));
+            Stage stage = (Stage) scrollPane.getScene().getWindow();
+            Scene scene = stage.getScene();
+            content = (AnchorPane) scene.lookup("#rootPane");
+            content.getChildren().setAll(root);
+        } catch (IOException ex) {
+            Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setSelectedItem(int selectedItem) {
+        this.selectedItem = selectedItem;
+    }
+
+    public void selectItem(Customer customer, HBox hbox) {
+        highlightRow(hbox);
+        if(isSelected(customer.getId())) {
+            openAddEdit(customer.getId());
+        }
+        setSelectedItem(customer.getId());
     }
 }
