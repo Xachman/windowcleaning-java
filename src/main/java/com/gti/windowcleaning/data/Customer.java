@@ -5,6 +5,9 @@
  */
 package com.gti.windowcleaning.data;
 
+import com.gti.windowcleaning.data.customer.Contact;
+import java.util.Date;
+
 /**
  *
  * @author xach
@@ -12,12 +15,29 @@ package com.gti.windowcleaning.data;
 public class Customer {
     private int id;
     private String name;
-    private String address;
-    private String zip;
-    private String phone;
-    private String address_b;
-    private String zip_b;
-    private String phone_b;
+    private String location;
+    private String area;
+    private Contact contact;
+    private Contact contactBilling;
+    private boolean monthly;
+    private boolean EOM;
+    private String obtainedBy;
+    private Date obtainedDate;
+    private double monthlyBill;
+    private double credit;
+    private double deposit;
+    private double stateTaxPer;
+    private boolean active;
+    private Date inactiveDate;
+    private String royaltyPaymentTo;
+    private String notes;
+    private double billCharge;
+    private boolean AWWLine;
+    private boolean AWWPUR;
+    private String division;
+    private String type;
+    private boolean quarterlyBill;
+    private String billNotes;
 
     public int getId() {
         return id;
@@ -35,54 +55,188 @@ public class Customer {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
-    public String getZip() {
-        return zip;
+    public Contact getContactBilling() {
+        return contactBilling;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public void setContactBilling(Contact contactBilling) {
+        this.contactBilling = contactBilling;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getLocation() {
+        return location;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getAddress_b() {
-        return address_b;
+    public String getArea() {
+        return area;
     }
 
-    public void setAddress_b(String address_b) {
-        this.address_b = address_b;
+    public void setArea(String area) {
+        this.area = area;
     }
 
-    public String getZip_b() {
-        return zip_b;
+    public boolean isMonthly() {
+        return monthly;
     }
 
-    public void setZip_b(String zip_b) {
-        this.zip_b = zip_b;
+    public void setMonthly(boolean monthly) {
+        this.monthly = monthly;
     }
 
-    public String getPhone_b() {
-        return phone_b;
+    public boolean isEOM() {
+        return EOM;
     }
 
-    public void setPhone_b(String phone_b) {
-        this.phone_b = phone_b;
+    public void setEOM(boolean EOM) {
+        this.EOM = EOM;
     }
-   
+
+    public String getObtainedBy() {
+        return obtainedBy;
+    }
+
+    public void setObtainedBy(String obtainedBy) {
+        this.obtainedBy = obtainedBy;
+    }
+
+    public Date getObtainedDate() {
+        return obtainedDate;
+    }
+
+    public void setObtainedDate(Date obtainedDate) {
+        this.obtainedDate = obtainedDate;
+    }
+
+    public double getMonthlyBill() {
+        return monthlyBill;
+    }
+
+    public void setMonthlyBill(double monthlyBill) {
+        this.monthlyBill = monthlyBill;
+    }
+
+    public double getCredit() {
+        return credit;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
+    public double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(double deposit) {
+        this.deposit = deposit;
+    }
+
+    public double getStateTaxPer() {
+        return stateTaxPer;
+    }
+
+    public void setStateTaxPer(double stateTaxPer) {
+        this.stateTaxPer = stateTaxPer;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Date getInactiveDate() {
+        return inactiveDate;
+    }
+
+    public void setInactiveDate(Date inactiveDate) {
+        this.inactiveDate = inactiveDate;
+    }
+
+    public String getRoyaltyPaymentTo() {
+        return royaltyPaymentTo;
+    }
+
+    public void setRoyaltyPaymentTo(String royaltyPaymentTo) {
+        this.royaltyPaymentTo = royaltyPaymentTo;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public double getBillCharge() {
+        return billCharge;
+    }
+
+    public void setBillCharge(double billCharge) {
+        this.billCharge = billCharge;
+    }
+
+    public boolean isAWWLine() {
+        return AWWLine;
+    }
+
+    public void setAWWLine(boolean AWWLine) {
+        this.AWWLine = AWWLine;
+    }
+
+    public boolean isAWWPUR() {
+        return AWWPUR;
+    }
+
+    public void setAWWPUR(boolean AWWPUR) {
+        this.AWWPUR = AWWPUR;
+    }
+
+    public String getDivision() {
+        return division;
+    }
+
+    public void setDivision(String division) {
+        this.division = division;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean isQuarterlyBill() {
+        return quarterlyBill;
+    }
+
+    public void setQuarterlyBill(boolean quarterlyBill) {
+        this.quarterlyBill = quarterlyBill;
+    }
+
+    public String getBillNotes() {
+        return billNotes;
+    }
+
+    public void setBillNotes(String billNotes) {
+        this.billNotes = billNotes;
+    }
     
-
 }
