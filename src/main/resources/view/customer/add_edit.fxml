@@ -12,12 +12,12 @@
   <children>
     <GridPane prefHeight="30.0" prefWidth="580.0">
       <children>
-        <CheckBox mnemonicParsing="false" text="Active" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <CheckBox fx:id="active" mnemonicParsing="false" text="Active" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label text="Inactive Since" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <CheckBox mnemonicParsing="false" text="AWW Pur" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <CheckBox fx:id="AWWPur" mnemonicParsing="false" text="AWW Pur" GridPane.columnIndex="3" GridPane.rowIndex="0" />
         <Label text="Customer ID" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-        <Label text="###" GridPane.columnIndex="5" GridPane.rowIndex="0" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Label fx:id="customerId" text="###" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+        <TextField fx:id="inactiveSince" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,15 +40,15 @@
         <Label text="Customer Since" GridPane.columnIndex="3" GridPane.rowIndex="0" />
         <Label text="Optained By" GridPane.columnIndex="3" GridPane.rowIndex="1" />
         <Label text="Royalty To" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="name" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField fx:id="location" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <GridPane prefHeight="34.000091552734375" prefWidth="294.0000999999975" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <children>
-            <TextField prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <TextField fx:id="area" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
               <children>
-                <Label text="Label" />
-                <ChoiceBox>
+                <Label text="Type" HBox.hgrow="ALWAYS" />
+                <ChoiceBox fx:id="type">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -59,10 +59,10 @@
                 </ChoiceBox>
               </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
               <children>
-                <Label text="Label" />
-                <ChoiceBox>
+                <Label text="Company" />
+                <ChoiceBox fx:id="company">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -75,18 +75,18 @@
             </HBox>
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="45.0" prefWidth="100.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <TextField prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField fx:id="customerSince" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+        <TextField fx:id="obtainedBy" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+        <TextField fx:id="royaltyTo" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+        <TextField fx:id="monthlyBill" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="7.0" prefWidth="100.0" />
@@ -121,14 +121,14 @@
         <Label text="City, St, Zip" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <Label text="Fax" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <Label text="Phone" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="contact" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField fx:id="addressLine1" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="addressLine2" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
           <children>
-            <TextField prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <TextField minWidth="9.0" prefWidth="9.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <TextField fx:id="city" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="state" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField fx:id="zip" minWidth="9.0" prefWidth="9.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="336.0" minWidth="10.0" percentWidth="45.0" prefWidth="87.0" />
@@ -139,8 +139,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField fx:id="fax" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="phone" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         <Button mnemonicParsing="false" text="--&gt;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
         <Label text="Contact" GridPane.columnIndex="3" GridPane.rowIndex="0" />
         <Label text="Address" GridPane.columnIndex="3" GridPane.rowIndex="1" />
@@ -148,16 +148,16 @@
         <Label text="City,St,Zip" GridPane.columnIndex="3" GridPane.rowIndex="3" />
         <Label text="Fax" GridPane.columnIndex="3" GridPane.rowIndex="4" />
         <Label text="Phone" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+        <TextField fx:id="faxB" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+        <TextField fx:id="phoneB" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+        <TextField fx:id="concactB" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+        <TextField fx:id="addressLine1B" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+        <TextField fx:id="addressLine2B" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
         <GridPane GridPane.columnIndex="4" GridPane.rowIndex="3">
           <children>
-            <TextField prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <TextField prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <TextField fx:id="cityB" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="stateB" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField fx:id="zipB" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" percentWidth="45.0" prefWidth="335.0" />
@@ -188,21 +188,21 @@
     </GridPane>
     <GridPane>
       <children>
-        <CheckBox mnemonicParsing="false" text="4 Week Invoice" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <CheckBox mnemonicParsing="false" text="Calendar Month Invoice" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <CheckBox mnemonicParsing="false" text="Quarterly Invoice" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label text="Bill Change" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <CheckBox id="quartarleyInvoice" mnemonicParsing="false" text="4 Week Invoice" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <CheckBox fx:id="montlyBill" mnemonicParsing="false" text="Calendar Month Invoice" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <CheckBox fx:id="quarterlyInvoice" mnemonicParsing="false" text="Quarterly Invoice" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label text="Bill Charge" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label text="Credit" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label text="Deposit" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <Label text="Sales Tax" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+        <TextField fx:id="billCharge" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <TextField fx:id="credit" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField fx:id="deposit" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <TextField fx:id="salesTaxPer" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
         <Label text="Customer Notes" GridPane.columnIndex="3" GridPane.rowIndex="0" />
         <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="3">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="90.0" prefWidth="487.0" />
+            <AnchorPane id="Content" fx:id="notes" minHeight="0.0" minWidth="0.0" prefHeight="90.0" prefWidth="487.0" />
           </content>
         </ScrollPane>
       </children>
@@ -223,24 +223,24 @@
       <children>
         <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="128.0" prefWidth="474.0" />
+            <AnchorPane id="Content" fx:id="billingNotes" minHeight="0.0" minWidth="0.0" prefHeight="128.0" prefWidth="474.0" />
           </content>
         </ScrollPane>
         <Label text="History" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label text="Collection Notes" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
           <children>
-            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+            <ScrollPane fx:id="jobs" prefHeight="200.0" prefWidth="200.0">
               <content>
                 <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
               </content>
             </ScrollPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
               <children>
-                <Button mnemonicParsing="false" text="Add" />
-                <Button mnemonicParsing="false" text="Edit" />
-                <Button mnemonicParsing="false" text="Delete" />
-                <Button mnemonicParsing="false" text="Create" />
+                <Button fx:id="addJob" mnemonicParsing="false" text="Add" />
+                <Button fx:id="editJob" mnemonicParsing="false" text="Edit" />
+                <Button fx:id="deleteJob" mnemonicParsing="false" text="Delete" />
+                <Button fx:id="createJob" mnemonicParsing="false" text="Create" />
               </children>
             </HBox>
           </children>
@@ -260,7 +260,7 @@
     </GridPane>
     <HBox alignment="CENTER" prefHeight="90.0" prefWidth="980.0">
       <children>
-        <Button mnemonicParsing="false" text="OK" />
+        <Button fx:id="update" mnemonicParsing="false" text="OK" />
         <Button mnemonicParsing="false" text="Cancel" />
       </children>
     </HBox>
