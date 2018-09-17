@@ -17,6 +17,7 @@ public class Contact {
     private String State;
     private String addressLine1;
     private String addressLine2;
+    private String fax;
 
     public String getName() {
         return name;
@@ -72,6 +73,13 @@ public class Contact {
 
     public void setAddressLine2(String addressLine2) {
         this.addressLine2 = addressLine2;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+    public String getFax() {
+        return fax;
     }
 
 
