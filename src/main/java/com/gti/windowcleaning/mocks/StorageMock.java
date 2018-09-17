@@ -11,7 +11,9 @@ import com.gti.windowcleaning.data.customer.Contact;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +40,7 @@ public class StorageMock implements StorageI {
             JSONArray jCustomers = (JSONArray) obj;
             
             Iterator<JSONObject> iter = jCustomers.iterator();
-
+        SimpleDateFormat sdf = new SimpleDateFormat("m/d/yyyy");
             while(iter.hasNext()) {
                 JSONObject jobj = iter.next();
                 Customer customer = new Customer();
@@ -83,26 +85,26 @@ public class StorageMock implements StorageI {
                 String name = jobj.get("name").toString();
                 String location = jobj.get("location").toString();
                 String area = jobj.get("area").toString();
-                boolean monthly = (boolean) jobj.get("monthly");
-                boolean EOM = (boolean) jobj.get("EOM");
+                boolean monthly = parseBoolean(jobj.get("monthly"));
+                boolean EOM = parseBoolean(jobj.get("EOM"));
                 String obtainedBy = jobj.get("obtainedBy").toString();
-                String optainedDate = jobj.get("obtainedDate").toString();
-                String montlyBill = jobj.get("montlyBill").toString();
-                String credit = jobj.get("credit").toString();
-                String deposit = jobj.get("deposit").toString();
-                String stateTaxPer = jobj.get("stateTaxPer").toString();
-                String active = jobj.get("active").toString();
-                String inactiveDate = jobj.get("inactiveDate").toString();
-                String royaltyPayment = jobj.get("royaltyPayment").toString();
-                String notes = jobj.get("notes").toString();
-                String billCharge = jobj.get("billCharge").toString();
-                String AWWLine = jobj.get("AWWLine").toString();
-                String AWWPur = jobj.get("AWWPur").toString();
-                String division = jobj.get("division").toString();
-                String type = jobj.get("type").toString();
-                String company = jobj.get("company").toString();
-                String quarterlyBill = jobj.get("quarterlyBill").toString();
-                String billNotes = jobj.get("billNotes").toString();
+                String obtainedDate = jobj.get("obtainedDate").toString();
+                double montlyBill = parseDouble(jobj.get("montlyBill"));
+                double credit = parseDouble(jobj.get("credit"));
+                double deposit = parseDouble(jobj.get("deposit"));
+                double stateTaxPer = parseDouble(jobj.get("stateTaxPer"));
+                boolean active = parseBoolean(jobj.get("active"));
+                String inactiveDate = parseString(jobj.get("inactiveDate"));
+                String royaltyPayment = parseString(jobj.get("royaltyPayment"));
+                String notes = parseString(jobj.get("notes"));
+                double billCharge = parseDouble(jobj.get("billCharge"));
+                boolean AWWLine = parseBoolean(jobj.get("AWWLine"));
+                boolean AWWPur = parseBoolean(jobj.get("AWWPur"));
+                String division = parseString(jobj.get("division"));
+                String type = parseString(jobj.get("type"));
+                String company = parseString(jobj.get("company"));
+                boolean quarterlyBill = parseBoolean(jobj.get("quarterlyBill"));
+                String billNotes = parseString(jobj.get("billNotes"));
                
 
                 customer.setId(id);
@@ -114,13 +116,35 @@ public class StorageMock implements StorageI {
                 customer.setMonthly(monthly);
                 customer.setEOM(EOM);
                 customer.setObtainedBy(obtainedBy);
-                customer.setObtainedDate(obtainedBy);
+                customer.setObtainedDate(sdf.parse(obtainedDate));
+                customer.setMonthlyBill(montlyBill);
+                customer.setCredit(credit);
+                customer.setDeposit(deposit);
+                customer.setStateTaxPer(stateTaxPer);
+                customer.setActive(active);
+                if(!inactiveDate.equals("")) {
+                    customer.setInactiveDate(sdf.parse(inactiveDate));
+                }
+                customer.setRoyaltyPaymentTo(royaltyPayment);
+                customer.setNotes(notes);
+                customer.setBillCharge(billCharge);
+                customer.setAWWLine(AWWLine);
+                customer.setAWWPUR(AWWPur);
+                customer.setDivision(division);
+                customer.setType(type);
+                customer.setCompany(company);
+                customer.setQuarterlyBill(quarterlyBill);
+                customer.setBillNotes(billNotes);
+
+                customers.add(customer);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(StorageMock.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(StorageMock.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
+            Logger.getLogger(StorageMock.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (java.text.ParseException ex) {
             Logger.getLogger(StorageMock.class.getName()).log(Level.SEVERE, null, ex);
         }
         return customers;
@@ -140,6 +164,22 @@ public class StorageMock implements StorageI {
             }
         }
         return customers;
+    }
+
+    private double parseDouble(Object d) {
+       if(d == null) return 0.00;
+       
+       return new Double(d.toString()); 
+    }
+
+    private boolean parseBoolean(Object b) {
+        if(b == null) return false;
+        return (boolean) b;
+    }
+
+    private String parseString(Object s) {
+        if(s == null) return "";
+        return s.toString();
     }
     
 }

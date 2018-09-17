@@ -38,6 +38,15 @@ public class Customer {
     private String type;
     private boolean quarterlyBill;
     private String billNotes;
+    private String company;
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
 
     public int getId() {
         return id;

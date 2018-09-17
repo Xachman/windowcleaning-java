@@ -26,7 +26,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -95,9 +94,9 @@ public class CustomersController {
             hbox.getStyleClass().add("row");
             Label cusName = new Label(customer.getName());
             cusName.getStyleClass().add("customer-list-item");
-            Label cusAdd = new Label(customer.getAddress());
+            Label cusAdd = new Label(customer.getContact().getAddressLine1());
             cusAdd.getStyleClass().add("customer-list-item");
-            Label cusPhone = new Label(customer.getPhone());
+            Label cusPhone = new Label(customer.getContact().getPhone());
             cusPhone.getStyleClass().add("customer-list-item");
             cusName.setOnMouseClicked(e -> {
                 selectItem(customer, hbox);
