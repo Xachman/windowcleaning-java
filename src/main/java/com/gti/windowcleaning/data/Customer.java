@@ -5,6 +5,7 @@
  */
 package com.gti.windowcleaning.data;
 
+import com.gti.windowcleaning.data.annotations.Validate;
 import com.gti.windowcleaning.data.customer.Contact;
 import java.util.Date;
 
@@ -14,12 +15,19 @@ import java.util.Date;
  */
 public class Customer {
     private int id;
+    @Validate
     private String name;
+    @Validate
     private String location;
+    @Validate
     private String area;
+    @Validate
     private Contact contact;
+    @Validate
     private Contact contactBilling;
+    @Validate
     private boolean monthly;
+    @Validate
     private boolean EOM;
     private String obtainedBy;
     private Date obtainedDate;
@@ -32,9 +40,12 @@ public class Customer {
     private String royaltyPaymentTo;
     private String notes;
     private double billCharge;
+    @Validate
     private boolean AWWLine;
+    @Validate
     private boolean AWWPUR;
     private String division;
+    @Validate
     private String type;
     private boolean quarterlyBill;
     private String billNotes;

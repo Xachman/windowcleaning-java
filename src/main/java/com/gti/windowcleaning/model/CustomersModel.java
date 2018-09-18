@@ -13,7 +13,7 @@ import java.util.List;
  * @author xach
  */
 public class CustomersModel extends Model {
-
+    
     public List<Customer> getCustomers() {
         System.out.println(storage.getCustomers());
         return storage.getCustomers();
@@ -21,4 +21,9 @@ public class CustomersModel extends Model {
     public List<Customer> findByName(String name) {
         return storage.getCustomersByName(name);
     }
+
+    public void save(Customer customer) throws MustIncludeException {
+        super.save(customer);
+    }
+
 }
