@@ -15,11 +15,10 @@ import java.util.List;
 public class CustomersModel extends Model {
     
     public List<Customer> getCustomers() {
-        System.out.println(storage.getCustomers());
-        return storage.getCustomers();
+        return storage.get(Customer.class);
     } 
-    public List<Customer> findByName(String name) {
-        return storage.getCustomersByName(name);
+    public List<Customer> findByFieldName(String name) {
+        return storage.getByField(Customer.class, name);
     }
 
     public void save(Customer customer) throws MustIncludeException {

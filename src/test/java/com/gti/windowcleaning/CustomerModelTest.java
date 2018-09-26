@@ -23,7 +23,7 @@ public class CustomerModelTest {
         try {
             model.save(customer);
         } catch(MustIncludeException e) {
-            Assert.assertEquals("[name, location, area, contact, contactBilling, type]",e.getMessage());
+            Assert.assertEquals("[name, location, area, contact, city, phone, state, addressLine1, addressLine2, zip, contactB, cityB, phoneB, stateB, addressLine1B, addressLine2B, zipB, type]",e.getMessage());
             throw e;
         }
         

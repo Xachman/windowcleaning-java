@@ -6,8 +6,8 @@
 package com.gti.windowcleaning.model;
 
 import com.gti.windowcleaning.data.StorageI;
-import com.gti.windowcleaning.data.annotations.Validate;
 import com.gti.windowcleaning.mocks.StorageMock;
+import com.j256.ormlite.field.DatabaseField;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -33,14 +33,16 @@ abstract class Model {
         List<String> errorFields =  new ArrayList<>();       
         for(Field field: objectClass.getDeclaredFields()) {
             field.setAccessible(true);
-            if(field.isAnnotationPresent(Validate.class)) {
-                if(!fieldIsSet(field, object)) {
+            if(field.isAnnotationPresent(DatabaseField.class)) {
+                DatabaseField dbField = (DatabaseField) field.getAnnotation(DatabaseField.class);
+                if(!dbField.canBeNull() && !fieldIsSet(field, object)) {
                     errorFields.add(field.getName());
                 }
             }
         }
 
         if(errorFields.size() > 0) {
+            System.out.println(errorFields.toString());
             throw new MustIncludeException(errorFields.toString());
         }
     } 

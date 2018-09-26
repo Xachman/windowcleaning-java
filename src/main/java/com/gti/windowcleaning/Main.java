@@ -5,6 +5,7 @@
  */
 package com.gti.windowcleaning;
 
+import com.gti.windowcleaning.data.SQLiteStorage;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -40,7 +41,8 @@ public class Main extends Application {
         primaryStage.show();
         System.out.println(scene);
         System.out.println(scene.getStylesheets());
-
+        SQLiteStorage storage = new SQLiteStorage();
+        storage.setup();
     }
 
  

@@ -5,50 +5,91 @@
  */
 package com.gti.windowcleaning.data;
 
-import com.gti.windowcleaning.data.annotations.Validate;
-import com.gti.windowcleaning.data.customer.Contact;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
 
 /**
  *
  * @author xach
  */
+@DatabaseTable(tableName = "customers")
 public class Customer {
+    @DatabaseField(generatedId = true)
     private int id;
-    @Validate
+    @DatabaseField(canBeNull = false)
     private String name;
-    @Validate
+    @DatabaseField(canBeNull = false)
     private String location;
-    @Validate
+    @DatabaseField(canBeNull = false)
     private String area;
-    @Validate
-    private Contact contact;
-    @Validate
-    private Contact contactBilling;
-    @Validate
+    @DatabaseField(canBeNull = false)
+    private String contact;
+    @DatabaseField(canBeNull = false)
+    private String city;
+    @DatabaseField(canBeNull = false)
+    private String phone;
+    @DatabaseField(canBeNull = false)
+    private String state;
+    @DatabaseField(canBeNull = false)
+    private String addressLine1;
+    @DatabaseField(canBeNull = false)
+    private String addressLine2;
+    @DatabaseField(canBeNull = false)
+    private String zip;
+    @DatabaseField(canBeNull = false)
+    private String contactB;
+    @DatabaseField(canBeNull = false)
+    private String cityB;
+    @DatabaseField(canBeNull = false)
+    private String phoneB;
+    @DatabaseField(canBeNull = false)
+    private String stateB;
+    @DatabaseField(canBeNull = false)
+    private String addressLine1B;
+    @DatabaseField(canBeNull = false)
+    private String addressLine2B;
+    @DatabaseField(canBeNull = false)
+    private String zipB;
+    @DatabaseField(canBeNull = false)
     private boolean monthly;
-    @Validate
+    @DatabaseField(canBeNull = false)
     private boolean EOM;
+    @DatabaseField()
     private String obtainedBy;
+    @DatabaseField()
     private Date obtainedDate;
+    @DatabaseField()
     private double monthlyBill;
+    @DatabaseField()
     private double credit;
+    @DatabaseField()
     private double deposit;
+    @DatabaseField()
     private double stateTaxPer;
+    @DatabaseField()
     private boolean active;
+    @DatabaseField()
     private Date inactiveDate;
+    @DatabaseField()
     private String royaltyPaymentTo;
+    @DatabaseField()
     private String notes;
+    @DatabaseField()
     private double billCharge;
-    @Validate
+    @DatabaseField(canBeNull = false)
     private boolean AWWLine;
-    @Validate
+    @DatabaseField(canBeNull = false)
     private boolean AWWPUR;
+    @DatabaseField()
     private String division;
-    @Validate
+    @DatabaseField(canBeNull = false)
     private String type;
+    @DatabaseField()
     private boolean quarterlyBill;
+    @DatabaseField()
     private String billNotes;
+    @DatabaseField()
     private String company;
 
     public String getCompany() {
@@ -75,22 +116,14 @@ public class Customer {
         this.name = name;
     }
 
-    public Contact getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(Contact contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
-
-    public Contact getContactBilling() {
-        return contactBilling;
-    }
-
-    public void setContactBilling(Contact contactBilling) {
-        this.contactBilling = contactBilling;
-    }
-
+    
     public String getLocation() {
         return location;
     }
@@ -257,6 +290,110 @@ public class Customer {
 
     public void setBillNotes(String billNotes) {
         this.billNotes = billNotes;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
+    }
+
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getContactB() {
+        return contactB;
+    }
+
+    public void setContactB(String contactB) {
+        this.contactB = contactB;
+    }
+
+    public String getCityB() {
+        return cityB;
+    }
+
+    public void setCityB(String cityB) {
+        this.cityB = cityB;
+    }
+
+    public String getPhoneB() {
+        return phoneB;
+    }
+
+    public void setPhoneB(String phoneB) {
+        this.phoneB = phoneB;
+    }
+
+    public String getStateB() {
+        return stateB;
+    }
+
+    public void setStateB(String stateB) {
+        this.stateB = stateB;
+    }
+
+    public String getAddressLine1B() {
+        return addressLine1B;
+    }
+
+    public void setAddressLine1B(String addressLine1B) {
+        this.addressLine1B = addressLine1B;
+    }
+
+    public String getAddressLine2B() {
+        return addressLine2B;
+    }
+
+    public void setAddressLine2B(String addressLine2B) {
+        this.addressLine2B = addressLine2B;
+    }
+
+    public String getZipB() {
+        return zipB;
+    }
+
+    public void setZipB(String zipB) {
+        this.zipB = zipB;
     }
     
 }

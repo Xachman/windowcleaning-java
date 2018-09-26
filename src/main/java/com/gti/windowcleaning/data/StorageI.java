@@ -12,9 +12,9 @@ import java.util.List;
  * @author xach
  */
 public interface StorageI {
-    public List<Customer> getCustomers();
-    public Customer getCustomer(int id);
-
-    public List<Customer> getCustomersByName(String name);
-    
+    public <T> List<T> get(Class<T> clazz);
+    public <T> T get(Class<T> clazz, int id);
+    public <T> List<T> getByField(Class<T> clazz, String fieldName);
+    public <T>  List<T> add(Object object); 
+    public void remove(Class clazz, int id);
 }

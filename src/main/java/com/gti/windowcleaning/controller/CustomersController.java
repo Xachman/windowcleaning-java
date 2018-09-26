@@ -60,7 +60,7 @@ public class CustomersController {
 
     @FXML
     private void findByName() {
-        setScrollPane(customers.findByName(findText.getText()));
+        setScrollPane(customers.findByFieldName("name"));
     }
 
     private void setScrollPane(List<Customer> customersParam) {
@@ -94,20 +94,20 @@ public class CustomersController {
             hbox.getStyleClass().add("row");
             Label cusName = new Label(customer.getName());
             cusName.getStyleClass().add("customer-list-item");
-            Label cusAdd = new Label(customer.getContact().getAddressLine1());
-            cusAdd.getStyleClass().add("customer-list-item");
-            Label cusPhone = new Label(customer.getContact().getPhone());
-            cusPhone.getStyleClass().add("customer-list-item");
-            cusName.setOnMouseClicked(e -> {
-                selectItem(customer, hbox);
-            });
-            cusAdd.setOnMouseClicked(e -> {
-                selectItem(customer, hbox);
-            });
-            cusPhone.setOnMouseClicked(e -> {
-                selectItem(customer, hbox);
-            });
-            hbox.getChildren().addAll(cusName, cusAdd, cusPhone);
+//            Label cusAdd = new Label(customer.getContact().getAddressLine1());
+//            cusAdd.getStyleClass().add("customer-list-item");
+//            Label cusPhone = new Label(customer.getContact().getPhone());
+//            cusPhone.getStyleClass().add("customer-list-item");
+//            cusName.setOnMouseClicked(e -> {
+//                selectItem(customer, hbox);
+//            });
+//            cusAdd.setOnMouseClicked(e -> {
+//                selectItem(customer, hbox);
+//            });
+//            cusPhone.setOnMouseClicked(e -> {
+//                selectItem(customer, hbox);
+//            });
+//            hbox.getChildren().addAll(cusName, cusAdd, cusPhone);
             return hbox;            
         }).map((hbox) -> {
             hbox.setCache(true);

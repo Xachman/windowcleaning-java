@@ -29,7 +29,6 @@ import org.json.simple.parser.ParseException;
  */
 public class StorageMock implements StorageI {
 
-    @Override
     public List<Customer> getCustomers() {
         List<Customer> customers = new ArrayList<>();
         JSONParser parser = new JSONParser();
@@ -109,8 +108,8 @@ public class StorageMock implements StorageI {
 
                 customer.setId(id);
                 customer.setName(name);
-                customer.setContact(contact);
-                customer.setContactBilling(contact);
+//                customer.setContact(contact);
+//                customer.setContactBilling(contact);
                 customer.setLocation(location);
                 customer.setArea(area);
                 customer.setMonthly(monthly);
@@ -150,12 +149,10 @@ public class StorageMock implements StorageI {
         return customers;
     }
 
-    @Override
     public Customer getCustomer(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public List<Customer> getCustomersByName(String name) {
         List<Customer> customers = new ArrayList<>();
         for(Customer customer: getCustomers()) {
@@ -180,6 +177,39 @@ public class StorageMock implements StorageI {
     private String parseString(Object s) {
         if(s == null) return "";
         return s.toString();
+    }
+
+    public void addCustomer(Customer customer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void removeCustomer(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public <T> List<T> get(Class<T> clazz) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public <T> T get(Class<T> clazz, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public <T> List<T> getByField(Class<T> clazz, String fieldName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public <T> List<T> add(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void remove(Class clazz, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
