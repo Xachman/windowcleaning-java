@@ -6,6 +6,7 @@
 package com.gti.windowcleaning.model;
 
 import com.gti.windowcleaning.data.Customer;
+import com.gti.windowcleaning.data.StorageI;
 import java.util.List;
 
 /**
@@ -13,6 +14,14 @@ import java.util.List;
  * @author xach
  */
 public class CustomersModel extends Model {
+
+    public CustomersModel() {
+        super();
+    }
+
+    public CustomersModel(StorageI storage) {
+        super(storage);
+    }
     
     public List<Customer> getCustomers() {
         return storage.get(Customer.class);

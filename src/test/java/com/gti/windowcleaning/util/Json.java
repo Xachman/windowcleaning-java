@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gti.windowcleaning.mocks;
+package com.gti.windowcleaning.util;
 
 import com.gti.windowcleaning.data.Customer;
-import com.gti.windowcleaning.data.StorageI;
-import com.gti.windowcleaning.data.customer.Contact;
+import com.gti.windowcleaning.mocks.StorageMock;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,30 +20,28 @@ import java.util.logging.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
  *
  * @author xach
  */
-public class StorageMock implements StorageI {
+public class Json {
+    public List<Customer> getCustomers(String path) {
 
-    public List<Customer> getCustomers() {
         List<Customer> customers = new ArrayList<>();
         JSONParser parser = new JSONParser();
         try {
-            String fileName = getClass().getResource("/mock/data/customers.json").getFile();
+            String fileName = path;
             FileReader r = new FileReader(fileName);
             Object obj = parser.parse(r);
             JSONArray jCustomers = (JSONArray) obj;
             
             Iterator<JSONObject> iter = jCustomers.iterator();
-        SimpleDateFormat sdf = new SimpleDateFormat("m/d/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("m/d/yyyy");
             while(iter.hasNext()) {
                 JSONObject jobj = iter.next();
                 Customer customer = new Customer();
 
-                Contact contact = new Contact();
                 String contactName = jobj.get("contact").toString();
                 String addressLine1 = jobj.get("addressLine1").toString();
                 String addressLine2 = jobj.get("addressLine2").toString();
@@ -53,16 +50,6 @@ public class StorageMock implements StorageI {
                 String zip = jobj.get("zip").toString();
                 String phone = jobj.get("phone").toString();
                 String fax = jobj.get("fax").toString();
-                contact.setName(contactName);
-                contact.setAddressLine1(addressLine1);
-                contact.setAddressLine2(addressLine2);
-                contact.setCity(city);
-                contact.setState(state);
-                contact.setPhone(phone);
-                contact.setZip(zip);
-                contact.setFax(fax);
-                
-                Contact contactb = new Contact();
                 String contactName_b = jobj.get("contact_b").toString();
                 String addressLine1_b = jobj.get("addressLine1_b").toString();
                 String addressLine2_b = jobj.get("addressLine2_b").toString();
@@ -71,14 +58,6 @@ public class StorageMock implements StorageI {
                 String zip_b = jobj.get("zip_b").toString();
                 String phone_b = jobj.get("phone_b").toString();
                 String fax_b = jobj.get("fax_b").toString();
-                contactb.setName(contactName_b);
-                contactb.setAddressLine1(addressLine1_b);
-                contactb.setAddressLine2(addressLine2_b);
-                contactb.setCity(city_b);
-                contactb.setState(state_b);
-                contactb.setPhone(phone_b);
-                contactb.setZip(zip_b);
-                contactb.setFax(fax_b);
                 
                 int id = new Integer(jobj.get("id").toString());
                 String name = jobj.get("name").toString();
@@ -108,8 +87,20 @@ public class StorageMock implements StorageI {
 
                 customer.setId(id);
                 customer.setName(name);
-//                customer.setContact(contact);
-//                customer.setContactBilling(contact);
+                customer.setContact(contactName);
+                customer.setPhone(phone);
+                customer.setAddressLine1(addressLine1);
+                customer.setAddressLine2(addressLine2);
+                customer.setZip(zip);
+                customer.setCity(city);
+                customer.setState(state);
+                customer.setContactB(contactName_b);
+                customer.setPhoneB(phone_b);
+                customer.setAddressLine1B(addressLine1_b);
+                customer.setAddressLine2B(addressLine2_b);
+                customer.setZipB(zip_b);
+                customer.setCityB(city_b);
+                customer.setStateB(state_b);
                 customer.setLocation(location);
                 customer.setArea(area);
                 customer.setMonthly(monthly);
@@ -138,31 +129,16 @@ public class StorageMock implements StorageI {
                 customers.add(customer);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(StorageMock.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(StorageMock.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(StorageMock.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (java.text.ParseException ex) {
-            Logger.getLogger(StorageMock.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        } catch (org.json.simple.parser.ParseException ex) {
+            Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
         }
         return customers;
-    }
-
-    public Customer getCustomer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public List<Customer> getCustomersByName(String name) {
-        List<Customer> customers = new ArrayList<>();
-        for(Customer customer: getCustomers()) {
-            if(customer.getName().contains(name)) {
-                customers.add(customer);
-            }
-        }
-        return customers;
-    }
-
+    } 
     private double parseDouble(Object d) {
        if(d == null) return 0.00;
        
@@ -179,42 +155,5 @@ public class StorageMock implements StorageI {
         return s.toString();
     }
 
-    public void addCustomer(Customer customer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    public void removeCustomer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <T> List<T> get(Class<T> clazz) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <T> T get(Class<T> clazz, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <T> List<T> getByField(Class<T> clazz, String fieldName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <T> List<T> add(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void remove(Class clazz, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public <T> List<T> add(Class<T> clazz, List<Object> object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

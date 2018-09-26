@@ -22,7 +22,15 @@ import java.util.logging.Logger;
  * @author xach
  */
 abstract class Model {
-    protected StorageI storage = new StorageMock();
+    protected StorageI storage;
+    
+    public Model() {
+        this(new StorageMock());
+    }
+    
+    public Model(StorageI storage) {
+        this.storage = storage;
+    }
 
     void save(Object object) throws MustIncludeException {
         validate(object);

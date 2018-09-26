@@ -6,8 +6,19 @@
 package com.gti.windowcleaning;
 
 import com.gti.windowcleaning.data.Customer;
+import com.gti.windowcleaning.data.SQLiteStorage;
+import com.gti.windowcleaning.data.customer.Contact;
 import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.model.MustIncludeException;
+import com.gti.windowcleaning.util.Json;
+import java.io.FileReader;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,5 +38,24 @@ public class CustomerModelTest {
             throw e;
         }
         
+    }
+
+    @Test()
+    public void addAndGetCustomers() {
+        SQLiteStorage storage = new SQLiteStorage(getClass().getResource("/mocks/test.db").toString());
+
+        List<Customer> customers = assembleCustomers();
+
+        storage.add(customers);
+
+        List<Customer> result = storage.get(Customer.class);
+        
+        Assert.assertEquals(customers.size(), result.size());
+    }
+
+    private List<Customer> assembleCustomers() {
+        Json jsonUtil = new Json();
+
+        return jsonUtil.getCustomers(getClass().getResource("/mocks/data/customers.json").getFile());
     }
 }
