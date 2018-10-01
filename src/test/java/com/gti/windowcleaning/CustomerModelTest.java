@@ -20,6 +20,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -27,6 +28,12 @@ import org.junit.Test;
  * @author xach
  */
 public class CustomerModelTest {
+    private String dbPath;
+    @Before
+    public void before() {
+       dbPath =  getClass().getResource("/mocks/test.db").toString();
+    }
+    
     @Test(expected = MustIncludeException.class)
     public void validateAllFields() throws MustIncludeException {
         Customer customer = new Customer();
@@ -41,14 +48,14 @@ public class CustomerModelTest {
     }
 
     @Test()
-    public void addAndGetCustomers() {
-        SQLiteStorage storage = new SQLiteStorage(getClass().getResource("/mocks/test.db").toString());
-
+    public void addAndGetCustomers() throws MustIncludeException {
+        SQLiteStorage storage = new SQLiteStorage(dbPath);
+        
+        CustomersModel customersModel = new CustomersModel(storage);
         List<Customer> customers = assembleCustomers();
-
-        storage.add(customers);
-
-        List<Customer> result = storage.get(Customer.class);
+        
+        customersModel.saveAll(customers);
+        List<Customer> result = customersModel.getAll();
         
         Assert.assertEquals(customers.size(), result.size());
     }

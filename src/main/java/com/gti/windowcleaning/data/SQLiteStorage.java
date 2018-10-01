@@ -9,9 +9,12 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,19 +33,26 @@ public class SQLiteStorage implements StorageI {
     
     public void setup() {
         try {
-            String databaseUrl = databaseUrl();
-            JdbcConnectionSource connectionSource =
-                new JdbcConnectionSource(databaseUrl);
-            Dao<Customer, String> customerDao = DaoManager.createDao(connectionSource, Customer.class);
-            TableUtils.createTable(connectionSource, Customer.class);
+            JdbcConnectionSource conn = getConnectionSrource();
+            System.out.println(conn.getUrl());
+            TableUtils.createTable(getConnectionSrource(), Customer.class);
+            conn.close();
         } catch(SQLException e) {
 
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    private JdbcConnectionSource getConnectionSrource() throws SQLException {
+        String databaseUrl = databaseUrl();
+        return new JdbcConnectionSource(databaseUrl);
+    }
     @Override
     public <T> List<T> get(Class<T> clazz) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(clazz.equals(Customer.class)) {
+            return (List<T>) getCustomers();
+        }
+        return null;
     }
 
     @Override
@@ -57,7 +67,21 @@ public class SQLiteStorage implements StorageI {
 
     @Override
     public <T> List<T> add(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            List<T> result = new ArrayList<>();
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, object.getClass());
+            T item = (T) object;
+            dao.create(item);
+            result.add(item);
+            conn.close();
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -69,13 +93,73 @@ public class SQLiteStorage implements StorageI {
         if(path == null) {
             return "jdbc:sqlite:"+System.getProperty("user.dir")+"/sqlitetest.db";
         }
-        return "jdbc:sqlite:"+path+"/sqlitetest.db";
+        return "jdbc:sqlite:"+path;
     }
 
     @Override
-    public <T> List<T> add(Class<T> clazz, List<Object> object) {
-        List<T> result = new ArrayList<>();
-        for()
+    public <T> List<T> add(Class<T> clazz, List<T> objects) {
+         
+        try {
+            List<T> result = new ArrayList<>();
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, clazz);
+            for(Object object: objects) {
+                T item = (T) object;
+                dao.create(item);
+                result.add(item);
+            }
+            conn.close();
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
+    
+    private <T> Dao<T, Integer> getDao(JdbcConnectionSource conn, Class<T> clazz) throws SQLException {
+            return DaoManager.createDao(conn, clazz);
+    } 
+   private Dao getCustomerDao() {
+        return null;
+   } 
+
+   private Customer addCustomer(Customer customer) {
+        try { 
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao<Customer, Integer> dao =  DaoManager.createDao(conn, Customer.class);
+
+            
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+   }
+
+   private List<Customer> getCustomers() {
+
+        try { 
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao<Customer, Integer> dao =  DaoManager.createDao(conn, Customer.class);
+
+            List<Customer> customers =  dao.queryForAll();
+            
+            conn.close();
+            return customers;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+   }
     
 }

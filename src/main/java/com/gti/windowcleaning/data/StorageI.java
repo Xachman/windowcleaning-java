@@ -16,6 +16,6 @@ public interface StorageI {
     public <T> T get(Class<T> clazz, int id);
     public <T> List<T> getByField(Class<T> clazz, String fieldName);
     public <T>  List<T> add(Object object); 
-    public <T>  List<T> add(Class<T> clazz, List<Object> object); 
+    public <T>  List<T> add(Class<T> clazz, List<T> object); 
     public void remove(Class clazz, int id);
 }

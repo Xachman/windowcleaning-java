@@ -34,6 +34,7 @@ abstract class Model {
 
     void save(Object object) throws MustIncludeException {
         validate(object);
+        storage.add(object);
     }
 
     private void validate(Object object) throws MustIncludeException {

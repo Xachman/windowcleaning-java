@@ -34,4 +34,14 @@ public class CustomersModel extends Model {
         super.save(customer);
     }
 
+    public void saveAll(List<Customer> customers) throws MustIncludeException {
+        for(Customer customer: customers) {
+            save(customer);
+        } 
+    }
+
+    public List<Customer> getAll() {
+        return storage.get(Customer.class);
+    }
+
 }
