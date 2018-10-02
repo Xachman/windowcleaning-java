@@ -8,19 +8,21 @@ package com.gti.windowcleaning.model;
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.StorageI;
 import java.util.List;
+import org.json.simple.JSONArray;
 
 /**
  *
  * @author xach
+ * @param <Customer>
  */
-public class CustomersModel extends Model {
+public class CustomersModel extends Model<Customer> {
 
     public CustomersModel() {
-        super();
+        super(Customer.class);
     }
 
     public CustomersModel(StorageI storage) {
-        super(storage);
+        super(storage, Customer.class);
     }
     
     public List<Customer> getCustomers() {
@@ -30,9 +32,6 @@ public class CustomersModel extends Model {
         return storage.getByField(Customer.class, name);
     }
 
-    public void save(Customer customer) throws MustIncludeException {
-        super.save(customer);
-    }
 
     public void saveAll(List<Customer> customers) throws MustIncludeException {
         for(Customer customer: customers) {

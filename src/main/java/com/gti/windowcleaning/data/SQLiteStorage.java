@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,7 +58,21 @@ public class SQLiteStorage implements StorageI {
 
     @Override
     public <T> T get(Class<T> clazz, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, clazz);
+            T result = (T) dao.queryForId(id);
+            conn.close();
+            if(result == null) {
+                throw new NoSuchElementException("No element with "+id+" found");
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        throw new NoSuchElementException("No element with "+id+" found");
     }
 
     @Override

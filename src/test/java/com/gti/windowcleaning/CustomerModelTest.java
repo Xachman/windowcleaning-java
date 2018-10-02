@@ -7,18 +7,14 @@ package com.gti.windowcleaning;
 
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.SQLiteStorage;
-import com.gti.windowcleaning.data.customer.Contact;
+import com.gti.windowcleaning.data.StorageI;
 import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.model.MustIncludeException;
 import com.gti.windowcleaning.util.Json;
-import java.io.FileReader;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.io.File;
+import java.net.URL;
 import java.util.List;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import java.util.NoSuchElementException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,10 +24,17 @@ import org.junit.Test;
  * @author xach
  */
 public class CustomerModelTest {
-    private String dbPath;
+    private URL dbPath;
+    private StorageI storage;
     @Before
     public void before() {
-       dbPath =  getClass().getResource("/mocks/test.db").toString();
+        dbPath =  getClass().getResource("/mocks/test.db");
+        File file = new File(dbPath.getPath());
+        boolean file_exists = file.exists();
+        if(file_exists) {
+            file.delete();
+        }
+        storage = new SQLiteStorage(dbPath.toString());
     }
     
     @Test(expected = MustIncludeException.class)
@@ -49,8 +52,6 @@ public class CustomerModelTest {
 
     @Test()
     public void addAndGetCustomers() throws MustIncludeException {
-        SQLiteStorage storage = new SQLiteStorage(dbPath);
-        
         CustomersModel customersModel = new CustomersModel(storage);
         List<Customer> customers = assembleCustomers();
         
@@ -58,6 +59,22 @@ public class CustomerModelTest {
         List<Customer> result = customersModel.getAll();
         
         Assert.assertEquals(customers.size(), result.size());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void getCustomerById() throws MustIncludeException {
+        CustomersModel customersModel = new CustomersModel(storage);
+        List<Customer> customers = assembleCustomers();
+
+        customersModel.saveAll(customers);
+        Customer customer = customersModel.get(4);
+       
+        Assert.assertEquals("Corenda Barnham", customer.getName());
+        Assert.assertEquals("Texarkana", customer.getLocation());
+        Assert.assertEquals("TX", customer.getArea());
+
+
+        customersModel.get(11);
     }
 
     private List<Customer> assembleCustomers() {

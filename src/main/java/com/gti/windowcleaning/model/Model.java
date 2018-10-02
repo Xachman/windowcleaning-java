@@ -21,22 +21,32 @@ import java.util.logging.Logger;
  *
  * @author xach
  */
-abstract class Model {
+abstract class Model<T> {
     protected StorageI storage;
+    protected Class<T> clazz;
     
-    public Model() {
-        this(new StorageMock());
+    public Model(Class<T> clazz) {
+        this(new StorageMock(), clazz);
     }
     
-    public Model(StorageI storage) {
+    public Model(StorageI storage, Class<T> clazz) {
+        this.clazz = clazz;
+
         this.storage = storage;
     }
 
-    void save(Object object) throws MustIncludeException {
+    public void save(Object object) throws MustIncludeException {
         validate(object);
         storage.add(object);
     }
+    
+    public List<T> getAll() {
+        return storage.get(clazz);
+    }
 
+    public T get(int id) {
+        return storage.get(clazz, id);
+    }
     private void validate(Object object) throws MustIncludeException {
         Class<?> objectClass = Objects.requireNonNull(object).getClass();
         List<String> errorFields =  new ArrayList<>();       
