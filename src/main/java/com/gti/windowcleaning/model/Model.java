@@ -47,6 +47,10 @@ abstract class Model<T> {
     public T get(int id) {
         return storage.get(clazz, id);
     }
+    public void remove(int id) {
+        storage.remove(clazz, id);
+    }
+
     private void validate(Object object) throws MustIncludeException {
         Class<?> objectClass = Objects.requireNonNull(object).getClass();
         List<String> errorFields =  new ArrayList<>();       

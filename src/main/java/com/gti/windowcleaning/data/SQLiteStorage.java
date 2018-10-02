@@ -101,7 +101,16 @@ public class SQLiteStorage implements StorageI {
 
     @Override
     public void remove(Class clazz, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, clazz);
+            dao.deleteById(id);
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private String databaseUrl() {

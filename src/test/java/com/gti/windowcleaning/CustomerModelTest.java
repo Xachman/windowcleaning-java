@@ -77,6 +77,23 @@ public class CustomerModelTest {
         customersModel.get(11);
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void removeById() throws MustIncludeException {
+        CustomersModel customersModel = new CustomersModel(storage);
+        List<Customer> customers = assembleCustomers();
+
+        customersModel.saveAll(customers);
+        customersModel.remove(3);
+        Customer customer = customersModel.get(4);
+         
+        Assert.assertEquals("Corenda Barnham", customer.getName());
+        Assert.assertEquals("Texarkana", customer.getLocation());
+        Assert.assertEquals("TX", customer.getArea());
+
+
+        customersModel.get(3);
+    }
+    
     private List<Customer> assembleCustomers() {
         Json jsonUtil = new Json();
 
