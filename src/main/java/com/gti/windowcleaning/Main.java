@@ -39,7 +39,6 @@ public class Main extends Application {
         System.out.println(scene);
         System.out.println(scene.getStylesheets());
         SQLiteStorage storage = new SQLiteStorage();
-        storage.setup();
     }
 
  

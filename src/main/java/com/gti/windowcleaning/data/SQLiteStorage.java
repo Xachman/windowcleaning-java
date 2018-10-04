@@ -25,25 +25,11 @@ public class SQLiteStorage implements StorageI {
     private String path; 
     public SQLiteStorage(String path) {
         this.path = path;
-        setup();
     }
 
     public SQLiteStorage() {
-        setup();
     }
     
-    public void setup() {
-        try {
-            JdbcConnectionSource conn = getConnectionSrource();
-            System.out.println(conn.getUrl());
-            TableUtils.createTable(getConnectionSrource(), Customer.class);
-            conn.close();
-        } catch(SQLException e) {
-
-        } catch (IOException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     private JdbcConnectionSource getConnectionSrource() throws SQLException {
         String databaseUrl = databaseUrl();
         return new JdbcConnectionSource(databaseUrl);
@@ -140,6 +126,19 @@ public class SQLiteStorage implements StorageI {
             Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    @Override
+    public void create(Class clazz) {
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            System.out.println(conn.getUrl());
+            TableUtils.createTable(getConnectionSrource(), clazz);
+            conn.close();
+        } catch(SQLException e) {
+
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private <T> Dao<T, Integer> getDao(JdbcConnectionSource conn, Class<T> clazz) throws SQLException {

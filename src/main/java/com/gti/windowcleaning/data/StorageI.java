@@ -12,6 +12,7 @@ import java.util.List;
  * @author xach
  */
 public interface StorageI {
+    public void create(Class clazz);
     public <T> List<T> get(Class<T> clazz);
     public <T> T get(Class<T> clazz, int id);
     public <T> List<T> getByField(Class<T> clazz, String fieldName);

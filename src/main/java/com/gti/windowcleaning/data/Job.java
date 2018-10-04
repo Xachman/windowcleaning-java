@@ -19,7 +19,7 @@ public class Job {
     @DatabaseField(canBeNull = false, foreign = true)
     private Customer customer;
     @DatabaseField(canBeNull = false)
-    private String serviced_by;
+    private String servicedBy;
     @DatabaseField(canBeNull = false)
     private double amount;
     @DatabaseField(canBeNull = false)
@@ -59,12 +59,12 @@ public class Job {
         this.customer = customer;
     }
 
-    public String getServiced_by() {
-        return serviced_by;
+    public String getServicedBy() {
+        return servicedBy;
     }
 
-    public void setServiced_by(String serviced_by) {
-        this.serviced_by = serviced_by;
+    public void setServicedBy(String servicedBy) {
+        this.servicedBy = servicedBy;
     }
 
     public double getAmount() {
@@ -153,5 +153,9 @@ public class Job {
 
     public void setAutoPrintServiceStatment(boolean autoPrintServiceStatment) {
         this.autoPrintServiceStatment = autoPrintServiceStatment;
+    }
+
+    public void add(Job job) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -35,6 +35,7 @@ public class CustomerModelTest {
             file.delete();
         }
         storage = new SQLiteStorage(dbPath.toString());
+        storage.create(Customer.class);
     }
     
     @Test(expected = MustIncludeException.class)
@@ -53,7 +54,7 @@ public class CustomerModelTest {
     @Test()
     public void addAndGetCustomers() throws MustIncludeException {
         CustomersModel customersModel = new CustomersModel(storage);
-        List<Customer> customers = assembleCustomers();
+        List<Customer> customers = Util.assembleCustomers();
         
         customersModel.saveAll(customers);
         List<Customer> result = customersModel.getAll();
@@ -64,7 +65,7 @@ public class CustomerModelTest {
     @Test(expected = NoSuchElementException.class)
     public void getCustomerById() throws MustIncludeException {
         CustomersModel customersModel = new CustomersModel(storage);
-        List<Customer> customers = assembleCustomers();
+        List<Customer> customers = Util.assembleCustomers();
 
         customersModel.saveAll(customers);
         Customer customer = customersModel.get(4);
@@ -80,7 +81,7 @@ public class CustomerModelTest {
     @Test(expected = NoSuchElementException.class)
     public void removeById() throws MustIncludeException {
         CustomersModel customersModel = new CustomersModel(storage);
-        List<Customer> customers = assembleCustomers();
+        List<Customer> customers = Util.assembleCustomers();
 
         customersModel.saveAll(customers);
         customersModel.remove(3);
@@ -92,11 +93,5 @@ public class CustomerModelTest {
 
 
         customersModel.get(3);
-    }
-    
-    private List<Customer> assembleCustomers() {
-        Json jsonUtil = new Json();
-
-        return jsonUtil.getCustomers(getClass().getResource("/mocks/data/customers.json").getFile());
     }
 }

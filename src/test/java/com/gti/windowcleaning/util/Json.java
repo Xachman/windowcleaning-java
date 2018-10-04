@@ -6,6 +6,7 @@
 package com.gti.windowcleaning.util;
 
 import com.gti.windowcleaning.data.Customer;
+import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.mocks.StorageMock;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -139,6 +141,53 @@ public class Json {
         }
         return customers;
     } 
+    public List<Job> getJobs(String path, List<Customer> customers) {
+
+        List<Job> jobs = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        try {
+            String fileName = path;
+            FileReader r = new FileReader(fileName);
+            Object obj = parser.parse(r);
+            JSONArray jCustomers = (JSONArray) obj;
+            
+            Iterator<JSONObject> iter = jCustomers.iterator();
+            SimpleDateFormat sdf = new SimpleDateFormat("m/d/yyyy");
+            while(iter.hasNext()) {
+                JSONObject jobj = iter.next();
+                int customer_id = new Integer(jobj.get("customer_id").toString());
+                String servicedBy = jobj.get("serviced_by").toString();
+                double amount =  parseDouble(jobj.get("amount").toString());
+                Date serviceDate = sdf.parse(jobj.get("service_date").toString());
+                int days_between = new Integer(jobj.get("days_between").toString());
+                double precent = parseDouble(jobj.get("days_between").toString());
+                boolean print_service_statement = parseBoolean(jobj.get("print_service_statement"));
+                boolean print_invoice = parseBoolean(jobj.get("print_invoice"));
+                boolean payment_expected = parseBoolean(jobj.get("payment_expected"));
+                String description = parseString(jobj.get("description"));
+                int difficulty = new Integer(jobj.get("difficulty").toString());
+                String notes = parseString(jobj.get("notes"));
+                boolean auto_print_service_statement = parseBoolean(jobj.get("auto_print_service_statement"));
+                Job job = new Job();
+                for(Customer customer: customers) {
+                    if(customer_id == customer.getId()) {
+                        job.setCustomer(customer);
+                    }
+                }
+                jobs.add(job);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        } catch (org.json.simple.parser.ParseException ex) {
+            Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return jobs;
+
+    }
     private double parseDouble(Object d) {
        if(d == null) return 0.00;
        

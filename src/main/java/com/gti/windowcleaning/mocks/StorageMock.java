@@ -216,5 +216,10 @@ public class StorageMock implements StorageI {
     public <T> List<T> add(Class<T> clazz, List<T> object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void create(Class clazz) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
