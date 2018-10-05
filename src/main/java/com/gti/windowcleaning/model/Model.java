@@ -5,8 +5,8 @@
  */
 package com.gti.windowcleaning.model;
 
+import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.data.StorageI;
-import com.gti.windowcleaning.mocks.StorageMock;
 import com.j256.ormlite.field.DatabaseField;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -26,7 +26,7 @@ abstract class Model<T> {
     protected Class<T> clazz;
     
     public Model(Class<T> clazz) {
-        this(new StorageMock(), clazz);
+        this(new SQLiteStorage(), clazz);
     }
     
     public Model(StorageI storage, Class<T> clazz) {
