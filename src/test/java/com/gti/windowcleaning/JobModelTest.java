@@ -49,13 +49,31 @@ public class JobModelTest {
         
         Job job = new Job();
         Customer customer = Util.assembleCustomers().get(3);
-        job.setAmount(10);
+        job.setAmount(10.00);
         job.setCustomer(customer);
         job.setServicedBy("Tim");
         job.setServiceDate(new Date());
         jobsModel.save(job);
-        Job eJob = jobsModel.get(49);
+        Job eJob = jobsModel.get(50);
 
-        Assert.assertEquals(10, eJob.getAmount());
+        Assert.assertEquals(10.00, eJob.getAmount(), 0);
+        Assert.assertEquals("Tim", eJob.getServicedBy());
     }    
+
+    @Test(expected = MustIncludeException.class)
+    public void mustIncludeTest() throws MustIncludeException {
+        JobsModel jobsModel = new JobsModel(storage); 
+
+        Job job = new Job();
+
+        try {
+            jobsModel.save(job);
+        } catch(MustIncludeException e) {
+            System.out.println(e.getMessage());
+            Assert.assertEquals("[customer, servicedBy, serviceDate]",e.getMessage());
+            throw e;
+        }
+
+
+    }
 }

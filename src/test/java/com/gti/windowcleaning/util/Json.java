@@ -169,6 +169,20 @@ public class Json {
                 String notes = parseString(jobj.get("notes"));
                 boolean auto_print_service_statement = parseBoolean(jobj.get("auto_print_service_statement"));
                 Job job = new Job();
+
+                job.setServicedBy(servicedBy);
+                job.setServiceDate(serviceDate);
+                job.setAmount(amount);
+                job.setDaysBetween(days_between);
+                job.setPercent(precent);
+                job.setAutoPrintServiceStatment(auto_print_service_statement);
+                job.setDescription(description);
+                job.setPrintServiceStatement(print_service_statement);
+                job.setPaymentExpected(payment_expected);
+                job.setPrintInvoice(print_invoice);
+                job.setDifficulty(difficulty);
+                job.setNotes(notes);
+                
                 for(Customer customer: customers) {
                     if(customer_id == customer.getId()) {
                         job.setCustomer(customer);
