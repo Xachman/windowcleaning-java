@@ -37,6 +37,8 @@ public class Customer {
     private String addressLine2;
     @DatabaseField(canBeNull = false)
     private String zip;
+    @DatabaseField()
+    private String fax;
     @DatabaseField(canBeNull = false)
     private String contactB;
     @DatabaseField(canBeNull = false)
@@ -51,6 +53,8 @@ public class Customer {
     private String addressLine2B;
     @DatabaseField(canBeNull = false)
     private String zipB;
+    @DatabaseField()
+    private String faxB;
     @DatabaseField(canBeNull = false)
     private boolean monthly;
     @DatabaseField(canBeNull = false)
@@ -394,6 +398,22 @@ public class Customer {
 
     public void setZipB(String zipB) {
         this.zipB = zipB;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public String getFaxB() {
+        return faxB;
+    }
+
+    public void setFaxB(String faxB) {
+        this.faxB = faxB;
     }
     
 }

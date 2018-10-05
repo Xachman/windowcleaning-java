@@ -8,6 +8,7 @@ package com.gti.windowcleaning.model;
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.data.StorageI;
 import com.j256.ormlite.field.DatabaseField;
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -24,9 +25,8 @@ import java.util.logging.Logger;
 abstract class Model<T> {
     protected StorageI storage;
     protected Class<T> clazz;
-    
     public Model(Class<T> clazz) {
-        this(new SQLiteStorage(), clazz);
+        this(new SQLiteStorage(System.getProperty("user.home")+File.separator+".windowcleaning"+File.separator+"data.db"), clazz);
     }
     
     public Model(StorageI storage, Class<T> clazz) {

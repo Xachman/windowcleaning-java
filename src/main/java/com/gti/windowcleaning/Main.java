@@ -5,7 +5,10 @@
  */
 package com.gti.windowcleaning;
 
+import com.gti.windowcleaning.data.Customer;
+import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.data.SQLiteStorage;
+import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +41,16 @@ public class Main extends Application {
         primaryStage.show();
         System.out.println(scene);
         System.out.println(scene.getStylesheets());
-        SQLiteStorage storage = new SQLiteStorage();
+        String storagePath = System.getProperty("user.home")+File.separator+".windowcleaning";
+        File storageDir = new File(storagePath); 
+        if(!storageDir.exists()){
+            storageDir.mkdir();
+        }
+         
+        System.out.println(storagePath);
+        SQLiteStorage storage = new SQLiteStorage(storagePath+File.separator+"data.db");
+        storage.create(Customer.class);
+        storage.create(Job.class);
     }
 
  

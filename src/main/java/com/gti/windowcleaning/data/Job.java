@@ -1,6 +1,7 @@
 package com.gti.windowcleaning.data;
 
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
 
 /*
@@ -13,6 +14,7 @@ import java.util.Date;
  *
  * @author xach
  */
+@DatabaseTable(tableName = "jobs")
 public class Job {
     @DatabaseField(generatedId = true)
     private int id;
