@@ -7,7 +7,6 @@ package com.gti.windowcleaning.util;
 
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
-import com.gti.windowcleaning.mocks.StorageMock;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
