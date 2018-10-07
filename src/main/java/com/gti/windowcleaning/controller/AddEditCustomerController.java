@@ -42,4 +42,10 @@ public class AddEditCustomerController implements Initializable {
         name.setText(customer.getName());
     }
 
+    @FXML
+    public void updateCustomer() {
+        System.out.println("update");
+        name.setText("test");
+    }
+
 }

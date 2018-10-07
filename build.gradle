@@ -29,5 +29,7 @@ dependencies {
     compile 'com.googlecode.json-simple:json-simple:1.1'
     compile 'com.j256.ormlite:ormlite-jdbc:5.1'
     compile 'org.xerial:sqlite-jdbc:3.23.1'
+    testCompile "org.testfx:testfx-core:4.0.14-alpha"
+    testCompile "org.testfx:testfx-junit:4.0.14-alpha"
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }

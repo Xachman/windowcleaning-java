@@ -261,7 +261,7 @@
     </GridPane>
     <HBox alignment="CENTER" prefHeight="90.0" prefWidth="980.0">
       <children>
-        <Button fx:id="update" mnemonicParsing="false" text="OK" />
+        <Button fx:id="update" mnemonicParsing="false" onAction="#updateCustomer" text="OK" />
         <Button id="cancle" fx:id="cancel" mnemonicParsing="false" text="Cancel" />
       </children>
     </HBox>
