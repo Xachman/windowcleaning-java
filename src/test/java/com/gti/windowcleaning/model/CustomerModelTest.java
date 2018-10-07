@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gti.windowcleaning;
+package com.gti.windowcleaning.model;
 
+import com.gti.windowcleaning.Util;
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.data.StorageI;
