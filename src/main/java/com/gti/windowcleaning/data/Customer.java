@@ -5,6 +5,7 @@
  */
 package com.gti.windowcleaning.data;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
@@ -61,7 +62,7 @@ public class Customer {
     private boolean EOM;
     @DatabaseField()
     private String obtainedBy;
-    @DatabaseField()
+    @DatabaseField(dataType = DataType.DATE_STRING, format = "yyyy-MM-dd")
     private Date obtainedDate;
     @DatabaseField()
     private double monthlyBill;
@@ -73,7 +74,7 @@ public class Customer {
     private double stateTaxPer;
     @DatabaseField()
     private boolean active;
-    @DatabaseField()
+    @DatabaseField(dataType = DataType.DATE_STRING, format = "yyyy-MM-dd")
     private Date inactiveDate;
     @DatabaseField()
     private String royaltyPaymentTo;

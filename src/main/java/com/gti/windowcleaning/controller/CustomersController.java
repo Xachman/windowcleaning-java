@@ -34,7 +34,7 @@ import javafx.stage.Stage;
  * @author xach
  */
 public class CustomersController {
-    private CustomersModel customers = new CustomersModel();
+    private final CustomersModel customers = new CustomersModel();
     private VBox vbox;
     private int selectedItem = 0;
 
@@ -65,7 +65,6 @@ public class CustomersController {
 
     private void setScrollPane(List<Customer> customersParam) {
         
-        int row = 1;
         GridPane gridPane = new GridPane();
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(25);
@@ -84,7 +83,7 @@ public class CustomersController {
         Label lAddress = new Label("Address");
         lAddress.getStyleClass().add("customer-list-header");
         headers.getChildren().add(lAddress);
-        Label lPhone = new Label("Address");
+        Label lPhone = new Label("Phone");
         lPhone.getStyleClass().add("customer-list-header");
         headers.getChildren().add(lPhone);
         headers.getStyleClass().add("row");
@@ -94,35 +93,33 @@ public class CustomersController {
             hbox.getStyleClass().add("row");
             Label cusName = new Label(customer.getName());
             cusName.getStyleClass().add("customer-list-item");
-//            Label cusAdd = new Label(customer.getContact().getAddressLine1());
-//            cusAdd.getStyleClass().add("customer-list-item");
-//            Label cusPhone = new Label(customer.getContact().getPhone());
-//            cusPhone.getStyleClass().add("customer-list-item");
-//            cusName.setOnMouseClicked(e -> {
-//                selectItem(customer, hbox);
-//            });
-//            cusAdd.setOnMouseClicked(e -> {
-//                selectItem(customer, hbox);
-//            });
-//            cusPhone.setOnMouseClicked(e -> {
-//                selectItem(customer, hbox);
-//            });
-//            hbox.getChildren().addAll(cusName, cusAdd, cusPhone);
+            Label cusAdd = new Label(customer.getAddressLine1());
+            cusAdd.getStyleClass().add("customer-list-item");
+            Label cusPhone = new Label(customer.getPhone());
+            cusPhone.getStyleClass().add("customer-list-item");
+            cusName.setOnMouseClicked(e -> {
+                selectItem(customer, hbox);
+            });
+            cusAdd.setOnMouseClicked(e -> {
+                selectItem(customer, hbox);
+            });
+            cusPhone.setOnMouseClicked(e -> {
+                selectItem(customer, hbox);
+            });
+            hbox.getChildren().addAll(cusName, cusAdd, cusPhone);
             return hbox;            
         }).map((hbox) -> {
             hbox.setCache(true);
-            return hbox;
-        }).map((hbox) -> {
             hbox.setCacheHint(CacheHint.SPEED);
             return hbox;
         }).forEachOrdered((hbox) -> {
             items.add(hbox);
         });
-            System.out.println("end loop");
-            vbox = new VBox();
-            vbox.getStyleClass().add("row");
-            vbox.getChildren().addAll(items);
-            scrollPane.setContent(vbox);
+        System.out.println("end loop");
+        vbox = new VBox();
+        vbox.getStyleClass().add("row");
+        vbox.getChildren().addAll(items);
+        scrollPane.setContent(vbox);
     }
 
     private boolean isSelected(int itemId) {
@@ -132,9 +129,12 @@ public class CustomersController {
     private void openAddEdit(int id) {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/view/customer/add_edit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/customer/add_edit.fxml"));
+            root = loader.load();
             Stage stage = (Stage) scrollPane.getScene().getWindow();
             Scene scene = stage.getScene();
+            AddEditCustomerController aeController = loader.<AddEditCustomerController>getController();
+            aeController.setId(id);
             content = (AnchorPane) scene.lookup("#rootPane");
             content.getChildren().setAll(root);
         } catch (IOException ex) {
