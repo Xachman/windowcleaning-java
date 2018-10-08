@@ -6,10 +6,9 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layou.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="AnchorPane" prefHeight="782.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.gti.windowcleaning.controller.AddEditCustomerController">
+<VBox id="AnchorPane" alignment="TOP_CENTER" prefHeight="768.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.gti.windowcleaning.controller.AddEditCustomerController">
   <children>
     <GridPane prefHeight="30.0" prefWidth="580.0">
       <children>

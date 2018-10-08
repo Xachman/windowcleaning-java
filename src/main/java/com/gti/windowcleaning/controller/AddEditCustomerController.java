@@ -11,8 +11,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.CheckBox;
 
 /**
  *
@@ -24,6 +24,12 @@ public class AddEditCustomerController implements Initializable {
 
     @FXML
     private TextField name;
+    @FXML
+    private CheckBox active;
+    @FXML
+    private TextField incactiveSince;
+    
+
     
     public void setId(int id) {
         this.id = id;
