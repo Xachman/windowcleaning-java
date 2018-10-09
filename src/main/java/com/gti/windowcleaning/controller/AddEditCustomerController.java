@@ -9,6 +9,10 @@ import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.model.MustIncludeException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,16 +43,16 @@ public class AddEditCustomerController implements Initializable {
     @FXML
     private TextField area;
     @FXML
-    private ChoiceBox type;
+    private ChoiceBox<String> type;
     @FXML
-    private ChoiceBox company;
+    private ChoiceBox<String> company;
     @FXML
     private TextField monthlyBill;
     @FXML
     private DatePicker customerSince;
     @FXML
     private TextField obtainedBy;
-    @FXML
+    @FXMet
     private TextField royaltyTo;
     @FXML
     private TextField contact;
@@ -101,7 +105,6 @@ public class AddEditCustomerController implements Initializable {
     @FXML
     private TextArea collectionNotes;
 
-
     
     public void setId(int id) {
         this.id = id;
@@ -120,6 +123,12 @@ public class AddEditCustomerController implements Initializable {
         name.setText(customer.getName());
     }
 
+    private Date getDateFromDatePicker(DatePicker dp) {
+        LocalDate localDate = dp.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        return Date.from(instant);
+    }
+
     @FXML
     public void updateCustomer() throws MustIncludeException {
         Customer customer = new Customer();
@@ -127,7 +136,22 @@ public class AddEditCustomerController implements Initializable {
         customer.setLocation(location.getText());
         customer.setArea(area.getText());
         customer.setAWWPUR(AWWPur.isSelected());
-
+        customer.setActive(active.isSelected());
+        customer.setInactiveDate(getDateFromDatePicker(inactiveSince));
+        customer.setType(type.getValue());
+        customer.setCompany(company.getValue());
+        customer.setMonthlyBill(getDouble(monthlyBill.getText()));
+        customer.setObtainedDate(getDateFromDatePicker(customerSince));
+        customer.setObtainedBy(obtainedBy.getText());
+        customer.setRoyaltyPaymentTo(royaltyTo.getText());
+        customer.setContact(contact.getText());
+        customer.setAddressLine1(addressLine1.getText());
+        customer.setAddressLine2(addressLine2.getText());
+        customer.setPhone(phone.getText());
+        customer.setFax(fax.getText());
+        customer.setState(state.getText());
+        customer.setCity(city.getText());
+        
         model.save(customer);
        
     }
@@ -139,4 +163,9 @@ public class AddEditCustomerController implements Initializable {
     public void setModel(CustomersModel model) {
         this.model = model;
     }
+
+    private Double getDouble(String str) {
+        return new Double(str);
+    }
+    
 }
