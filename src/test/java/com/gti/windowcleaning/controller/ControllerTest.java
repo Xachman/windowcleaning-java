@@ -32,6 +32,9 @@ public class ControllerTest<T> {
         Field field = controller.getClass().getDeclaredField(fieldName);
         field.setAccessible(true);
         FXML fxml = field.getAnnotation(FXML.class);
+        if(fxml == null) {
+            throw new Exception("No FXML annotation");
+        }
         System.out.println(fxml);
 
         System.out.println(field.getName());
@@ -42,6 +45,9 @@ public class ControllerTest<T> {
         Field field = controller.getClass().getDeclaredField(fieldName);
         field.setAccessible(true);
         FXML fxml = field.getAnnotation(FXML.class);
+        if(fxml == null) {
+            throw new Exception("No FXML annotation");
+        }
         return (Y) field.get(controller);
     }
 
