@@ -38,10 +38,15 @@ public class ControllerTest<T> {
         field.set(controller, value); 
     }
 
-    protected Object getFXMLField(String fieldName) throws Exception {
+    protected <Y> Y getFXMLField(String fieldName, Class<Y> clazz) throws Exception {
         Field field = controller.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
         FXML fxml = field.getAnnotation(FXML.class);
-        return field.get(controller);
+        return (Y) field.get(controller);
+    }
+
+    protected T getController() {
+        return controller;
     }
     
     
