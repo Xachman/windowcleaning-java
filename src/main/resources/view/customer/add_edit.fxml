@@ -17,7 +17,7 @@
         <CheckBox fx:id="AWWPur" mnemonicParsing="false" text="AWW Pur" GridPane.columnIndex="3" GridPane.rowIndex="0" />
         <Label text="Customer ID" GridPane.columnIndex="4" GridPane.rowIndex="0" />
         <Label fx:id="customerId" text="###" GridPane.columnIndex="5" GridPane.rowIndex="0" />
-        <TextField fx:id="inactiveSince" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <DatePicker fx:id="inactiveSince" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
