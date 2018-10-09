@@ -16,15 +16,15 @@ import org.junit.BeforeClass;
  *
  * @author xach
  */
-public class ControllerTest {
-    public Object controller;
+public class ControllerTest<T> {
+    public T controller;
     
 
     @BeforeClass
     static public void init() {
         new JFXPanel();
     }
-    protected void setConroller(Object controller) {
+    protected void setConroller(T controller) {
         this.controller = controller;    
     }
 
@@ -38,6 +38,11 @@ public class ControllerTest {
         field.set(controller, value); 
     }
 
+    protected Object getFXMLField(String fieldName) throws Exception {
+        Field field = controller.getClass().getDeclaredField(fieldName);
+        FXML fxml = field.getAnnotation(FXML.class);
+        return field.get(controller);
+    }
     
     
 }

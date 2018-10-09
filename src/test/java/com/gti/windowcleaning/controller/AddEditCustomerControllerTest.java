@@ -23,18 +23,22 @@ public class AddEditCustomerControllerTest extends ControllerTest {
     }
 
     @Test
-    public void addNewCustomer() {
+    public void testSetAndGetFXMLField() {
             try {
 
             TextField name = new TextField();
             name.setText("ted");
             setFXMLField("name", name);
             
-            Assert.assertEquals(0, 0);
+            Assert.assertEquals("ted", getFXMLField("name"));
             } catch(Exception e) {
-                e.printStackTrace();
             }
     
+    }
+
+    @Test
+    public void testAddCustomer() {
+        
     }
 
 
