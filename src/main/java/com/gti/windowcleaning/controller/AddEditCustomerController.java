@@ -11,6 +11,7 @@ import com.gti.windowcleaning.model.MustIncludeException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -120,7 +121,46 @@ public class AddEditCustomerController implements Initializable {
         if(id < 1) return;
         Customer customer = model.get(id);
         
-        name.setText(customer.getName());
+        name.setText(getString(customer.getName()));
+        location.setText(getString(customer.getLocation()));
+        area.setText(getString(customer.getArea()));
+        AWWPur.setSelected(customer.isAWWPUR());
+        active.setSelected(customer.isActive());
+        if(customer.getInactiveDate() != null) {
+            Date inDate = customer.getInactiveDate();
+            inactiveSince.setValue(inDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        }
+        type.setValue(customer.getType());
+        company.setValue(customer.getCompany());
+        monthlyBill.setText(getString(customer.getMonthlyBill()));
+        customerSince.setValue(customer.getObtainedDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        obtainedBy.setText(getString(customer.getObtainedBy()));
+        royaltyTo.setText(getString(customer.getRoyaltyPaymentTo()));
+        contact.setText(getString(customer.getContact()));
+        addressLine1.setText(getString(customer.getAddressLine1()));
+        addressLine2.setText(getString(customer.getAddressLine2()));
+        phone.setText(getString(customer.getPhone()));
+        fax.setText(getString(customer.getFax()));
+        state.setText(getString(customer.getState()));
+        city.setText(getString(customer.getCity()));
+        zip.setText(getString(customer.getZip()));
+        contactB.setText(getString(customer.getContactB()));
+        addressLine1B.setText(getString(customer.getAddressLine1B()));
+        addressLine2B.setText(getString(customer.getAddressLine2B()));
+        phoneB.setText(getString(customer.getPhoneB()));
+        faxB.setText(getString(customer.getFaxB()));
+        stateB.setText(getString(customer.getStateB()));
+        cityB.setText(getString(customer.getCityB()));
+        zipB.setText(getString(customer.getZipB()));
+        billCharge.setText(getString(customer.getBillCharge()));
+        credit.setText(getString(customer.getCredit()));
+        deposit.setText(getString(customer.getDeposit()));
+        fourWeekInvoice.setSelected(customer.isMonthly());
+        quarterlyInvoice.setSelected(customer.isQuarterlyBill());
+        customerNotes.setText(getString(customer.getNotes()));
+        calendarMonthInvoice.setSelected(customer.isEOM());
+        collectionNotes.setText(getString(customer.getBillNotes()));
+         
     }
 
     private Date getDateFromDatePicker(DatePicker dp) {
@@ -188,5 +228,18 @@ public class AddEditCustomerController implements Initializable {
         }
         return new Double(str);
     }
-    
+  
+    private String getString(Double dub) {
+        if(dub == null) {
+            return "";
+        }
+        return dub.toString();
+    }
+
+    private String getString(String str) {
+        if(str == null) {
+            return "";
+        }
+        return str;
+    }
 }
