@@ -52,7 +52,7 @@ public class AddEditCustomerController implements Initializable {
     private DatePicker customerSince;
     @FXML
     private TextField obtainedBy;
-    @FXMet
+    @FXML
     private TextField royaltyTo;
     @FXML
     private TextField contact;
@@ -151,6 +151,24 @@ public class AddEditCustomerController implements Initializable {
         customer.setFax(fax.getText());
         customer.setState(state.getText());
         customer.setCity(city.getText());
+        customer.setZip(zip.getText());
+        customer.setContactB(contactB.getText());
+        customer.setAddressLine1B(addressLine1B.getText());
+        customer.setAddressLine2B(addressLine2B.getText());
+        customer.setPhoneB(phoneB.getText());
+        customer.setFaxB(faxB.getText());
+        customer.setStateB(stateB.getText());
+        customer.setCityB(cityB.getText());
+        customer.setZipB(zipB.getText());
+        customer.setBillCharge(getDouble(billCharge.getText()));
+        customer.setCredit(getDouble(credit.getText()));
+        customer.setDeposit(getDouble(deposit.getText()));
+        customer.setStateTaxPer(getDouble(salesTax.getText()));
+        customer.setMonthly(fourWeekInvoice.isSelected());
+        customer.setQuarterlyBill(quarterlyInvoice.isSelected());
+        customer.setNotes(customerNotes.getText());
+        customer.setEOM(calendarMonthInvoice.isSelected());
+        customer.setBillNotes(collectionNotes.getText());
         
         model.save(customer);
        
@@ -165,6 +183,9 @@ public class AddEditCustomerController implements Initializable {
     }
 
     private Double getDouble(String str) {
+        if(str == null || str.trim().equals("")) {
+            return null;
+        }
         return new Double(str);
     }
     

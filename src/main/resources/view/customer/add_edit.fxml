@@ -83,7 +83,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <TextField fx:id="customerSince" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+        <DatePicker fx:id="customerSince" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0" />
         <TextField fx:id="obtainedBy" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
         <TextField fx:id="royaltyTo" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
         <TextField fx:id="monthlyBill" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />

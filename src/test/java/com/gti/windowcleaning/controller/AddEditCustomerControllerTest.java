@@ -5,6 +5,7 @@
  */
 package com.gti.windowcleaning.controller;
 
+import com.gti.windowcleaning.Util;
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.data.StorageI;
@@ -43,7 +44,7 @@ public class AddEditCustomerControllerTest extends ControllerTest<AddEditCustome
         }
         StorageI storage = new SQLiteStorage(dbPath.toString());
         storage.create(Customer.class);
-
+        storage.add(Customer.class, Util.assembleCustomers());
         getController().setModel(new CustomersModel(storage));
     }
 

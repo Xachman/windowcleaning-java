@@ -65,13 +65,13 @@ public class Customer {
     @DatabaseField(dataType = DataType.DATE_STRING, format = "yyyy-MM-dd")
     private Date obtainedDate;
     @DatabaseField()
-    private double monthlyBill;
+    private Double monthlyBill;
     @DatabaseField()
-    private double credit;
+    private Double credit;
     @DatabaseField()
-    private double deposit;
+    private Double deposit;
     @DatabaseField()
-    private double stateTaxPer;
+    private Double stateTaxPer;
     @DatabaseField()
     private boolean active;
     @DatabaseField(dataType = DataType.DATE_STRING, format = "yyyy-MM-dd")
@@ -81,7 +81,7 @@ public class Customer {
     @DatabaseField()
     private String notes;
     @DatabaseField()
-    private double billCharge;
+    private Double billCharge;
     @DatabaseField(canBeNull = false)
     private boolean AWWLine;
     @DatabaseField(canBeNull = false)
@@ -177,35 +177,35 @@ public class Customer {
         this.obtainedDate = obtainedDate;
     }
 
-    public double getMonthlyBill() {
+    public Double getMonthlyBill() {
         return monthlyBill;
     }
 
-    public void setMonthlyBill(double monthlyBill) {
+    public void setMonthlyBill(Double monthlyBill) {
         this.monthlyBill = monthlyBill;
     }
 
-    public double getCredit() {
+    public Double getCredit() {
         return credit;
     }
 
-    public void setCredit(double credit) {
+    public void setCredit(Double credit) {
         this.credit = credit;
     }
 
-    public double getDeposit() {
+    public Double getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(double deposit) {
+    public void setDeposit(Double deposit) {
         this.deposit = deposit;
     }
 
-    public double getStateTaxPer() {
+    public Double getStateTaxPer() {
         return stateTaxPer;
     }
 
-    public void setStateTaxPer(double stateTaxPer) {
+    public void setStateTaxPer(Double stateTaxPer) {
         this.stateTaxPer = stateTaxPer;
     }
 
@@ -241,11 +241,11 @@ public class Customer {
         this.notes = notes;
     }
 
-    public double getBillCharge() {
+    public Double getBillCharge() {
         return billCharge;
     }
 
-    public void setBillCharge(double billCharge) {
+    public void setBillCharge(Double billCharge) {
         this.billCharge = billCharge;
     }
 
