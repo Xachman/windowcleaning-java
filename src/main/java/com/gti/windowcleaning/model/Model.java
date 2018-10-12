@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author xach
  */
-abstract class Model<T> {
+public abstract class Model<T> {
     protected StorageI storage;
     protected Class<T> clazz;
     public Model(Class<T> clazz) {
