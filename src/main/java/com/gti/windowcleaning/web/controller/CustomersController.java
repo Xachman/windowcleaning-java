@@ -5,10 +5,12 @@
  */
 package com.gti.windowcleaning.web.controller;
 
+import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.web.Answer;
 import com.gti.windowcleaning.web.Controller;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,11 +23,15 @@ public class CustomersController extends Controller<EmptyPayload> {
 
     public CustomersController(CustomersModel model) {
         super(EmptyPayload.class, model);
+        this.model = model;
     }
 
     @Override
     protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
-        return new Answer(200, "{}");
+        List<Customer> customers = model.getAll();
+
+        String json = dataToJson(customers);
+        return new Answer(200, json);
     }
     
 }

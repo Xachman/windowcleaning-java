@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Dun Andretti",
+        "location": "Washington",
+        "area": "DC",
+        "contact": "Dun Bischop",
+        "city": "Chattanooga",
+        "phone": "202-523-0725",
+        "state": "District of Columbia",
+        "addressLine1": "6 Barby Lane",
+        "addressLine2": "dtodarello0@sun.com",
+        "zip": "28242",
+        "fax": null,
+        "contactB": "Dun Todarello",
+        "cityB": "Washington",
+        "phoneB": "202-611-1316",
+        "stateB": "Tennessee",
+        "addressLine1B": "2691 Elka Street",
+        "addressLine2B": "dtodarello0@stanford.edu",
+        "zipB": "24496",
+        "faxB": null,
+        "monthly": false,
+        "EOM": false,
+        "obtainedBy": "Murry",
+        "obtainedDate": "2017-01-24"
+
+
+    }
+]
