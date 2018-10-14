@@ -42,7 +42,6 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
     public static String dataToJson(Object data) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            mapper.enable(SerializationFeature.INDENT_OUTPUT);
             return mapper.writeValueAsString(data);
         } catch (IOException e){
             throw new RuntimeException("IOException from a StringWriter?");

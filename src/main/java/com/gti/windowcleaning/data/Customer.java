@@ -5,6 +5,7 @@
  */
 package com.gti.windowcleaning.data;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -157,6 +158,7 @@ public class Customer {
         return EOM;
     }
 
+    @JsonProperty("EOM")
     public void setEOM(boolean EOM) {
         this.EOM = EOM;
     }
@@ -249,14 +251,15 @@ public class Customer {
         this.billCharge = billCharge;
     }
 
+    @JsonProperty("AWWLine")
     public boolean isAWWLine() {
         return AWWLine;
     }
-
     public void setAWWLine(boolean AWWLine) {
         this.AWWLine = AWWLine;
     }
 
+    @JsonProperty("AWWPUR")
     public boolean isAWWPUR() {
         return AWWPUR;
     }

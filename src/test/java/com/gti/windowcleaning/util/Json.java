@@ -68,7 +68,7 @@ public class Json {
                 boolean EOM = parseBoolean(jobj.get("EOM"));
                 String obtainedBy = jobj.get("obtainedBy").toString();
                 String obtainedDate = jobj.get("obtainedDate").toString();
-                double montlyBill = parseDouble(jobj.get("montlyBill"));
+                double montlyBill = parseDouble(jobj.get("monthlyBill"));
                 double credit = parseDouble(jobj.get("credit"));
                 double deposit = parseDouble(jobj.get("deposit"));
                 double stateTaxPer = parseDouble(jobj.get("stateTaxPer"));
@@ -76,7 +76,7 @@ public class Json {
                 String inactiveDate = parseString(jobj.get("inactiveDate"));
                 String royaltyPayment = parseString(jobj.get("royaltyPayment"));
                 String notes = parseString(jobj.get("notes"));
-                double billCharge = parseDouble(jobj.get("billCharge"));
+                double billCharge = parseDouble(jobj.get("billcharge"));
                 boolean AWWLine = parseBoolean(jobj.get("AWWLine"));
                 boolean AWWPur = parseBoolean(jobj.get("AWWPur"));
                 String division = parseString(jobj.get("division"));
@@ -126,7 +126,9 @@ public class Json {
                 customer.setCompany(company);
                 customer.setQuarterlyBill(quarterlyBill);
                 customer.setBillNotes(billNotes);
-
+                customer.setFax(fax);
+                customer.setFaxB(fax_b);
+                
                 customers.add(customer);
             }
         } catch (FileNotFoundException ex) {
