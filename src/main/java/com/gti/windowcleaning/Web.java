@@ -39,7 +39,8 @@ public class Web {
         get("/customers",new CustomersController(new CustomersModel(storage)));
         options("/customers",new CustomersController(new CustomersModel(storage)));
         
-        get("/customer/:id",new CustomerController(new CustomersModel(storage)));
-        options("/customer/:id",new CustomerController(new CustomersModel(storage)));
+        get("/customers/:id",new CustomerController(new CustomersModel(storage)));
+        options("/customers/:id",new CustomerController(new CustomersModel(storage)));
+       // ("/customers/:id",new CustomerController(new CustomersModel(storage)));
     } 
 }

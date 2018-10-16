@@ -11,6 +11,7 @@ import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.Answer;
 import com.gti.windowcleaning.web.Controller;
 import com.gti.windowcleaning.web.payload.CustomerPayload;
+import com.gti.windowcleaning.web.valid.EmptyPayload;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,19 +19,19 @@ import java.util.Map;
  *
  * @author xach
  */
-public class CustomerController extends Controller<CustomerPayload> {
+public class CustomerController extends Controller<EmptyPayload> {
 
     private CustomersModel model;
-    
+      
     public CustomerController(CustomersModel model) {
-        super(CustomerPayload.class, model);
+        super(EmptyPayload.class, model);
         this.model = model;
     }
 
     @Override
-    protected Answer processImpl(CustomerPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
-        if(value.isValid()) {
-            Customer customer = model.get(value.getCustomer().getId());
+    protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
+        if(urlParams.get(":id") != null) {
+            Customer customer = model.get(new Integer(urlParams.get(":id")));
             return new Answer(200, dataToJson(customer));
         }
         Map<String,String> error = new HashMap<>();

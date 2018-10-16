@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import junit.framework.Assert;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
@@ -50,14 +52,12 @@ public class CustomerControllerTest {
     } 
     @Test
     public void getCustomer() throws ParseException, FileNotFoundException, IOException, JSONException, URISyntaxException {
-        CustomerPayload cp = new CustomerPayload();
-        Customer customer = new Customer();
-        customer.setId(1);
-        cp.setCustomer(customer);
+        EmptyPayload ep = new EmptyPayload();
         CustomersModel model = new CustomersModel(storage);
         CustomerController controller = new CustomerController(model);
-         
-        Answer answer = controller.process(cp, Collections.emptyMap(), true);
+        Map<String, String> urlParams = new HashMap<>();
+        urlParams.put(":id", "1");
+        Answer answer = controller.process(ep, urlParams, true);
         String expect = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/customer_expect.json").toURI()), "UTF-8");
         Assert.assertEquals(200, answer.getCode());
         JSONAssert.assertEquals(expect, answer.getBody(), false);
