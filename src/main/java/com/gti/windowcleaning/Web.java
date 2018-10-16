@@ -9,6 +9,7 @@ import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.model.CustomersModel;
+import com.gti.windowcleaning.web.controller.CustomerController;
 import com.gti.windowcleaning.web.controller.CustomersController;
 import java.io.File;
 import static spark.Spark.*;
@@ -38,5 +39,7 @@ public class Web {
         get("/customers",new CustomersController(new CustomersModel(storage)));
         options("/customers",new CustomersController(new CustomersModel(storage)));
         
+        get("/customer/:id",new CustomerController(new CustomersModel(storage)));
+        options("/customer/:id",new CustomerController(new CustomersModel(storage)));
     } 
 }

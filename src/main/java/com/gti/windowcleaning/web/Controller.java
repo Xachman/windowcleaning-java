@@ -18,7 +18,6 @@ import spark.Route;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 
