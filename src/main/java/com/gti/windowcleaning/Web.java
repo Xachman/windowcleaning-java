@@ -28,6 +28,15 @@ public class Web {
         SQLiteStorage storage = new SQLiteStorage(storagePath+File.separator+"data.db");
         storage.create(Customer.class);
         storage.create(Job.class);
+        before((request, response) -> {
+            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            response.header("Access-Control-Expose-Headers", "Content-Range");
+            response.header("Content-Range", "1-200");
+        });
+
         get("/customers",new CustomersController(new CustomersModel(storage)));
+        options("/customers",new CustomersController(new CustomersModel(storage)));
+        
     } 
 }
