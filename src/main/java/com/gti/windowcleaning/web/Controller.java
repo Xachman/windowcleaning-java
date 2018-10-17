@@ -20,11 +20,14 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 public abstract class Controller<V extends ValidI> implements ControllerI<V>, Route {
 
     private Class<V> valueClass;
     protected Model model;
+    protected Map<String, String> headers;
 
     private static final int HTTP_BAD_REQUEST = 400;
 
@@ -48,15 +51,15 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
     }
 
     @Override
-    public final Answer process(V value, Map<String, String> urlParams, boolean shouldReturnHtml) {
+    public final Answer process(V value, Map<String, String> urlParams, Map<String,String> query, boolean shouldReturnHtml) {
         if (value != null && !value.isValid()) {
             return new Answer(HTTP_BAD_REQUEST);
         } else {
-            return processImpl(value, urlParams, shouldReturnHtml);
+            return processImpl(value, urlParams, query, shouldReturnHtml);
         }
     }
 
-    protected abstract Answer processImpl(V value, Map<String, String> urlParams, boolean shouldReturnHtml);
+    protected abstract Answer processImpl(V value, Map<String, String> urlParams, Map<String,String> query, boolean shouldReturnHtml);
 
 
     @Override
@@ -68,7 +71,11 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
                 value = objectMapper.readValue(request.body(), valueClass);
             }
             Map<String, String> urlParams = request.params();
-            Answer answer = process(value, urlParams, shouldReturnHtml(request));
+            Map<String, String> query = new HashMap<>();
+            request.queryParams().forEach((key) -> {
+                query.put(key, request.queryParams(key));
+            });
+            Answer answer = process(value, urlParams, query, shouldReturnHtml(request));
             response.status(answer.getCode());
             if (shouldReturnHtml(request)) {
                 response.type("text/html");
@@ -76,12 +83,19 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
                 response.type("application/json");
             }
             response.body(answer.getBody());
+            for(Entry<String,String> entry: getHeaders().entrySet()) {
+                response.header(entry.getKey(), entry.getValue());
+            }
             return answer.getBody();
         } catch (JsonMappingException e) {
             response.status(400);
             response.body(e.getMessage());
             return e.getMessage();
         }
+    }
+
+    public Map<String,String> getHeaders() {
+        return this.headers;
     }
 
 }

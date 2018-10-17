@@ -12,5 +12,5 @@ import java.util.Map;
  * @author xach
  */
 public interface ControllerI<V extends ValidI> {
-       Answer process(V value, Map<String, String> urlParams, boolean shouldReturnHtml);
+       Answer process(V value, Map<String, String> urlParams, Map<String,String> query, boolean shouldReturnHtml);
 }

@@ -26,7 +26,7 @@ public class DeleteCustomerController extends Controller<EmptyPayload> {
     }
     
     @Override
-    protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
+    protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, Map<String, String> query, boolean shouldReturnHtml) {
         Map<String,String> message = new HashMap<>();
         if(urlParams.get(":id") != null) {
             Integer id = new Integer(urlParams.get(":id"));

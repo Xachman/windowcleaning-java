@@ -35,7 +35,7 @@ public class Web {
             response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             response.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
             response.header("Access-Control-Expose-Headers", "Content-Range");
-            response.header("Content-Range", "1-200");
+            response.header("Content-Range", "1-10");
         });
 
         get("/customers",new CustomersController(new CustomersModel(storage)));

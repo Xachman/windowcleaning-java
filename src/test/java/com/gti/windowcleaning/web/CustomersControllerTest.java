@@ -62,7 +62,7 @@ public class CustomersControllerTest {
         CustomersModel model = new CustomersModel(storage);
         CustomersController controller = new CustomersController(model);
         
-        Answer answer = controller.process(ep, Collections.emptyMap(), true);
+        Answer answer = controller.process(ep, Collections.emptyMap(), Collections.emptyMap(), false);
         String expect = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/customers_expect.json").toURI()), "UTF-8");
         
         JSONAssert.assertEquals(expect, answer.getBody(), false);

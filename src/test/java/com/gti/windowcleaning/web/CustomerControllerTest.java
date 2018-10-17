@@ -58,7 +58,7 @@ public class CustomerControllerTest {
         CustomerController controller = new CustomerController(model);
         Map<String, String> urlParams = new HashMap<>();
         urlParams.put(":id", "1");
-        Answer answer = controller.process(ep, urlParams, true);
+        Answer answer = controller.process(ep, urlParams, Collections.emptyMap(), false);
         String expect = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/customer_expect.json").toURI()), "UTF-8");
         Assert.assertEquals(200, answer.getCode());
         JSONAssert.assertEquals(expect, answer.getBody(), false);
@@ -73,12 +73,12 @@ public class CustomerControllerTest {
         Map<String, String> urlParams = new HashMap<>();
         urlParams.put(":id", "3");
 
-        Answer answer = controller.process(ep, urlParams, true);
+        Answer answer = controller.process(ep, urlParams, Collections.emptyMap(), false);
 
         Assert.assertEquals(200, answer.getCode());
         JSONAssert.assertEquals("{\"success\": \"Customer 3 was deleted\"}", answer.getBody(), false);
 
-        answer = controller.process(ep, urlParams, true);
+        answer = controller.process(ep, urlParams, Collections.emptyMap(), false);
 
         Assert.assertEquals(400, answer.getCode());
         JSONAssert.assertEquals("{\"error\": \"Customer not found\"}", answer.getBody(), false);

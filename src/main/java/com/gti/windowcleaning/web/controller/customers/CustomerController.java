@@ -28,8 +28,16 @@ public class CustomerController extends Controller<EmptyPayload> {
         this.model = model;
     }
 
+    /**
+     *
+     * @param value
+     * @param urlParams
+     * @param query
+     * @param shouldReturnHtml
+     * @return
+     */
     @Override
-    protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
+    protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, Map<String,String> query, boolean shouldReturnHtml) {
         if(urlParams.get(":id") != null) {
             Customer customer = model.get(new Integer(urlParams.get(":id")));
             return new Answer(200, dataToJson(customer));
@@ -38,5 +46,6 @@ public class CustomerController extends Controller<EmptyPayload> {
         error.put("error", "Customer not valid");
         return new Answer(400, dataToJson(error));
     }
-    
+
+
 }

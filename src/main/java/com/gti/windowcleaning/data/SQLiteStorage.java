@@ -8,6 +8,8 @@ package com.gti.windowcleaning.data;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.TableUtils;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -185,6 +187,27 @@ public class SQLiteStorage implements StorageI {
 
         return null;
 
+   }
+   
+   @Override
+   public <T> List<T> getRange(Class<T> clazz, long start, long end) {
+        List<T> result = new ArrayList<>();
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, clazz);
+            QueryBuilder qb = dao.queryBuilder();
+            qb.offset(start);
+            qb.limit(end);
+            PreparedQuery<T> pq = qb.prepare();
+            result = dao.query(pq);
+            conn.close();
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
    }
     
 }

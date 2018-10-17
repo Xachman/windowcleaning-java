@@ -5,12 +5,14 @@
  */
 package com.gti.windowcleaning.web;
 
+import java.util.Map;
+
 /**
  *
  * @author xach
  */
 public class Answer {
-
+    private Map<String,String> headers;
     public Answer(int code) {
         this.code = code;
         this.body = "";
@@ -55,6 +57,11 @@ public class Answer {
     public Answer(int code, String body){
         this.code = code;
         this.body = body;
+    }
+
+    public Answer(int code, String body, Map<String,String> headers) {
+        this(code, body);
+        this.headers = headers;
     }
 
     public static Answer ok(String body) {

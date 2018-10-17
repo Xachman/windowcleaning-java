@@ -27,7 +27,7 @@ public class CustomersController extends Controller<EmptyPayload> {
     }
 
     @Override
-    protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
+    protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, Map<String, String> query, boolean shouldReturnHtml) {
         List<Customer> customers = model.getAll();
 
         String json = dataToJson(customers);

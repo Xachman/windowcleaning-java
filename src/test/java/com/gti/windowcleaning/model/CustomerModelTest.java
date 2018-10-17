@@ -37,6 +37,7 @@ public class CustomerModelTest {
         }
         storage = new SQLiteStorage(dbPath.toString());
         storage.create(Customer.class);
+        storage.add(Customer.class,Util.assembleCustomers());
     }
     
     @Test(expected = MustIncludeException.class)
@@ -54,6 +55,14 @@ public class CustomerModelTest {
 
     @Test()
     public void addAndGetCustomers() throws MustIncludeException {
+        URL dbPath =  getClass().getResource("/mocks/test_add_customer.db");
+        File file = new File(dbPath.getPath());
+        boolean file_exists = file.exists();
+        if(file_exists) {
+            file.delete();
+        }
+        StorageI storage = new SQLiteStorage(dbPath.toString());
+        storage.create(Customer.class);
         CustomersModel customersModel = new CustomersModel(storage);
         List<Customer> customers = Util.assembleCustomers();
         
@@ -66,9 +75,6 @@ public class CustomerModelTest {
     @Test(expected = NoSuchElementException.class)
     public void getCustomerById() throws MustIncludeException {
         CustomersModel customersModel = new CustomersModel(storage);
-        List<Customer> customers = Util.assembleCustomers();
-
-        customersModel.saveAll(customers);
         Customer customer = customersModel.get(4);
        
         Assert.assertEquals("Corenda Barnham", customer.getName());
@@ -82,9 +88,6 @@ public class CustomerModelTest {
     @Test(expected = NoSuchElementException.class)
     public void removeById() throws MustIncludeException {
         CustomersModel customersModel = new CustomersModel(storage);
-        List<Customer> customers = Util.assembleCustomers();
-
-        customersModel.saveAll(customers);
         customersModel.remove(3);
         Customer customer = customersModel.get(4);
          
@@ -94,5 +97,20 @@ public class CustomerModelTest {
 
 
         customersModel.get(3);
+    }
+
+    @Test
+    public void paginate() throws MustIncludeException {
+        CustomersModel customersModel = new CustomersModel(storage);
+        
+        List<Customer> customers = customersModel.getRange(0, 5); 
+        
+        Assert.assertEquals(5, customers.size());
+        Customer customer = customers.get(3);
+       
+        Assert.assertEquals("Corenda Barnham", customer.getName());
+        Assert.assertEquals("Texarkana", customer.getLocation());
+        Assert.assertEquals("TX", customer.getArea());
+
     }
 }
