@@ -10,7 +10,7 @@ import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.data.StorageI;
 import com.gti.windowcleaning.model.CustomersModel;
-import com.gti.windowcleaning.web.controller.CustomersController;
+import com.gti.windowcleaning.web.controller.customers.CustomersController;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 import java.io.File;
 import java.io.FileNotFoundException;

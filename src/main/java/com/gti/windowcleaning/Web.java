@@ -9,8 +9,8 @@ import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.model.CustomersModel;
-import com.gti.windowcleaning.web.controller.CustomerController;
-import com.gti.windowcleaning.web.controller.CustomersController;
+import com.gti.windowcleaning.web.controller.customers.CustomerController;
+import com.gti.windowcleaning.web.controller.customers.CustomersController;
 import java.io.File;
 import static spark.Spark.*;
 /**
