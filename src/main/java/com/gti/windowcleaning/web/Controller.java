@@ -27,7 +27,6 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
 
     private Class<V> valueClass;
     protected Model model;
-    protected Map<String, String> headers;
 
     private static final int HTTP_BAD_REQUEST = 400;
 
@@ -83,7 +82,7 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
                 response.type("application/json");
             }
             response.body(answer.getBody());
-            for(Entry<String,String> entry: getHeaders().entrySet()) {
+            for(Entry<String,String> entry: answer.getHeaders().entrySet()) {
                 response.header(entry.getKey(), entry.getValue());
             }
             return answer.getBody();
@@ -94,8 +93,5 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
         }
     }
 
-    public Map<String,String> getHeaders() {
-        return this.headers;
-    }
 
 }

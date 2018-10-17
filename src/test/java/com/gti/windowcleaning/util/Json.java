@@ -38,7 +38,7 @@ public class Json {
             JSONArray jCustomers = (JSONArray) obj;
             
             Iterator<JSONObject> iter = jCustomers.iterator();
-            SimpleDateFormat sdf = new SimpleDateFormat("m/d/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
             while(iter.hasNext()) {
                 JSONObject jobj = iter.next();
                 Customer customer = new Customer();
@@ -84,7 +84,8 @@ public class Json {
                 String company = parseString(jobj.get("company"));
                 boolean quarterlyBill = parseBoolean(jobj.get("quarterlyBill"));
                 String billNotes = parseString(jobj.get("billNotes"));
-               
+                
+
 
                 customer.setId(id);
                 customer.setName(name);

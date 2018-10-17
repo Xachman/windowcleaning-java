@@ -67,4 +67,8 @@ public class Answer {
     public static Answer ok(String body) {
         return new Answer(200, body);
     }
+
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
 }
