@@ -11,6 +11,7 @@ import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.web.controller.customers.CustomerController;
 import com.gti.windowcleaning.web.controller.customers.CustomersController;
+import com.gti.windowcleaning.web.controller.customers.DeleteCustomerController;
 import java.io.File;
 import static spark.Spark.*;
 /**
@@ -32,6 +33,7 @@ public class Web {
         before((request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
             response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            response.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
             response.header("Access-Control-Expose-Headers", "Content-Range");
             response.header("Content-Range", "1-200");
         });
@@ -41,6 +43,6 @@ public class Web {
         
         get("/customers/:id",new CustomerController(new CustomersModel(storage)));
         options("/customers/:id",new CustomerController(new CustomersModel(storage)));
-       // ("/customers/:id",new CustomerController(new CustomersModel(storage)));
+        delete("/customers/:id",new DeleteCustomerController(new CustomersModel(storage)));
     } 
 }

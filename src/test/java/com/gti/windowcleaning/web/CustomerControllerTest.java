@@ -12,6 +12,7 @@ import com.gti.windowcleaning.data.StorageI;
 import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.web.controller.customers.CustomerController;
 import com.gti.windowcleaning.web.controller.customers.CustomersController;
+import com.gti.windowcleaning.web.controller.customers.DeleteCustomerController;
 import com.gti.windowcleaning.web.payload.CustomerPayload;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 import java.io.File;
@@ -62,5 +63,24 @@ public class CustomerControllerTest {
         Assert.assertEquals(200, answer.getCode());
         JSONAssert.assertEquals(expect, answer.getBody(), false);
 
+    }
+
+    @Test
+    public void deleteCustomer() throws JSONException {
+        EmptyPayload ep = new EmptyPayload();
+        CustomersModel model = new CustomersModel(storage);
+        DeleteCustomerController controller = new DeleteCustomerController(model);
+        Map<String, String> urlParams = new HashMap<>();
+        urlParams.put(":id", "3");
+
+        Answer answer = controller.process(ep, urlParams, true);
+
+        Assert.assertEquals(200, answer.getCode());
+        JSONAssert.assertEquals("{\"success\": \"Customer 3 was deleted\"}", answer.getBody(), false);
+
+        answer = controller.process(ep, urlParams, true);
+
+        Assert.assertEquals(400, answer.getCode());
+        JSONAssert.assertEquals("{\"error\": \"Customer not found\"}", answer.getBody(), false);
     }
 }

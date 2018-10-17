@@ -86,17 +86,19 @@ public class SQLiteStorage implements StorageI {
     }
 
     @Override
-    public void remove(Class clazz, int id) {
+    public boolean remove(Class clazz, int id) {
         try {
             JdbcConnectionSource conn = getConnectionSrource();
             Dao dao = getDao(conn, clazz);
-            dao.deleteById(id);
+            int result = dao.deleteById(id);
             conn.close();
+            return result > 0;
         } catch (SQLException ex) {
             Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
     }
     
     private String databaseUrl() {
