@@ -57,10 +57,12 @@ public class Web {
         sb.append(request.requestMethod());
         sb.append(" " + request.url());
         sb.append(" " + request.body());
-        try {
-            sb.append(" " + URLDecoder.decode(request.queryString(), "UTF-8"));
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Web.class.getName()).log(Level.SEVERE, null, ex);
+        if(request.queryString() != null) {
+            try {
+                sb.append(" " + URLDecoder.decode(request.queryString(), "UTF-8"));
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Web.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return sb.toString();
     }
