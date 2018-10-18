@@ -71,6 +71,7 @@ public class CustomersControllerTest {
         Answer answer = controller.process(ep, Collections.emptyMap(), Collections.emptyMap(), false);
         String expect = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/customers_expect.json").toURI()), "UTF-8");
 
+        Assert.assertEquals("1-1/1", answer.getHeaders().get("Content-Range"));
         JSONAssert.assertEquals(expect, answer.getBody(), false);
 
     }
@@ -81,13 +82,20 @@ public class CustomersControllerTest {
         CustomersModel model = new CustomersModel(storage);
         CustomersController controller = new CustomersController(model);
         Map<String,String> query = new HashMap<>();
-        query.put("range", "[0,2]");
+        query.put("range", "[0,1]");
 
         Answer answer = controller.process(ep, Collections.emptyMap(), query, false);
         
         String expect = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/customers_range_expect.json").toURI()), "UTF-8");
-        Assert.assertEquals("0-2", answer.getHeaders().get("Content-Range"));
+        Assert.assertEquals("1-2/10", answer.getHeaders().get("Content-Range"));
         JSONAssert.assertEquals(expect, answer.getBody(), false);
 
+        query.put("range", "[3,6]");
+
+        answer = controller.process(ep, Collections.emptyMap(), query, false);
+        
+        expect = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/customers_range_expect2.json").toURI()), "UTF-8");
+        Assert.assertEquals("4-7/10", answer.getHeaders().get("Content-Range"));
+        JSONAssert.assertEquals(expect, answer.getBody(), false);
     }
 }

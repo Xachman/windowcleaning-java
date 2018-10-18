@@ -19,5 +19,6 @@ public interface StorageI {
     public <T>  List<T> add(Object object); 
     public <T>  List<T> add(Class<T> clazz, List<T> object); 
     public <T>  List<T> getRange(Class<T> clazz, long start, long end); 
+    public <T> long getTotalCount(Class<T> clazz);
     public boolean remove(Class clazz, int id);
 }

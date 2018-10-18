@@ -197,7 +197,7 @@ public class SQLiteStorage implements StorageI {
             Dao dao = getDao(conn, clazz);
             QueryBuilder qb = dao.queryBuilder();
             qb.offset(start);
-            qb.limit(end);
+            qb.limit(end-start);
             PreparedQuery<T> pq = qb.prepare();
             result = dao.query(pq);
             conn.close();
@@ -208,6 +208,22 @@ public class SQLiteStorage implements StorageI {
             Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
+   }
+
+   @Override
+   public <T> long getTotalCount(Class<T> clazz) {
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, clazz);
+            long count = dao.countOf();
+            conn.close();
+            return count;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
    }
     
 }

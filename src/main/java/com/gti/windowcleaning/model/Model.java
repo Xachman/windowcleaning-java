@@ -53,6 +53,9 @@ public abstract class Model<T> {
     public List<T> getRange(long start, long end) {
         return storage.getRange(clazz, start, end); 
     }
+    public long getTotalCount() {
+        return storage.getTotalCount(clazz);
+    }
     private void validate(Object object) throws MustIncludeException {
         Class<?> objectClass = Objects.requireNonNull(object).getClass();
         List<String> errorFields =  new ArrayList<>();       

@@ -40,10 +40,10 @@ public class CustomersController extends Controller<EmptyPayload> {
                 JSONArray range = (JSONArray) parser.parse(query.get("range"));
                 long start = Long.parseLong(range.get(0).toString());
                 long end = Long.parseLong(range.get(1).toString());
-                List<Customer> customers = model.getRange(start, end);
+                List<Customer> customers = model.getRange(start, end+1);
                 String json = dataToJson(customers);
                 Map<String, String> lHeaders = new HashMap<>();
-                lHeaders.put("Content-Range", start+"-"+end);
+                lHeaders.put("Content-Range", (start+1)+"-"+(end+1)+"/"+model.getTotalCount());
                 return new Answer(200, json, lHeaders);
             } catch (ParseException ex) {
                 Logger.getLogger(CustomersController.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,7 +52,9 @@ public class CustomersController extends Controller<EmptyPayload> {
 
         List<Customer> customers = model.getAll();
         String json = dataToJson(customers);
-        return new Answer(200, json);
+        Map<String, String> lHeaders = new HashMap<>();
+        lHeaders.put("Content-Range", 1+"-"+customers.size()+"/"+model.getTotalCount());
+        return new Answer(200, json, lHeaders);
     }
     
 }
