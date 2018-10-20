@@ -38,7 +38,7 @@ export const CustomerCreate = (props) => (
                 <TextInput source="addressLine2" />
                 <TextInput source="city" />
                 <TextInput source="state" />
-                <TextInput source="zipcode" />
+                <TextInput source="zip" />
                 <TextInput source="phone" />
                 <TextInput source="fax" />
                 <h2>Billing Information</h2>
@@ -47,7 +47,7 @@ export const CustomerCreate = (props) => (
                 <TextInput source="addressLine2B" />
                 <TextInput source="cityB" />
                 <TextInput source="stateB" />
-                <TextInput source="zipcodeB" />
+                <TextInput source="zipB" />
                 <TextInput source="phoneB" />
                 <TextInput source="faxB" />
             </FormTab>
@@ -78,9 +78,8 @@ const CustomerTitle = ({ record }) => {
 export const CustomerEdit = (props) => (
     <Edit title={<CustomerTitle/>} {...props}>
         <TabbedForm>
-
-            <DisabledInput source="id" />
             <FormTab label="General">
+                <DisabledInput source="id" />
                 <TextInput source="name" />
                 <TextInput source="location" />
                 <TextInput source="area" />
@@ -103,7 +102,7 @@ export const CustomerEdit = (props) => (
                 <TextInput source="addressLine2" />
                 <TextInput source="city" />
                 <TextInput source="state" />
-                <TextInput source="zipcode" />
+                <TextInput source="zip" />
                 <TextInput source="phone" />
                 <TextInput source="fax" />
                 <h2>Billing Information</h2>
@@ -112,7 +111,7 @@ export const CustomerEdit = (props) => (
                 <TextInput source="addressLine2B" />
                 <TextInput source="cityB" />
                 <TextInput source="stateB" />
-                <TextInput source="zipcodeB" />
+                <TextInput source="zipB" />
                 <TextInput source="phoneB" />
                 <TextInput source="faxB" />
             </FormTab>

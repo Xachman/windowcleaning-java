@@ -5,6 +5,7 @@
  */
 package com.gti.windowcleaning.web;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Map;
  * @author xach
  */
 public class Answer {
-    private Map<String,String> headers;
+    private Map<String,String> headers = new HashMap<>();
     public Answer(int code) {
         this.code = code;
         this.body = "";
