@@ -69,16 +69,14 @@ public class SQLiteStorage implements StorageI {
     }
 
     @Override
-    public <T> List<T> add(Object object) {
+    public <T> T add(T object) {
         try {
-            List<T> result = new ArrayList<>();
             JdbcConnectionSource conn = getConnectionSrource();
             Dao dao = getDao(conn, object.getClass());
-            T item = (T) object;
+            T item = object;
             dao.create(item);
-            result.add(item);
             conn.close();
-            return result;
+            return item;
         } catch (SQLException ex) {
             Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -145,29 +143,9 @@ public class SQLiteStorage implements StorageI {
         }
     }
     
-    private <T> Dao<T, Integer> getDao(JdbcConnectionSource conn, Class<T> clazz) throws SQLException {
+    private <D> Dao<D, Integer> getDao(JdbcConnectionSource conn, Class<D> clazz) throws SQLException {
             return DaoManager.createDao(conn, clazz);
     } 
-   private Dao getCustomerDao() {
-        return null;
-   } 
-
-   private Customer addCustomer(Customer customer) {
-        try { 
-            JdbcConnectionSource conn = getConnectionSrource();
-            Dao<Customer, Integer> dao =  DaoManager.createDao(conn, Customer.class);
-
-            
-            conn.close();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return null;
-   }
 
    private List<Customer> getCustomers() {
 

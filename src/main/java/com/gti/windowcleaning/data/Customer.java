@@ -18,85 +18,85 @@ import java.util.Date;
 @DatabaseTable(tableName = "customers")
 public class Customer {
     @DatabaseField(generatedId = true)
-    private int id;
+    protected int id;
     @DatabaseField(canBeNull = false)
-    private String name;
+    protected String name;
     @DatabaseField(canBeNull = false)
-    private String location;
+    protected String location;
     @DatabaseField(canBeNull = false)
-    private String area;
+    protected String area;
     @DatabaseField(canBeNull = false)
-    private String contact;
+    protected String contact;
     @DatabaseField(canBeNull = false)
-    private String city;
+    protected String city;
     @DatabaseField(canBeNull = false)
-    private String phone;
+    protected String phone;
     @DatabaseField(canBeNull = false)
-    private String state;
+    protected String state;
     @DatabaseField(canBeNull = false)
-    private String addressLine1;
+    protected String addressLine1;
     @DatabaseField(canBeNull = false)
-    private String addressLine2;
+    protected String addressLine2;
     @DatabaseField(canBeNull = false)
-    private String zip;
+    protected String zip;
     @DatabaseField()
-    private String fax;
+    protected String fax;
     @DatabaseField(canBeNull = false)
-    private String contactB;
+    protected String contactB;
     @DatabaseField(canBeNull = false)
-    private String cityB;
+    protected String cityB;
     @DatabaseField(canBeNull = false)
-    private String phoneB;
+    protected String phoneB;
     @DatabaseField(canBeNull = false)
-    private String stateB;
+    protected String stateB;
     @DatabaseField(canBeNull = false)
-    private String addressLine1B;
+    protected String addressLine1B;
     @DatabaseField(canBeNull = false)
-    private String addressLine2B;
+    protected String addressLine2B;
     @DatabaseField(canBeNull = false)
-    private String zipB;
+    protected String zipB;
     @DatabaseField()
-    private String faxB;
+    protected String faxB;
     @DatabaseField(canBeNull = false)
-    private boolean monthly;
+    protected boolean monthly;
     @DatabaseField(canBeNull = false)
-    private boolean EOM;
+    protected boolean EOM;
     @DatabaseField()
-    private String obtainedBy;
+    protected String obtainedBy;
     @DatabaseField(dataType = DataType.DATE_STRING, format = "yyyy-MM-dd")
-    private Date obtainedDate;
+    protected Date obtainedDate;
     @DatabaseField()
-    private Double monthlyBill;
+    protected Double monthlyBill;
     @DatabaseField()
-    private Double credit;
+    protected Double credit;
     @DatabaseField()
-    private Double deposit;
+    protected Double deposit;
     @DatabaseField()
-    private Double stateTaxPer;
+    protected Double stateTaxPer;
     @DatabaseField()
-    private boolean active;
+    protected boolean active;
     @DatabaseField(dataType = DataType.DATE_STRING, format = "yyyy-MM-dd")
-    private Date inactiveDate;
+    protected Date inactiveDate;
     @DatabaseField()
-    private String royaltyPaymentTo;
+    protected String royaltyPaymentTo;
     @DatabaseField()
-    private String notes;
+    protected String notes;
     @DatabaseField()
-    private Double billCharge;
+    protected Double billCharge;
     @DatabaseField(canBeNull = false)
-    private boolean AWWLine;
+    protected boolean AWWLine;
     @DatabaseField(canBeNull = false)
-    private boolean AWWPUR;
+    protected boolean AWWPUR;
     @DatabaseField()
-    private String division;
+    protected String division;
     @DatabaseField(canBeNull = false)
-    private String type;
+    protected String type;
     @DatabaseField()
-    private boolean quarterlyBill;
+    protected boolean quarterlyBill;
     @DatabaseField()
-    private String billNotes;
+    protected String billNotes;
     @DatabaseField()
-    private String company;
+    protected String company;
 
     public String getCompany() {
         return company;

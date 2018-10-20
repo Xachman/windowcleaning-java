@@ -13,6 +13,7 @@ import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.web.controller.customers.CustomerController;
 import com.gti.windowcleaning.web.controller.customers.CustomersController;
 import com.gti.windowcleaning.web.controller.customers.DeleteCustomerController;
+import com.gti.windowcleaning.web.controller.customers.EditCreateCustomerController;
 import com.gti.windowcleaning.web.payload.CustomerPayload;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 import java.io.File;
@@ -82,5 +83,18 @@ public class CustomerControllerTest {
 
         Assert.assertEquals(400, answer.getCode());
         JSONAssert.assertEquals("{\"error\": \"Customer not found\"}", answer.getBody(), false);
+    }
+
+    @Test public void createCustomerController() {
+        CustomerPayload cp = new CustomerPayload();
+        cp.setAWWLine(true);
+        CustomersModel model = new CustomersModel(storage);
+        EditCreateCustomerController controller = new EditCreateCustomerController(model);
+
+        controller.process(cp, Collections.emptyMap(), Collections.emptyMap(), false);
+
+        List<Customer> customers = model.getAll();
+        Assert.assertEquals(11, customers.size());
+
     }
 }

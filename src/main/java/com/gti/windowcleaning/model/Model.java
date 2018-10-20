@@ -35,9 +35,9 @@ public abstract class Model<T> {
         this.storage = storage;
     }
 
-    public void save(Object object) throws MustIncludeException {
+    public T save(T object) throws MustIncludeException {
         validate(object);
-        storage.add(object);
+        return storage.add(object);
     }
     
     public List<T> getAll() {
