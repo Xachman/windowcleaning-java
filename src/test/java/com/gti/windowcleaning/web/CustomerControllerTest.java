@@ -156,7 +156,7 @@ public class CustomerControllerTest {
         
         Map<String,String> urlParams = new HashMap<>();
         
-        urlParams.put("id", "3");
+        urlParams.put(":id", "3");
         Answer answer = controller.process(cp, urlParams, Collections.emptyMap(), false);
 
         List<Customer> customers = model.getAll();

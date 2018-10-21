@@ -53,7 +53,7 @@ public class Customer extends BaseData {
     protected String addressLine1B;
     @DatabaseField()
     protected String addressLine2B;
-    @DatabaseField()
+    @DatabaseField(canBeNull = false)
     protected String zipB;
     @DatabaseField()
     protected String faxB;
