@@ -50,6 +50,9 @@ public abstract class Model<T> {
     public boolean remove(int id) {
         return storage.remove(clazz, id);
     }
+    public T update(T object) {
+        return storage.update(object);
+    }
     public List<T> getRange(long start, long end) {
         return storage.getRange(clazz, start, end); 
     }

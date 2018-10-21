@@ -85,16 +85,89 @@ public class CustomerControllerTest {
         JSONAssert.assertEquals("{\"error\": \"Customer not found\"}", answer.getBody(), false);
     }
 
-    @Test public void createCustomerController() {
-        CustomerPayload cp = new CustomerPayload();
+    @Test 
+    public void createCustomer() {
+        Customer cp = new Customer();
+        cp.setName("Ted Denson");
+        cp.setLocation("Wilmington");
+        cp.setArea("Back Street");
+        cp.setAWWPUR(true);
         cp.setAWWLine(true);
+        cp.setActive(true);
+        cp.setContact("Barbra Denson");
+        cp.setAddressLine1("123 Elm St");
+        cp.setCity("Salisbury");
+        cp.setZip("12345");
+        cp.setState("MD");
+        cp.setPhone("555-555-5555");
+        cp.setContactB("Barbra Denson");
+        cp.setAddressLine1B("123 Elm St");
+        cp.setCityB("Salisbury");
+        cp.setZipB("12345");
+        cp.setStateB("MD");
+        cp.setPhoneB("555-555-5555");
+        cp.setBillCharge(100.00);
+        cp.setBillNotes("Some notes about the charge");
+        cp.setCredit(0.0);
+        cp.setDivision("Residence");
+        cp.setEOM(false);
+        cp.setMonthly(true);
+        cp.setType("S");
         CustomersModel model = new CustomersModel(storage);
         EditCreateCustomerController controller = new EditCreateCustomerController(model);
 
-        controller.process(cp, Collections.emptyMap(), Collections.emptyMap(), false);
+        Answer answer = controller.process(cp, Collections.emptyMap(), Collections.emptyMap(), false);
 
         List<Customer> customers = model.getAll();
+        Assert.assertEquals(200, answer.getCode());
         Assert.assertEquals(11, customers.size());
+    }
+    @Test
+    public void editCustomer() {
+        Customer cp = new Customer();
+        cp.setId(3);
+        cp.setName("Ted Denson");
+        cp.setLocation("Wilmington");
+        cp.setArea("Back Street");
+        cp.setAWWPUR(true);
+        cp.setAWWLine(true);
+        cp.setActive(true);
+        cp.setContact("Barbra Denson");
+        cp.setAddressLine1("123 Elm St");
+        cp.setCity("Salisbury");
+        cp.setZip("12345");
+        cp.setState("MD");
+        cp.setPhone("555-555-5555");
+        cp.setContactB("Barbra Denson");
+        cp.setAddressLine1B("123 Elm St");
+        cp.setCityB("Salisbury");
+        cp.setZipB("12345");
+        cp.setStateB("MD");
+        cp.setPhoneB("555-555-5555");
+        cp.setBillCharge(100.00);
+        cp.setBillNotes("Some notes about the charge");
+        cp.setCredit(0.0);
+        cp.setDivision("Residence");
+        cp.setEOM(false);
+        cp.setMonthly(true);
+        cp.setType("S");
+        CustomersModel model = new CustomersModel(storage);
+        EditCreateCustomerController controller = new EditCreateCustomerController(model);
+        
+        Map<String,String> urlParams = new HashMap<>();
+        
+        urlParams.put("id", "3");
+        Answer answer = controller.process(cp, urlParams, Collections.emptyMap(), false);
+
+        List<Customer> customers = model.getAll();
+        Assert.assertEquals(200, answer.getCode());
+        Assert.assertEquals(10, customers.size());
+
+        Customer customer = model.get(3);
+        
+        Assert.assertEquals("Ted Denson", customer.getName());
+        Assert.assertEquals("Wilmington", customer.getLocation());
+
 
     }
 }

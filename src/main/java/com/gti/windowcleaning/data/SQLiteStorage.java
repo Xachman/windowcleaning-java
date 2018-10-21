@@ -100,7 +100,22 @@ public class SQLiteStorage implements StorageI {
         }
         return false;
     }
-    
+    @Override
+    public <T> T update(T object) {
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, object.getClass());
+            T item = object;
+            dao.update(item);
+            conn.close();
+            return item;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     private String databaseUrl() {
         if(path == null) {
             return "jdbc:sqlite:"+System.getProperty("user.dir")+"/sqlitetest.db";

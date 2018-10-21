@@ -17,6 +17,7 @@ public interface StorageI {
     public <T> T get(Class<T> clazz, int id);
     public <T> List<T> getByField(Class<T> clazz, String fieldName);
     public <T>  T add(T object); 
+    public <T>  T update(T object); 
     public <T>  List<T> add(Class<T> clazz, List<T> object); 
     public <T>  List<T> getRange(Class<T> clazz, long start, long end); 
     public <T> long getTotalCount(Class<T> clazz);

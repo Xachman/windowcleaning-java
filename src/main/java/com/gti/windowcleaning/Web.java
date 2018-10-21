@@ -12,6 +12,7 @@ import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.web.controller.customers.CustomerController;
 import com.gti.windowcleaning.web.controller.customers.CustomersController;
 import com.gti.windowcleaning.web.controller.customers.DeleteCustomerController;
+import com.gti.windowcleaning.web.controller.customers.EditCreateCustomerController;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -50,6 +51,8 @@ public class Web {
         get("/customers/:id",new CustomerController(new CustomersModel(storage)));
         options("/customers/:id",new CustomerController(new CustomersModel(storage)));
         delete("/customers/:id",new DeleteCustomerController(new CustomersModel(storage)));
+        post("/customers",new EditCreateCustomerController(new CustomersModel(storage)));
+        put("/customers/:id",new EditCreateCustomerController(new CustomersModel(storage)));
     } 
 
     private static String requestInfoToString(Request request) {

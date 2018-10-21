@@ -16,7 +16,7 @@ import java.util.Date;
  * @author xach
  */
 @DatabaseTable(tableName = "customers")
-public class Customer {
+public class Customer extends BaseData {
     @DatabaseField(generatedId = true)
     protected int id;
     @DatabaseField(canBeNull = false)
@@ -35,7 +35,7 @@ public class Customer {
     protected String state;
     @DatabaseField(canBeNull = false)
     protected String addressLine1;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField()
     protected String addressLine2;
     @DatabaseField(canBeNull = false)
     protected String zip;
@@ -51,15 +51,15 @@ public class Customer {
     protected String stateB;
     @DatabaseField(canBeNull = false)
     protected String addressLine1B;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField()
     protected String addressLine2B;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField()
     protected String zipB;
     @DatabaseField()
     protected String faxB;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField()
     protected boolean monthly;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField()
     protected boolean EOM;
     @DatabaseField()
     protected String obtainedBy;
@@ -83,13 +83,13 @@ public class Customer {
     protected String notes;
     @DatabaseField()
     protected Double billCharge;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField()
     protected boolean AWWLine;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField()
     protected boolean AWWPUR;
     @DatabaseField()
     protected String division;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField()
     protected String type;
     @DatabaseField()
     protected boolean quarterlyBill;

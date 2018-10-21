@@ -22,22 +22,29 @@ import java.util.logging.Logger;
  *
  * @author xach
  */
-public class EditCreateCustomerController extends Controller<CustomerPayload> {
+public class EditCreateCustomerController extends Controller<Customer> {
     private CustomersModel model;
 
     public EditCreateCustomerController(CustomersModel model) {
-        super(CustomerPayload.class, model);
+        super(Customer.class, model);
         this.model = model;
     }
 
     @Override
-    protected Answer processImpl(CustomerPayload value, Map<String, String> urlParams, Map<String, String> query, boolean shouldReturnHtml) {
+    protected Answer processImpl(Customer value, Map<String, String> urlParams, Map<String, String> query, boolean shouldReturnHtml) {
         if(value.isValid()) {
             try {
-                Customer customer = model.save(value);
+                if(urlParams.get(":id") == null) {
+                    Customer customer = model.save(value);
+                    Map<String,String> result = new HashMap<>();
+                    result.put("id", ""+customer.getId());
+                    return new Answer(200, dataToJson(result));
+                }
+                Customer customer = model.update(value);
                 Map<String,String> result = new HashMap<>();
                 result.put("id", ""+customer.getId());
                 return new Answer(200, dataToJson(result));
+
             } catch (MustIncludeException ex) {
                 Logger.getLogger(EditCreateCustomerController.class.getName()).log(Level.SEVERE, null, ex);
             }
