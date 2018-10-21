@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Edit, DisabledInput, EditButton, Datagrid, DateInput, NumberInput, SelectInput, TextField, Create, TextInput, LongTextInput, TabbedForm, FormTab, BooleanInput, TabbedShowLayout, Tab } from 'react-admin';
-
+import Grid from '@material-ui/core/Grid';
 export const CustomersList = (props) => (
     <List {...props}>
         <Datagrid>
@@ -32,24 +32,34 @@ export const CustomerCreate = (props) => (
                 <LongTextInput source="notes" />
             </FormTab>
             <FormTab label="Contacts">
-                <h2>Location Information</h2>
-                <TextInput source="contact" />
-                <TextInput source="addressLine1" />
-                <TextInput source="addressLine2" />
-                <TextInput source="city" />
-                <TextInput source="state" />
-                <TextInput source="zip" />
-                <TextInput source="phone" />
-                <TextInput source="fax" />
-                <h2>Billing Information</h2>
-                <TextInput source="contactB" />
-                <TextInput source="addressLine1B" />
-                <TextInput source="addressLine2B" />
-                <TextInput source="cityB" />
-                <TextInput source="stateB" />
-                <TextInput source="zipB" />
-                <TextInput source="phoneB" />
-                <TextInput source="faxB" />
+                <Grid container spacing={24}>
+                    <Grid item md={6}>
+                        <Grid container direction="column">
+                            <h2>Location Information</h2>
+                            <TextInput source="contact" />
+                            <TextInput source="addressLine1" />
+                            <TextInput source="addressLine2" />
+                            <TextInput source="city" />
+                            <TextInput source="state" />
+                            <TextInput source="zip" />
+                            <TextInput source="phone" />
+                            <TextInput source="fax" />
+                        </Grid>
+                    </Grid>
+                    <Grid item md={6}>
+                        <Grid container direction="column">
+                            <h2>Billing Information</h2>
+                            <TextInput source="contactB" />
+                            <TextInput source="addressLine1B" />
+                            <TextInput source="addressLine2B" />
+                            <TextInput source="cityB" />
+                            <TextInput source="stateB" />
+                            <TextInput source="zipB" />
+                            <TextInput source="phoneB" />
+                            <TextInput source="faxB" />
+                        </Grid>
+                    </Grid>
+                </Grid>
             </FormTab>
             <FormTab label="Accounting">
                 <TextInput source="obtainedBy"/>
