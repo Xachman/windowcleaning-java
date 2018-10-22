@@ -38,9 +38,20 @@ public class SQLiteStorage implements StorageI {
     }
     @Override
     public <T> List<T> get(Class<T> clazz) {
-        if(clazz.equals(Customer.class)) {
-            return (List<T>) getCustomers();
+        try { 
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao =  getDao(conn, clazz);
+
+            List<T> list=  dao.queryForAll();
+            
+            conn.close();
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return null;
     }
 
@@ -162,26 +173,6 @@ public class SQLiteStorage implements StorageI {
             return DaoManager.createDao(conn, clazz);
     } 
 
-   private List<Customer> getCustomers() {
-
-        try { 
-            JdbcConnectionSource conn = getConnectionSrource();
-            Dao<Customer, Integer> dao =  DaoManager.createDao(conn, Customer.class);
-
-            List<Customer> customers =  dao.queryForAll();
-            
-            conn.close();
-            return customers;
-        } catch (SQLException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return null;
-
-   }
-   
    @Override
    public <T> List<T> getRange(Class<T> clazz, long start, long end) {
         List<T> result = new ArrayList<>();

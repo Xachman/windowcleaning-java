@@ -13,8 +13,10 @@ import com.gti.windowcleaning.web.controller.customers.CustomerController;
 import com.gti.windowcleaning.web.controller.customers.CustomersController;
 import com.gti.windowcleaning.web.controller.customers.DeleteCustomerController;
 import com.gti.windowcleaning.web.controller.customers.EditCreateCustomerController;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLDecoder;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +29,7 @@ import static spark.Spark.*;
 public class Main {
     public static void main(String[] args) {
         startWeb();
+        openBrowser("http://localhost:3000");
     } 
 
     private static String requestInfoToString(Request request) {
@@ -76,5 +79,20 @@ public class Main {
         delete("/customers/:id",new DeleteCustomerController(new CustomersModel(storage)));
         post("/customers",new EditCreateCustomerController(new CustomersModel(storage)));
         put("/customers/:id",new EditCreateCustomerController(new CustomersModel(storage)));
+    }
+
+    
+
+    public static boolean openBrowser(String uri) {
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            try {
+                desktop.browse( new URI(uri));
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 }
