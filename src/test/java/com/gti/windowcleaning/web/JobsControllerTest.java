@@ -18,14 +18,16 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.skyscreamer.jsonassert.JSONCompareMode;
-
+import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 /**
  *
  * @author xach
@@ -57,7 +59,15 @@ public class JobsControllerTest {
         Answer answer = controller.process(payload, Collections.emptyMap(), Collections.emptyMap(), false);
         
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_expect.json").toURI()), "UTF-8");
-        JSONAssert.assertEquals(actual, answer.getBody(), false);
+        Assert.assertEquals("1-10/10", answer.getHeaders().get("Content-Range"));
+        JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
+       
+        Map<String,String> query = new HashMap<>();
+        query.put("range", "2-5");
+        Answer answer2 = controller.process(payload, Collections.emptyMap(), query, false);
         
+        String actual2 = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_expect.json").toURI()), "UTF-8");
+        Assert.assertEquals("3-6/10", answer2.getHeaders().get("Content-Range"));
+        JSONAssert.assertEquals(actual, answer2.getBody(), STRICT);
     }
 }

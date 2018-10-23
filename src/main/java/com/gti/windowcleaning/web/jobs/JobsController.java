@@ -11,6 +11,7 @@ import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.Answer;
 import com.gti.windowcleaning.web.Controller;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +30,9 @@ public class JobsController extends Controller<EmptyPayload> {
     @Override
     protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, Map<String, String> query, boolean shouldReturnHtml) {
         List<Job> jobs = model.getAll();
-        return new Answer(200, dataToJson(jobs));
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Range", 1+"-"+jobs.size()+"/"+model.getTotalCount());
+        return new Answer(200, dataToJson(jobs), headers);
     }
     
 }
