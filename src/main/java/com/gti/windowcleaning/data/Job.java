@@ -43,7 +43,7 @@ public class Job {
     @DatabaseField()
     private String notes;
     @DatabaseField(canBeNull = false)
-    private boolean autoPrintServiceStatment;
+    private boolean autoPrintServiceStatement;
 
     public int getId() {
         return id;
@@ -149,15 +149,11 @@ public class Job {
         this.notes = notes;
     }
 
-    public boolean isAutoPrintServiceStatment() {
-        return autoPrintServiceStatment;
+    public boolean isAutoPrintServiceStatement() {
+        return autoPrintServiceStatement;
     }
 
-    public void setAutoPrintServiceStatment(boolean autoPrintServiceStatment) {
-        this.autoPrintServiceStatment = autoPrintServiceStatment;
-    }
-
-    public void add(Job job) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setAutoPrintServiceStatement(boolean autoPrintServiceStatement) {
+        this.autoPrintServiceStatement = autoPrintServiceStatement;
     }
 }

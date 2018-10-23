@@ -56,7 +56,7 @@ public class JobsControllerTest {
         JobsController controller = new JobsController(model);
         Answer answer = controller.process(payload, Collections.emptyMap(), Collections.emptyMap(), false);
         
-        String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/customer_expect.json").toURI()), "UTF-8");
+        String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_expect.json").toURI()), "UTF-8");
         JSONAssert.assertEquals(actual, answer.getBody(), false);
         
     }

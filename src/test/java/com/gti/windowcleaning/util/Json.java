@@ -154,7 +154,7 @@ public class Json {
             JSONArray jCustomers = (JSONArray) obj;
             
             Iterator<JSONObject> iter = jCustomers.iterator();
-            SimpleDateFormat sdf = new SimpleDateFormat("m/d/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
             while(iter.hasNext()) {
                 JSONObject jobj = iter.next();
                 int customer_id = new Integer(jobj.get("customer_id").toString());
@@ -162,7 +162,7 @@ public class Json {
                 double amount =  parseDouble(jobj.get("amount").toString());
                 Date serviceDate = sdf.parse(jobj.get("service_date").toString());
                 int days_between = new Integer(jobj.get("days_between").toString());
-                double precent = parseDouble(jobj.get("days_between").toString());
+                double precent = parseDouble(jobj.get("percent").toString());
                 boolean print_service_statement = parseBoolean(jobj.get("print_service_statement"));
                 boolean print_invoice = parseBoolean(jobj.get("print_invoice"));
                 boolean payment_expected = parseBoolean(jobj.get("payment_expected"));
@@ -177,7 +177,7 @@ public class Json {
                 job.setAmount(amount);
                 job.setDaysBetween(days_between);
                 job.setPercent(precent);
-                job.setAutoPrintServiceStatment(auto_print_service_statement);
+                job.setAutoPrintServiceStatement(auto_print_service_statement);
                 job.setDescription(description);
                 job.setPrintServiceStatement(print_service_statement);
                 job.setPaymentExpected(payment_expected);

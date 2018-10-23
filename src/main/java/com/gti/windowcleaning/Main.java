@@ -9,10 +9,12 @@ import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.model.CustomersModel;
+import com.gti.windowcleaning.model.JobsModel;
 import com.gti.windowcleaning.web.controller.customers.CustomerController;
 import com.gti.windowcleaning.web.controller.customers.CustomersController;
 import com.gti.windowcleaning.web.controller.customers.DeleteCustomerController;
 import com.gti.windowcleaning.web.controller.customers.EditCreateCustomerController;
+import com.gti.windowcleaning.web.jobs.JobsController;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -79,6 +81,9 @@ public class Main {
         delete("/customers/:id",new DeleteCustomerController(new CustomersModel(storage)));
         post("/customers",new EditCreateCustomerController(new CustomersModel(storage)));
         put("/customers/:id",new EditCreateCustomerController(new CustomersModel(storage)));
+
+        get("/jobs", new JobsController(new JobsModel(storage)));
+        options("/jobs", new JobsController(new JobsModel(storage)));
     }
 
     
