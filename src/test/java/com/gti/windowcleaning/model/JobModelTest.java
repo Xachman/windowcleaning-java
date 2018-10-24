@@ -44,6 +44,7 @@ public class JobModelTest {
         storage.add(Customer.class, customers);
         storage.add(Job.class, jobs);
     }
+
     @Test()
     public void addJobTest() throws MustIncludeException {
         JobsModel jobsModel = new JobsModel(storage); 
@@ -55,7 +56,7 @@ public class JobModelTest {
         job.setServicedBy("Tim");
         job.setServiceDate(new Date());
         jobsModel.save(job);
-        Job eJob = jobsModel.get(50);
+        Job eJob = jobsModel.get(11);
 
         Assert.assertEquals(10.00, eJob.getAmount(), 0);
         Assert.assertEquals("Tim", eJob.getServicedBy());

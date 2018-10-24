@@ -1,5 +1,6 @@
 package com.gti.windowcleaning.data;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class Job {
     private String servicedBy;
     @DatabaseField(canBeNull = false)
     private double amount;
-    @DatabaseField(canBeNull = false)
+    @DatabaseField(canBeNull = false, dataType = DataType.DATE_STRING, format = "yyyy-MM-dd")
     private Date serviceDate;
     @DatabaseField()
     private int daysBetween;
