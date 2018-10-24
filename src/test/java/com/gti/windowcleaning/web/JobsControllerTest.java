@@ -63,11 +63,11 @@ public class JobsControllerTest {
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
        
         Map<String,String> query = new HashMap<>();
-        query.put("range", "2-5");
+        query.put("range", "[2,5]");
         Answer answer2 = controller.process(payload, Collections.emptyMap(), query, false);
-        
-        String actual2 = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_expect.json").toURI()), "UTF-8");
+       
+        String actual2 = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_expect2.json").toURI()), "UTF-8");
         Assert.assertEquals("3-6/10", answer2.getHeaders().get("Content-Range"));
-        JSONAssert.assertEquals(actual, answer2.getBody(), STRICT);
+        JSONAssert.assertEquals(actual2, answer2.getBody(), STRICT);
     }
 }

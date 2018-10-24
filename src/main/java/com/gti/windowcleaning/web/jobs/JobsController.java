@@ -14,6 +14,11 @@ import com.gti.windowcleaning.web.valid.EmptyPayload;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -29,6 +34,22 @@ public class JobsController extends Controller<EmptyPayload> {
 
     @Override
     protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, Map<String, String> query, boolean shouldReturnHtml) {
+        if(query.get("range") != null) {
+            JSONParser parser = new JSONParser();
+            try {
+                JSONArray range = (JSONArray) parser.parse(query.get("range"));
+                long start = Long.parseLong(range.get(0).toString());
+                long end = Long.parseLong(range.get(1).toString());
+                List<Job> customers = model.getRange(start, end+1);
+                String json = dataToJson(customers);
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Range", (start+1)+"-"+(end+1)+"/"+model.getTotalCount());
+                return new Answer(200, json, headers);
+            } catch (ParseException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                return new Answer(400, "{\"error\": \"ParseException\"}");
+            }
+        }
         List<Job> jobs = model.getAll();
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Range", 1+"-"+jobs.size()+"/"+model.getTotalCount());
