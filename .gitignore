@@ -10,3 +10,4 @@ gradlew
 gradlew.bat
 stale_outputs_checked
 windowcleaning-java.iml
+out/
