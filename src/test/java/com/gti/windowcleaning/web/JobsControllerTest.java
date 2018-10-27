@@ -11,7 +11,7 @@ import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.data.StorageI;
 import com.gti.windowcleaning.model.JobsModel;
-import com.gti.windowcleaning.web.jobs.JobsController;
+import com.gti.windowcleaning.web.controller.jobs.JobsController;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 import java.io.File;
 import java.io.IOException;
@@ -69,5 +69,21 @@ public class JobsControllerTest {
         String actual2 = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_expect2.json").toURI()), "UTF-8");
         Assert.assertEquals("3-6/10", answer2.getHeaders().get("Content-Range"));
         JSONAssert.assertEquals(actual2, answer2.getBody(), STRICT);
+    }
+    @Test
+    public void sortJobs() throws JSONException, URISyntaxException, IOException {
+        JobsModel model = new JobsModel(storage);
+        EmptyPayload payload = new EmptyPayload();
+
+        JobsController controller = new JobsController(model);
+
+        Map<String,String> query = new HashMap<>();
+        query.put("range", "[0,2]");
+        query.put("sort", "[\"serviceDate\", \"DESC\"]");
+        Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
+
+        String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_sort_expect.json").toURI()), "UTF-8");
+        Assert.assertEquals("1-3/10", answer.getHeaders().get("Content-Range"));
+        JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
     }
 }

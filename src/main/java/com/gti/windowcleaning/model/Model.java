@@ -7,12 +7,16 @@ package com.gti.windowcleaning.model;
 
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.data.StorageI;
+import com.gti.windowcleaning.model.execute.ExecuteOptions;
+import com.gti.windowcleaning.model.execute.options.Range;
+import com.gti.windowcleaning.model.execute.options.Sort;
 import com.j256.ormlite.field.DatabaseField;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -25,6 +29,7 @@ import java.util.logging.Logger;
 public abstract class Model<T> {
     protected StorageI storage;
     protected Class<T> clazz;
+    protected ExecuteOptions executeOptions = new ExecuteOptions();
     public Model(Class<T> clazz) {
         this(new SQLiteStorage(System.getProperty("user.home")+File.separator+".windowcleaning"+File.separator+"data.db"), clazz);
     }
@@ -77,7 +82,29 @@ public abstract class Model<T> {
             throw new MustIncludeException(errorFields.toString());
         }
     } 
-
+    public Model range(int start, int end) {
+        executeOptions.setRange(new Range(start, end));
+        return this;
+    }
+    public Model sort(String field, boolean decending) {
+        executeOptions.setSort(new Sort(field, decending));
+        return this;
+    }
+    public List<T> execute() {
+        switch(executeOptions.type()) {
+            case ExecuteOptions.RANGE_SORT:
+                return storage.getRangeSort(clazz,
+                        executeOptions.getRange().getStart(),
+                        executeOptions.getRange().getEnd(),
+                        executeOptions.getSort().getField(),
+                        executeOptions.getSort().isDesending());
+            case ExecuteOptions.RANGE:
+                return storage.getRange(clazz, executeOptions.getRange().getStart(),executeOptions.getRange().getEnd());
+            case ExecuteOptions.SORT:
+                return storage.getSort(clazz, executeOptions.getSort().getField(), executeOptions.getSort().isDesending());
+        }
+        return new ArrayList<>();
+    }
     private boolean fieldIsSet(Field field,  Object object) {
         try {
             if(field.getType().equals(boolean.class)){

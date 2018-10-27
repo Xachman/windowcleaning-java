@@ -1,0 +1,50 @@
+[
+    {
+        "id": 10,
+        "customer":{"valid":false,"id":2,"name":null,"location":null,"area":null,"contact":null,"city":null,"phone":null,"state":null,"addressLine1":null,"addressLine2":null,"zip":null,"fax":null,"contactB":null,"cityB":null,"phoneB":null,"stateB":null,"addressLine1B":null,"addressLine2B":null,"zipB":null,"faxB":null,"monthly":false,"obtainedBy":null,"obtainedDate":null,"monthlyBill":null,"credit":null,"deposit":null,"stateTaxPer":null,"active":false,"inactiveDate":null,"royaltyPaymentTo":null,"notes":null,"billCharge":null,"division":null,"type":null,"quarterlyBill":false,"billNotes":null,"company":null,"EOM":false,"AWWLine":false,"AWWPUR":false},
+        "servicedBy": "Terry",
+        "amount": 209.99,
+        "serviceDate": 1531886400000,
+        "daysBetween": 184,
+        "percent": 0.47,
+        "printServiceStatement": false,
+        "printInvoice": true,
+        "paymentExpected": false,
+        "description": "",
+        "difficulty": 6,
+        "notes": "",
+        "autoPrintServiceStatement": true
+    },
+    {
+        "id": 7,
+        "customer":{"valid":false,"id":8,"name":null,"location":null,"area":null,"contact":null,"city":null,"phone":null,"state":null,"addressLine1":null,"addressLine2":null,"zip":null,"fax":null,"contactB":null,"cityB":null,"phoneB":null,"stateB":null,"addressLine1B":null,"addressLine2B":null,"zipB":null,"faxB":null,"monthly":false,"obtainedBy":null,"obtainedDate":null,"monthlyBill":null,"credit":null,"deposit":null,"stateTaxPer":null,"active":false,"inactiveDate":null,"royaltyPaymentTo":null,"notes":null,"billCharge":null,"division":null,"type":null,"quarterlyBill":false,"billNotes":null,"company":null,"EOM":false,"AWWLine":false,"AWWPUR":false},
+        "servicedBy": "Bill",
+        "amount": 522.81,
+        "serviceDate": 1507608000000,
+        "daysBetween": 157,
+        "percent": 0.09,
+        "printServiceStatement": true,
+        "printInvoice": false,
+        "paymentExpected": true,
+        "description": "",
+        "difficulty": 7,
+        "notes": "",
+        "autoPrintServiceStatement": true
+    },
+    {
+        "id": 5,
+        "customer":{"valid":false,"id":4,"name":null,"location":null,"area":null,"contact":null,"city":null,"phone":null,"state":null,"addressLine1":null,"addressLine2":null,"zip":null,"fax":null,"contactB":null,"cityB":null,"phoneB":null,"stateB":null,"addressLine1B":null,"addressLine2B":null,"zipB":null,"faxB":null,"monthly":false,"obtainedBy":null,"obtainedDate":null,"monthlyBill":null,"credit":null,"deposit":null,"stateTaxPer":null,"active":false,"inactiveDate":null,"royaltyPaymentTo":null,"notes":null,"billCharge":null,"division":null,"type":null,"quarterlyBill":false,"billNotes":null,"company":null,"EOM":false,"AWWLine":false,"AWWPUR":false},
+        "servicedBy": "Terry",
+        "amount": 151.35,
+        "serviceDate": 1477108800000,
+        "daysBetween": 5,
+        "percent": 0.02,
+        "printServiceStatement": true,
+        "printInvoice": true,
+        "paymentExpected": true,
+        "description": "Fusce consequat. Nulla nisl. Nunc nisl.",
+        "difficulty": 6,
+        "notes": "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
+        "autoPrintServiceStatement": true
+    }
+]

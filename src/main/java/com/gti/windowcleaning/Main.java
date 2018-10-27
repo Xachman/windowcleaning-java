@@ -14,7 +14,7 @@ import com.gti.windowcleaning.web.controller.customers.CustomerController;
 import com.gti.windowcleaning.web.controller.customers.CustomersController;
 import com.gti.windowcleaning.web.controller.customers.DeleteCustomerController;
 import com.gti.windowcleaning.web.controller.customers.EditCreateCustomerController;
-import com.gti.windowcleaning.web.jobs.JobsController;
+import com.gti.windowcleaning.web.controller.jobs.JobsController;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.UnsupportedEncodingException;

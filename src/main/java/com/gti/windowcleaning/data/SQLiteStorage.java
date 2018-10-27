@@ -111,6 +111,34 @@ public class SQLiteStorage implements StorageI {
         }
         return false;
     }
+
+    @Override
+    public <T> List<T> getSort(Class<T> clazz, String field, boolean desending) {
+        return null;
+    }
+
+    @Override
+    public <T> List<T> getRangeSort(Class<T> clazz, long start, long end, String field, boolean desending) {
+        List<T> result = new ArrayList<>();
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, clazz);
+            QueryBuilder qb = dao.queryBuilder();
+            qb.offset(start);
+            qb.limit(end-start);
+            qb.orderBy(field,
+            PreparedQuery<T> pq = qb.prepare();
+            result = dao.query(pq);
+            conn.close();
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
     @Override
     public <T> T update(T object) {
         try {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gti.windowcleaning.web.jobs;
+package com.gti.windowcleaning.web.controller.jobs;
 
 import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.model.JobsModel;

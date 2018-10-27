@@ -12,14 +12,18 @@ import java.util.List;
  * @author xach
  */
 public interface StorageI {
-    public void create(Class clazz);
-    public <T> List<T> get(Class<T> clazz);
-    public <T> T get(Class<T> clazz, int id);
-    public <T> List<T> getByField(Class<T> clazz, String fieldName);
-    public <T>  T add(T object); 
-    public <T>  T update(T object); 
-    public <T>  List<T> add(Class<T> clazz, List<T> object); 
-    public <T>  List<T> getRange(Class<T> clazz, long start, long end); 
-    public <T> long getTotalCount(Class<T> clazz);
-    public boolean remove(Class clazz, int id);
+     void create(Class clazz);
+     <T> List<T> get(Class<T> clazz);
+     <T> T get(Class<T> clazz, int id);
+     <T> List<T> getByField(Class<T> clazz, String fieldName);
+     <T>  T add(T object);
+     <T>  T update(T object);
+     <T>  List<T> add(Class<T> clazz, List<T> object);
+     <T>  List<T> getRange(Class<T> clazz, long start, long end);
+     <T> long getTotalCount(Class<T> clazz);
+     boolean remove(Class clazz, int id);
+
+     <T>  List<T> getSort(Class<T> clazz, String field, boolean desending);
+
+     <T> List<T> getRangeSort(Class<T> clazz, long start, long end, String field, boolean desending);
 }
