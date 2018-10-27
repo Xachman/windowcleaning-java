@@ -29,7 +29,6 @@ import java.util.logging.Logger;
 public abstract class Model<T> {
     protected StorageI storage;
     protected Class<T> clazz;
-    protected ExecuteOptions executeOptions = new ExecuteOptions();
     public Model(Class<T> clazz) {
         this(new SQLiteStorage(System.getProperty("user.home")+File.separator+".windowcleaning"+File.separator+"data.db"), clazz);
     }
@@ -82,28 +81,20 @@ public abstract class Model<T> {
             throw new MustIncludeException(errorFields.toString());
         }
     } 
-    public Model range(int start, int end) {
-        executeOptions.setRange(new Range(start, end));
-        return this;
-    }
-    public Model sort(String field, boolean decending) {
-        executeOptions.setSort(new Sort(field, decending));
-        return this;
-    }
-    public List<T> execute() {
+    public List<T> execute(ExecuteOptions executeOptions) {
         switch(executeOptions.type()) {
             case ExecuteOptions.RANGE_SORT:
                 return storage.getRangeSort(clazz,
                         executeOptions.getRange().getStart(),
                         executeOptions.getRange().getEnd(),
                         executeOptions.getSort().getField(),
-                        executeOptions.getSort().isDesending());
+                        executeOptions.getSort().isAscending());
             case ExecuteOptions.RANGE:
                 return storage.getRange(clazz, executeOptions.getRange().getStart(),executeOptions.getRange().getEnd());
             case ExecuteOptions.SORT:
-                return storage.getSort(clazz, executeOptions.getSort().getField(), executeOptions.getSort().isDesending());
+                return storage.getSort(clazz, executeOptions.getSort().getField(), executeOptions.getSort().isAscending());
         }
-        return new ArrayList<>();
+        return getAll();
     }
     private boolean fieldIsSet(Field field,  Object object) {
         try {
@@ -141,5 +132,10 @@ public abstract class Model<T> {
            }
        }
        return true;
+    }
+
+
+    public Class<T> getClazz() {
+        return clazz;
     }
 }

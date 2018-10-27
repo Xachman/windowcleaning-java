@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "customer":{"valid":false,"id":1,"name":null,"location":null,"area":null,"contact":null,"city":null,"phone":null,"state":null,"addressLine1":null,"addressLine2":null,"zip":null,"fax":null,"contactB":null,"cityB":null,"phoneB":null,"stateB":null,"addressLine1B":null,"addressLine2B":null,"zipB":null,"faxB":null,"monthly":false,"obtainedBy":null,"obtainedDate":null,"monthlyBill":null,"credit":null,"deposit":null,"stateTaxPer":null,"active":false,"inactiveDate":null,"royaltyPaymentTo":null,"notes":null,"billCharge":null,"division":null,"type":null,"quarterlyBill":false,"billNotes":null,"company":null,"EOM":false,"AWWLine":false,"AWWPUR":false},
+        "servicedBy": "Jim",
+        "amount": 814.76,
+        "serviceDate": 1359435600000,
+        "daysBetween": 123,
+        "percent": 0.51,
+        "printServiceStatement": true,
+        "printInvoice": false,
+        "paymentExpected": true,
+        "description": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
+        "difficulty": 8,
+        "notes": "Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.",
+        "autoPrintServiceStatement": true
+    },
+    {
+        "id": 6,
+        "customer":{"valid":false,"id":5,"name":null,"location":null,"area":null,"contact":null,"city":null,"phone":null,"state":null,"addressLine1":null,"addressLine2":null,"zip":null,"fax":null,"contactB":null,"cityB":null,"phoneB":null,"stateB":null,"addressLine1B":null,"addressLine2B":null,"zipB":null,"faxB":null,"monthly":false,"obtainedBy":null,"obtainedDate":null,"monthlyBill":null,"credit":null,"deposit":null,"stateTaxPer":null,"active":false,"inactiveDate":null,"royaltyPaymentTo":null,"notes":null,"billCharge":null,"division":null,"type":null,"quarterlyBill":false,"billNotes":null,"company":null,"EOM":false,"AWWLine":false,"AWWPUR":false},
+        "servicedBy": "Jim",
+        "amount": 994.26,
+        "serviceDate": 1401336000000,
+        "daysBetween": 95,
+        "percent": 0.78,
+        "printServiceStatement": false,
+        "printInvoice": true,
+        "paymentExpected": false,
+        "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\n\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
+        "difficulty": 4,
+        "notes": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.",
+        "autoPrintServiceStatement": true
+    },
+    {
+        "id": 4,
+        "customer":{"valid":false,"id":3,"name":null,"location":null,"area":null,"contact":null,"city":null,"phone":null,"state":null,"addressLine1":null,"addressLine2":null,"zip":null,"fax":null,"contactB":null,"cityB":null,"phoneB":null,"stateB":null,"addressLine1B":null,"addressLine2B":null,"zipB":null,"faxB":null,"monthly":false,"obtainedBy":null,"obtainedDate":null,"monthlyBill":null,"credit":null,"deposit":null,"stateTaxPer":null,"active":false,"inactiveDate":null,"royaltyPaymentTo":null,"notes":null,"billCharge":null,"division":null,"type":null,"quarterlyBill":false,"billNotes":null,"company":null,"EOM":false,"AWWLine":false,"AWWPUR":false},
+        "servicedBy": "Terry",
+        "amount": 612,
+        "serviceDate": 1404446400000,
+        "daysBetween": 99,
+        "percent": 0.93,
+        "printServiceStatement": false,
+        "printInvoice": true,
+        "paymentExpected": false,
+        "description": "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
+        "difficulty": 4,
+        "notes": "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.",
+        "autoPrintServiceStatement": false
+  }
+]

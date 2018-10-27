@@ -1,19 +1,19 @@
 package com.gti.windowcleaning.model.execute.options;
 
 public class Range {
-    private int start;
-    private int end;
+    private long start;
+    private long end;
 
-    public Range(int start, int end) {
+    public Range(long start, long end) {
         this.start = start;
         this.end = end;
     }
 
-    public int getStart() {
+    public long getStart() {
         return start;
     }
 
-    public int getEnd() {
+    public long getEnd() {
         return end;
     }
 }

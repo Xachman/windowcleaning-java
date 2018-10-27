@@ -10,6 +10,7 @@ import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.data.SQLiteStorage;
 import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.model.JobsModel;
+import com.gti.windowcleaning.web.controller.ListController;
 import com.gti.windowcleaning.web.controller.customers.CustomerController;
 import com.gti.windowcleaning.web.controller.customers.CustomersController;
 import com.gti.windowcleaning.web.controller.customers.DeleteCustomerController;
@@ -73,8 +74,8 @@ public class Main {
             res.redirect("/index.html");
             return null;
         });
-        get("/customers",new CustomersController(new CustomersModel(storage)));
-        options("/customers",new CustomersController(new CustomersModel(storage)));
+        get("/customers",new ListController(new CustomersModel(storage)));
+        options("/customers",new ListController(new CustomersModel(storage)));
         
         get("/customers/:id",new CustomerController(new CustomersModel(storage)));
         options("/customers/:id",new CustomerController(new CustomersModel(storage)));
@@ -82,8 +83,8 @@ public class Main {
         post("/customers",new EditCreateCustomerController(new CustomersModel(storage)));
         put("/customers/:id",new EditCreateCustomerController(new CustomersModel(storage)));
 
-        get("/jobs", new JobsController(new JobsModel(storage)));
-        options("/jobs", new JobsController(new JobsModel(storage)));
+        get("/jobs", new ListController(new JobsModel(storage)));
+        options("/jobs", new ListController(new JobsModel(storage)));
     }
 
     
