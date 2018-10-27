@@ -118,7 +118,7 @@ public class SQLiteStorage implements StorageI {
     }
 
     @Override
-    public <T> List<T> getRangeSort(Class<T> clazz, long start, long end, String field, boolean desending) {
+    public <T> List<T> getRangeSort(Class<T> clazz, long start, long end, String field, boolean ascending) {
         List<T> result = new ArrayList<>();
         try {
             JdbcConnectionSource conn = getConnectionSrource();
@@ -126,7 +126,7 @@ public class SQLiteStorage implements StorageI {
             QueryBuilder qb = dao.queryBuilder();
             qb.offset(start);
             qb.limit(end-start);
-            qb.orderBy(field,
+            qb.orderBy(field, ascending);
             PreparedQuery<T> pq = qb.prepare();
             result = dao.query(pq);
             conn.close();
