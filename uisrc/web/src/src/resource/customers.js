@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Edit, DisabledInput, EditButton, Datagrid, DateInput, NumberInput, SelectInput, TextField, Create, TextInput, LongTextInput, TabbedForm, FormTab, BooleanInput, TabbedShowLayout, Tab } from 'react-admin';
+import { List, Edit, Show, SimpleShowLayout, DisabledInput, EditButton, Datagrid, DateInput, NumberInput, SelectInput, TextField, Create, TextInput, LongTextInput, TabbedForm, FormTab, BooleanInput, TabbedShowLayout, Tab } from 'react-admin';
 import Grid from '@material-ui/core/Grid';
 export const CustomersList = (props) => (
     <List {...props}>
@@ -146,3 +146,11 @@ export const CustomerEdit = (props) => (
         </TabbedForm>
     </Edit>
 );
+
+export const CustomerShow = (props) => (
+    <Show {...props}>
+        <SimpleShowLayout>
+            <TextField source="name" />
+        </SimpleShowLayout>
+    </Show>
+)
