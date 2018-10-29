@@ -18,10 +18,13 @@ export class UrlBuilder {
             const { field, order } = params.sort;
             query.sort = JSON.stringify([field, order])
         }
-        console.log(params)
         if(params.filter != undefined){
             query.filter = JSON.stringify(params.filter)
         }
+        if(params.between != undefined) {
+            query.between = JSON.stringify(params.between)
+        }
+
             
         return `${this.apiUrl}/${resource}?${stringify(query)}`;
     }
