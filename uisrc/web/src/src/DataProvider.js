@@ -14,6 +14,7 @@ import {
 import {
     GET
 } from './RequestTypes'
+import { UrlBuilder } from './UrlBuilder';
 /**
  * Maps react-admin queries to a simple REST API
  *
@@ -37,25 +38,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     const convertDataRequestToHTTP = (type, resource, params) => {
         let url = '';
         const options = {};
+        let urlBuilder = new UrlBuilder(apiUrl);
         switch (type) {
             case GET_LIST: {
-                const query = {}
-                if(params.pagination != null) {
-                    const { page, perPage } = params.pagination;
-                    query.range = JSON.stringify([
-                        (page - 1) * perPage,
-                        page * perPage - 1,
-                    ])
-                }
-                if(params.sort != undefined){
-                    const { field, order } = params.sort;
-                    query.sort = JSON.stringify([field, order])
-                }
-                if(params.filter != undefined){
-                    query.filter = JSON.stringify(params.filter)
-                }
-                
-                url = `${apiUrl}/${resource}?${stringify(query)}`;
+                url = urlBuilder.buildUrl(resource, params);
                 break;
             }
             case GET_ONE:
