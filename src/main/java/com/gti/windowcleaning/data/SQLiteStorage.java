@@ -140,6 +140,47 @@ public class SQLiteStorage implements StorageI {
     }
 
     @Override
+    public <T> List<T> getBetween(Class<T> clazz, String field, Object value1, Object value2) {
+        List<T> result = new ArrayList<>();
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, clazz);
+            QueryBuilder qb = dao.queryBuilder();
+            qb.where().between(field, value1, value2);
+            PreparedQuery<T> pq = qb.prepare();
+            result = dao.query(pq);
+            conn.close();
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public <T> List<T> getBetweenSort(Class<T> clazz, String field, Object value1, Object value2, String field1, boolean ascending) {
+        List<T> result = new ArrayList<>();
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, clazz);
+            QueryBuilder qb = dao.queryBuilder();
+            qb.where().between(field, value1, value2);
+            qb.orderBy(field1, ascending);
+            PreparedQuery<T> pq = qb.prepare();
+            result = dao.query(pq);
+            conn.close();
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
     public <T> T update(T object) {
         try {
             JdbcConnectionSource conn = getConnectionSrource();

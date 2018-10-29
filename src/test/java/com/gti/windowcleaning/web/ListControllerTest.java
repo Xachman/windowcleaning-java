@@ -99,4 +99,21 @@ public class ListControllerTest {
         Assert.assertEquals("1-3/10", answer2.getHeaders().get("Content-Range"));
         JSONAssert.assertEquals(actual2, answer2.getBody(), STRICT);
     }
+    @Test
+    public void between() throws JSONException, URISyntaxException, IOException {
+        JobsModel model = new JobsModel(storage);
+        EmptyPayload payload = new EmptyPayload();
+
+        ListController controller = new ListController(model);
+
+        Map<String,String> query = new HashMap<>();
+        query.put("sort", "[\"serviceDate\", \"ASC\"]");
+        query.put("between", "{\"serviceDate\": [1401336000000, 1419570000000]}");
+        Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
+
+        String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_between_expect.json").toURI()), "UTF-8");
+        Assert.assertEquals("1-3/10", answer.getHeaders().get("Content-Range"));
+        JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
+
+    }
 }

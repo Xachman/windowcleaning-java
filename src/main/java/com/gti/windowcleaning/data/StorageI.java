@@ -26,4 +26,8 @@ public interface StorageI {
      <T>  List<T> getSort(Class<T> clazz, String field, boolean desending);
 
      <T> List<T> getRangeSort(Class<T> clazz, long start, long end, String field, boolean ascending);
+
+    <T> List<T> getBetween(Class<T> clazz, String field, Object value1, Object value2);
+
+     <T> List<T> getBetweenSort(Class<T> clazz, String field, Object value1, Object value2, String field1, boolean ascending);
 }

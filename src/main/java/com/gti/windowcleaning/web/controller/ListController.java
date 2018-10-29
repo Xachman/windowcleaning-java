@@ -9,6 +9,7 @@ import com.gti.windowcleaning.web.Answer;
 import com.gti.windowcleaning.web.Controller;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.util.HashMap;
@@ -40,6 +41,14 @@ public class ListController extends Controller<EmptyPayload> {
                 JSONArray sort = (JSONArray) parser.parse(query.get("sort"));
                 String ASC = sort.get(1).toString();
                 executeOptions.setSort(new Sort(sort.get(0).toString(), (ASC.equals("ASC"))? true: false));
+            }
+            if(query.get("between") != null) {
+                JSONObject between = (JSONObject) parser.parse(query.get("between"));
+                String field = between.keySet().iterator().next().toString();
+                JSONArray values = (JSONArray) between.values().iterator().next();
+                Object value1 = values.get(0);
+                Object value2 = values.get(1);
+                executeOptions.setBetween(field, value1, value2);
             }
             List result = model.execute(executeOptions);
             if(headers.get("Content-Range") == null) {

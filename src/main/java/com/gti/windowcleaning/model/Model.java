@@ -93,6 +93,15 @@ public abstract class Model<T> {
                 return storage.getRange(clazz, executeOptions.getRange().getStart(),executeOptions.getRange().getEnd());
             case ExecuteOptions.SORT:
                 return storage.getSort(clazz, executeOptions.getSort().getField(), executeOptions.getSort().isAscending());
+            case ExecuteOptions.BETWEEN:
+                return storage.getBetween(clazz, executeOptions.getBetween().getField(), executeOptions.getBetween().getValue1(), executeOptions.getBetween().getValue2());
+            case ExecuteOptions.BETWEEN_SORT:
+                return storage.getBetweenSort(clazz, executeOptions.getBetween().getField(),
+                        executeOptions.getBetween().getValue1(),
+                        executeOptions.getBetween().getValue2(),
+                        executeOptions.getSort().getField(),
+                        executeOptions.getSort().isAscending()
+                );
         }
         return getAll();
     }
