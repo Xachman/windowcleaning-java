@@ -15,10 +15,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -94,14 +91,10 @@ public abstract class Model<T> {
             case ExecuteOptions.SORT:
                 return storage.getSort(clazz, executeOptions.getSort().getField(), executeOptions.getSort().isAscending());
             case ExecuteOptions.BETWEEN:
-                return storage.getBetween(clazz, executeOptions.getBetween().getField(), executeOptions.getBetween().getValue1(), executeOptions.getBetween().getValue2());
+                return processBetween(executeOptions);
             case ExecuteOptions.BETWEEN_SORT:
-                return storage.getBetweenSort(clazz, executeOptions.getBetween().getField(),
-                        executeOptions.getBetween().getValue1(),
-                        executeOptions.getBetween().getValue2(),
-                        executeOptions.getSort().getField(),
-                        executeOptions.getSort().isAscending()
-                );
+                return processBetween(executeOptions);
+
         }
         return getAll();
     }
@@ -146,5 +139,43 @@ public abstract class Model<T> {
 
     public Class<T> getClazz() {
         return clazz;
+    }
+
+    public Class getType(String field) throws NoSuchFieldException {
+        return clazz.getDeclaredField(field).getType();
+    }
+
+    private List<T> processBetween(ExecuteOptions eo) {
+        String field = eo.getBetween().getField();
+        Object value1 = processField(field, eo.getBetween().getValue1());
+        Object value2 = processField(field, eo.getBetween().getValue2());
+
+
+
+        switch (eo.type()) {
+            case ExecuteOptions.BETWEEN:
+                return storage.getBetween(clazz, field, value1, value2);
+            case ExecuteOptions.BETWEEN_SORT:
+                return storage.getBetweenSort(clazz, field,
+                        value1,
+                        value2,
+                        eo.getSort().getField(),
+                        eo.getSort().isAscending());
+        }
+        return getAll();
+    }
+    private Object processField(String field, Object value) {
+        try {
+            String type = getType(field).getTypeName().toString();
+            if(type.equals("java.util.Date")) {
+                String valueType = value.getClass().getTypeName();
+                if(valueType.equals("java.lang.Long")) {
+                    return new Date((long) value);
+                }
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

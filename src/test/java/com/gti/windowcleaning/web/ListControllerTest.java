@@ -112,7 +112,6 @@ public class ListControllerTest {
         Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
 
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_between_expect.json").toURI()), "UTF-8");
-        Assert.assertEquals("1-3/10", answer.getHeaders().get("Content-Range"));
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
 
     }
