@@ -70,20 +70,4 @@ public class JobsControllerTest {
         Assert.assertEquals("3-6/10", answer2.getHeaders().get("Content-Range"));
         JSONAssert.assertEquals(actual2, answer2.getBody(), STRICT);
     }
-    @Test
-    public void sortJobs() throws JSONException, URISyntaxException, IOException {
-        JobsModel model = new JobsModel(storage);
-        EmptyPayload payload = new EmptyPayload();
-
-        JobsController controller = new JobsController(model);
-
-        Map<String,String> query = new HashMap<>();
-        query.put("range", "[0,2]");
-        query.put("sort", "[\"serviceDate\", \"DESC\"]");
-        Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
-
-        String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_sort_expect.json").toURI()), "UTF-8");
-        Assert.assertEquals("1-3/10", answer.getHeaders().get("Content-Range"));
-        JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
-    }
 }
