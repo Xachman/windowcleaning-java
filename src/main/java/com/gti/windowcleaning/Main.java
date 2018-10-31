@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import spark.Request;
@@ -90,14 +91,18 @@ public class Main {
     
 
     public static boolean openBrowser(String uri) {
-        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-            try {
-                desktop.browse( new URI(uri));
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            // enter code here
+
+
+            Process p = Runtime.getRuntime().exec(
+                    System.getProperty("user.home")+"/applications/nw/nw "+System.getProperty("user.home")+"/projects/windowcleaning-java/uisrc/nw"
+            );
+
+            return true;
+            // enter code here
+        } catch (Exception err) {
+            err.printStackTrace();
         }
         return false;
     }
