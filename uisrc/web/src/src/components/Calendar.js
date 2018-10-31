@@ -10,40 +10,41 @@ import 'fullcalendar/dist/fullcalendar.js';
 export class Calendar extends React.Component {
     dataProvider = Config.getDataProvider();
     cal;
-    constructor(props) {
-        super(props)
-    }
     componentDidMount() {
-        this.cal = $(this.refs.calendar).fullCalendar()
-        let date = new Date();
-        this.getEvents(new Date(date.getFullYear(), date.getMonth(), 1),
-            new Date(date.getFullYear(), date.getMonth()+1, 0) 
-        )
+        this.cal = $(this.refs.calendar).fullCalendar({
+            events: this.getEvents.bind(this),
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listWeek'
+              }
+        })
     }
     render() {
       return <div ref="calendar"></div>;
     }
 
-    getEvents(startDate, endDate) {
+    getEvents(startDate, endDate, timezone, callback) {
 
         this.dataProvider(GET_LIST, 'jobs', {
             between: {
-                serviceDate: [startDate.getTime(),endDate.getTime()]
+                serviceDate: [startDate.unix()*1000,endDate.unix()*1000]
             }
         }).then((data) => {
-            console.log(data)
-            console.log(this.cal)
+            callback(this.arrangeEvents(data.data))
         })
     }
 
     arrangeEvents(data) {
-        result = [];
+        let result = [];
         for(var i = 0; i < data.length; i++ ){
-            item = data[i];
+            let item = data[i];
             result.push({
-                
+                title: item.servicedBy,
+                start: new Date(item.serviceDate)
             })
         }
+        return result
     }
 
 

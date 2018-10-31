@@ -25,7 +25,7 @@ public class Job {
     private String servicedBy;
     @DatabaseField(canBeNull = false)
     private double amount;
-    @DatabaseField(canBeNull = false, dataType = DataType.DATE_STRING, format = "yyyy-MM-dd")
+    @DatabaseField(canBeNull = false)
     private Date serviceDate;
     @DatabaseField()
     private int daysBetween;
