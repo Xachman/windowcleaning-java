@@ -11,3 +11,4 @@ gradlew.bat
 stale_outputs_checked
 windowcleaning-java.iml
 out/
+src/main/resources/executables/nw/

@@ -96,7 +96,7 @@ public class Main {
 
 
             Process p = Runtime.getRuntime().exec(
-                    System.getProperty("user.home")+"/applications/nw/nw "+System.getProperty("user.home")+"/projects/windowcleaning-java/uisrc/nw"
+                    new File("src/main/resources/executables/nw/nw").getAbsolutePath()+" "+new File("src/main/resources/ui").getAbsolutePath()
             );
 
             return true;
