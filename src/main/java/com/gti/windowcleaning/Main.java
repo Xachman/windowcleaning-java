@@ -95,10 +95,12 @@ public class Main {
             // enter code here
 
 
-            Process p = Runtime.getRuntime().exec(
-                    new File("src/main/resources/executables/nw/nw").getAbsolutePath()+" "+new File("src/main/resources/ui").getAbsolutePath()
-            );
-
+            Process p = new ProcessBuilder().command(
+                    new File("src/main/resources/executables/nw/nw").getAbsolutePath(),
+                    new File("src/main/resources/ui").getAbsolutePath()
+            ).inheritIO().start();
+            int exitCode = p.waitFor();
+            System.exit(0);
             return true;
             // enter code here
         } catch (Exception err) {
