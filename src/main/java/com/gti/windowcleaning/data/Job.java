@@ -16,7 +16,7 @@ import java.util.Date;
  * @author xach
  */
 @DatabaseTable(tableName = "jobs")
-public class Job {
+public class Job extends BaseData {
     @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField(canBeNull = false, foreign = true)
