@@ -25,16 +25,22 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import spark.Request;
+
+import javax.swing.*;
+
 import static spark.Spark.*;
 /**
  *
  * @author xach
  */
 public class Main {
+    private static String workDir;
     public static void main(String[] args) {
+        workDir = System.getProperty("user.dir");
         startWeb();
+       // popUpMessage(workDir, "Working Dir");
         openBrowser("http://localhost:3000");
-    } 
+    }
 
     private static String requestInfoToString(Request request) {
         StringBuilder sb = new StringBuilder();
@@ -96,8 +102,8 @@ public class Main {
 
 
             Process p = new ProcessBuilder().command(
-                    new File("src/main/resources/executables/nw/nw").getAbsolutePath(),
-                    new File("src/main/resources/ui").getAbsolutePath()
+                    new File(workDir+"/executables/nw/nw").getAbsolutePath(),
+                    new File(workDir+"/nw").getAbsolutePath()
             ).inheritIO().start();
             int exitCode = p.waitFor();
             System.exit(0);
@@ -107,5 +113,9 @@ public class Main {
             err.printStackTrace();
         }
         return false;
+    }
+
+    public static void popUpMessage(String infoMessage, String titleBar) {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 }
