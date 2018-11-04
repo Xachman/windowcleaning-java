@@ -2,9 +2,11 @@ version: '2'
 services:
   app:
     build: .
+    working_dir: /app/src
     volumes: 
-      - ./:/app
-      - /app/node_modules
+      - ./src:/app/src
+      - /app/src/node_modules
     ports:
       - 3000:3000
-    network_mode: host
+    environment:
+      - CHOKIDAR_USEPOLLING=true
