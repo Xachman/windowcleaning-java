@@ -31,4 +31,8 @@ public interface StorageI {
     <T> List<T> getBetween(Class<T> clazz, String field, Object value1, Object value2);
 
      <T> List<T> getBetweenSort(Class<T> clazz, String field, Object value1, Object value2, String field1, boolean ascending);
+
+     <T> List<T> getFilter(Class<T> clazz, String field, Object value);
+
+     <T> List<T> getFilterSort(Class<T> clazz, String field, Object value, String field1, boolean ascending);
 }

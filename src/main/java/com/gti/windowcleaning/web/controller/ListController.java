@@ -30,6 +30,12 @@ public class ListController extends Controller<EmptyPayload> {
         Map<String, String> headers = new HashMap<>();
         try {
             ExecuteOptions executeOptions = new ExecuteOptions();
+            if(urlParams.get(":field") != null && query.get("filter") != null) {
+                String field = urlParams.get(":field");
+                JSONObject filter = (JSONObject) parser.parse(query.get("filter"));
+                String q = filter.get("q").toString();
+                executeOptions.setFilter(field, q);
+            }
             if(query.get("range") != null) {
                 JSONArray range = (JSONArray) parser.parse(query.get("range"));
                 long start = (long) range.get(0);

@@ -94,7 +94,10 @@ public abstract class Model<T> {
                 return processBetween(executeOptions);
             case ExecuteOptions.BETWEEN_SORT:
                 return processBetween(executeOptions);
-
+            case ExecuteOptions.FILTER:
+                return processFilter(executeOptions);
+            case ExecuteOptions.FILTER_SORT:
+                return processFilter(executeOptions);
         }
         return getAll();
     }
@@ -164,15 +167,33 @@ public abstract class Model<T> {
         }
         return getAll();
     }
+    private List<T> processFilter(ExecuteOptions eo) {
+        String field = eo.getFilter().getField();
+        Object value = processField(field, eo.getFilter().getValue());
+
+
+        switch (eo.type()) {
+            case ExecuteOptions.FILTER:
+                return storage.getFilter(clazz, field, value);
+            case ExecuteOptions.FILTER_SORT:
+                return storage.getFilterSort(clazz, field,
+                        value,
+                        eo.getSort().getField(),
+                        eo.getSort().isAscending());
+        }
+        return getAll();
+
+    }
     private Object processField(String field, Object value) {
         try {
-            String type = getType(field).getTypeName().toString();
+            String type = getType(field).getTypeName();
             if(type.equals("java.util.Date")) {
                 String valueType = value.getClass().getTypeName();
                 if(valueType.equals("java.lang.Long")) {
                     return new Date((long) value);
                 }
             }
+            return value;
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
