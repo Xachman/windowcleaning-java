@@ -38,17 +38,8 @@ public class CustomersControllerTest {
     private StorageI storage;
 
     @Before
-    public void setUp() {
-        URL dbPath = getClass().getResource("/mocks/test.db");
-        File file = new File(dbPath.getPath());
-        boolean file_exists = file.exists();
-        if (file_exists) {
-            file.delete();
-        }
-        storage = new SQLiteStorage(dbPath.toString());
-        storage.create(Customer.class);
-        List<Customer> customers = Util.assembleCustomers();
-        storage.add(Customer.class, customers);
+    public void setUp()  {
+        storage = Util.getTestDB();
     }
 
     @Test

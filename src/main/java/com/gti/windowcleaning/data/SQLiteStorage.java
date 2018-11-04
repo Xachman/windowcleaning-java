@@ -24,11 +24,14 @@ import java.util.logging.Logger;
  * @author xach
  */
 public class SQLiteStorage implements StorageI {
-    private String path; 
+    private String path;
+    private boolean inMemory = false;
     public SQLiteStorage(String path) {
         this.path = path;
     }
-
+    public SQLiteStorage(boolean inMemory) {
+        this.inMemory = inMemory;
+    }
     public SQLiteStorage() {
     }
     
@@ -197,6 +200,9 @@ public class SQLiteStorage implements StorageI {
         return null;
     }
     private String databaseUrl() {
+        if(inMemory) {
+            return "jdbc:sqlite::memory:";
+        }
         if(path == null) {
             return "jdbc:sqlite:"+System.getProperty("user.dir")+"/sqlitetest.db";
         }
@@ -237,7 +243,19 @@ public class SQLiteStorage implements StorageI {
             Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    @Override
+    public void drop(Class clazz) {
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            TableUtils.dropTable(conn,clazz,false);
+            conn.close();
+        } catch(SQLException e) {
+
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private <D> Dao<D, Integer> getDao(JdbcConnectionSource conn, Class<D> clazz) throws SQLException {
             return DaoManager.createDao(conn, clazz);
     } 

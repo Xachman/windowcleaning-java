@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface StorageI {
      void create(Class clazz);
+     void drop(Class clazz);
      <T> List<T> get(Class<T> clazz);
      <T> T get(Class<T> clazz, int id);
      <T> List<T> getByField(Class<T> clazz, String fieldName);

@@ -28,18 +28,10 @@ public class CustomerModelTest {
     private URL dbPath;
     private StorageI storage;
     @Before
-    public void before() {
-        dbPath =  getClass().getResource("/mocks/test.db");
-        File file = new File(dbPath.getPath());
-        boolean file_exists = file.exists();
-        if(file_exists) {
-            file.delete();
-        }
-        storage = new SQLiteStorage(dbPath.toString());
-        storage.create(Customer.class);
-        storage.add(Customer.class,Util.assembleCustomers());
+    public void setUp()  {
+        storage = Util.getTestDB();
     }
-    
+
     @Test(expected = MustIncludeException.class)
     public void validateAllFields() throws MustIncludeException {
         Customer customer = new Customer();

@@ -7,7 +7,11 @@ package com.gti.windowcleaning;
 
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
+import com.gti.windowcleaning.data.SQLiteStorage;
+import com.gti.windowcleaning.data.StorageI;
 import com.gti.windowcleaning.util.Json;
+
+import java.io.File;
 import java.util.List;
 
 /**
@@ -25,5 +29,20 @@ public class Util {
         Json jsonUtil = new Json();
 
         return jsonUtil.getJobs(Util.class.getResource("/mocks/data/jobs.json").getFile(), customers);
+    }
+
+    static public StorageI getTestDB() {
+        File file = new File("out/test.db");
+
+        StorageI storage = new SQLiteStorage(file.getAbsolutePath());
+        storage.drop(Job.class);
+        storage.drop(Customer.class);
+        storage.create(Customer.class);
+        storage.create(Job.class);
+        List<Customer> customers = Util.assembleCustomers();
+        List<Job> jobs = Util.assembleJobs(customers);
+        storage.add(Customer.class, customers);
+        storage.add(Job.class, jobs);
+        return storage;
     }
 }

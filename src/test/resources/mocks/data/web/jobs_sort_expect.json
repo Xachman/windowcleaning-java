@@ -13,7 +13,8 @@
         "description": "",
         "difficulty": 6,
         "notes": "",
-        "autoPrintServiceStatement": true
+        "autoPrintServiceStatement": true,
+        "valid": true
     },
     {
         "id": 7,
@@ -29,7 +30,8 @@
         "description": "",
         "difficulty": 7,
         "notes": "",
-        "autoPrintServiceStatement": true
+        "autoPrintServiceStatement": true,
+        "valid": true
     },
     {
         "id": 5,
@@ -45,6 +47,7 @@
         "description": "Fusce consequat. Nulla nisl. Nunc nisl.",
         "difficulty": 6,
         "notes": "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
-        "autoPrintServiceStatement": true
+        "autoPrintServiceStatement": true,
+        "valid": true
     }
 ]

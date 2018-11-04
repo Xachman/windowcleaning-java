@@ -1,0 +1,34 @@
+[
+  {
+    "id": 3,
+    "customer":{"valid":false,"id":2,"name":null,"location":null,"area":null,"contact":null,"city":null,"phone":null,"state":null,"addressLine1":null,"addressLine2":null,"zip":null,"fax":null,"contactB":null,"cityB":null,"phoneB":null,"stateB":null,"addressLine1B":null,"addressLine2B":null,"zipB":null,"faxB":null,"monthly":false,"obtainedBy":null,"obtainedDate":null,"monthlyBill":null,"credit":null,"deposit":null,"stateTaxPer":null,"active":false,"inactiveDate":null,"royaltyPaymentTo":null,"notes":null,"billCharge":null,"division":null,"type":null,"quarterlyBill":false,"billNotes":null,"company":null,"EOM":false,"AWWLine":false,"AWWPUR":false},
+    "servicedBy": "Jim",
+    "amount": 149.72,
+    "serviceDate": 1419570000000,
+    "daysBetween": 329,
+    "percent": 0.26,
+    "printServiceStatement": false,
+    "printInvoice": true,
+    "paymentExpected": true,
+    "description": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.",
+    "difficulty": 7,
+    "notes": "In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
+    "autoPrintServiceStatement": false
+  },
+  {
+    "id": 10,
+    "customer":{"valid":false,"id":2,"name":null,"location":null,"area":null,"contact":null,"city":null,"phone":null,"state":null,"addressLine1":null,"addressLine2":null,"zip":null,"fax":null,"contactB":null,"cityB":null,"phoneB":null,"stateB":null,"addressLine1B":null,"addressLine2B":null,"zipB":null,"faxB":null,"monthly":false,"obtainedBy":null,"obtainedDate":null,"monthlyBill":null,"credit":null,"deposit":null,"stateTaxPer":null,"active":false,"inactiveDate":null,"royaltyPaymentTo":null,"notes":null,"billCharge":null,"division":null,"type":null,"quarterlyBill":false,"billNotes":null,"company":null,"EOM":false,"AWWLine":false,"AWWPUR":false},
+    "servicedBy": "Terry",
+    "amount": 209.99,
+    "serviceDate": 1531886400000,
+    "daysBetween": 184,
+    "percent": 0.47,
+    "printServiceStatement": false,
+    "printInvoice": true,
+    "paymentExpected": false,
+    "description": "",
+    "difficulty": 6,
+    "notes": "",
+    "autoPrintServiceStatement": true
+  }
+]

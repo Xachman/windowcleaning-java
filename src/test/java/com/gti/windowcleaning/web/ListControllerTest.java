@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -39,21 +40,9 @@ import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;
 public class ListControllerTest {
     StorageI storage;
     @Before
-    public void setUp() {
-        URL dbPath =  getClass().getResource("/mocks/test.db");
-        File file = new File(dbPath.getPath());
-        boolean file_exists = file.exists();
-        if(file_exists) {
-            file.delete();
-        }
-        storage = new SQLiteStorage(dbPath.toString());
-        storage.create(Customer.class);
-        storage.create(Job.class);
-        List<Customer> customers = Util.assembleCustomers();
-        List<Job> jobs = Util.assembleJobs(customers);
-        storage.add(Customer.class, customers);
-        storage.add(Job.class, jobs);
-    } 
+    public void setUp()  {
+        storage = Util.getTestDB();
+    }
     @Test
     public void listJobs() throws JSONException, URISyntaxException, IOException {
         JobsModel model = new JobsModel(storage);
@@ -115,4 +104,23 @@ public class ListControllerTest {
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
 
     }
+
+//    @Test
+//    public void filter() throws JSONException, URISyntaxException, IOException {
+//        JobsModel model = new JobsModel(storage);
+//        EmptyPayload payload = new EmptyPayload();
+//
+//        ListController controller = new ListController(model);
+//
+//        Map<String,String> query = new HashMap<>();
+//        query.put("sort", "[\"id\", \"DESC\"]");
+//        query.put("filter", "{\"q\": \"5\"}}");
+//
+//        Map<String, String> urlParam = new HashMap<>();
+//        urlParam.put(":field", "customer_id");
+//        Answer answer = controller.process(payload, urlParam, query, false);
+//
+//        String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_expect.json").toURI()), "UTF-8");
+//        JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
+//    }
 }

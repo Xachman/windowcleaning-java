@@ -25,20 +25,8 @@ import java.util.Map;
 public class DeleteControllerTest {
     StorageI storage;
     @Before
-    public void setUp() {
-        URL dbPath =  getClass().getResource("/mocks/test.db");
-        File file = new File(dbPath.getPath());
-        boolean file_exists = file.exists();
-        if(file_exists) {
-            file.delete();
-        }
-        storage = new SQLiteStorage(dbPath.toString());
-        storage.create(Customer.class);
-        storage.create(Job.class);
-        List<Customer> customers = Util.assembleCustomers();
-        List<Job> jobs = Util.assembleJobs(customers);
-        storage.add(Customer.class, customers);
-        storage.add(Job.class, jobs);
+    public void setUp()  {
+        storage = Util.getTestDB();
     }
 
     @Test
