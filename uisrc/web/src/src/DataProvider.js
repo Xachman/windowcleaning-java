@@ -39,6 +39,9 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         let url = '';
         const options = {};
         let urlBuilder = new UrlBuilder(apiUrl);
+                console.log(type)
+                console.log(params)
+                console.log(resource)
         switch (type) {
             case GET_LIST: {
                 url = urlBuilder.buildUrl(resource, params);

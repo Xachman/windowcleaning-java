@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Edit, DateField, ReferenceField, EditButton, Datagrid, DateInput, NumberInput, SelectInput, 
     TextField, Create, TextInput, LongTextInput, TabbedForm, FormTab, BooleanInput, 
-    TabbedShowLayout, Tab, SimpleForm, ReferenceInput } from 'react-admin';
+    TabbedShowLayout, Tab, SimpleForm, ReferenceInput, AutocompleteInput } from 'react-admin';
 import Grid from '@material-ui/core/Grid';
 
 export const JobsList = (props) => (
@@ -20,8 +20,8 @@ export const JobsList = (props) => (
 export const CreateJob = (props) => (
     <Create title="Create Job" {...props}>
         <SimpleForm>
-            <ReferenceInput label="Customer" source="customer.id" reference="customers">
-                <SelectInput optionText="name" />
+            <ReferenceInput label="Customer" source="customer.id" reference="customers/filter/name">
+                <AutocompleteInput optionText="name" />
             </ReferenceInput>
             <TextInput source="servicedBy" />
             <DateInput source="serviceDate" />

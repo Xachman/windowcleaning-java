@@ -80,6 +80,7 @@ public class Main {
         });
         options("/*", (req, res) -> "");
         get("/customers",new ListController(new CustomersModel(storage)));
+        get("/customers/filter/:name",new ListController(new CustomersModel(storage)));
 
         get("/customers/:id",new CustomerController(new CustomersModel(storage)));
         delete("/customers/:id",new DeleteCustomerController(new CustomersModel(storage)));
