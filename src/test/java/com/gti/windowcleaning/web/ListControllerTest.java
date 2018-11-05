@@ -116,4 +116,41 @@ public class ListControllerTest {
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_expect.json").toURI()), "UTF-8");
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
     }
+    @Test
+    public void filterRange() throws JSONException, URISyntaxException, IOException {
+        JobsModel model = new JobsModel(storage);
+        EmptyPayload payload = new EmptyPayload();
+
+        ListController controller = new ListController(model);
+
+        Map<String,String> query = new HashMap<>();
+        query.put("sort", "[\"id\", \"DESC\"]");
+        query.put("filter", "{\"q\": \"JIM\"}");
+        query.put("range", "[0,1]");
+
+        Map<String, String> urlParam = new HashMap<>();
+        urlParam.put(":field", "servicedBy");
+        Answer answer = controller.process(payload, urlParam, query, false);
+
+        String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_range_expect.json").toURI()), "UTF-8");
+        JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
+    }
+    @Test
+    public void filterRangeNoUrlParam() throws JSONException, URISyntaxException, IOException {
+        JobsModel model = new JobsModel(storage);
+        EmptyPayload payload = new EmptyPayload();
+
+        ListController controller = new ListController(model);
+
+        Map<String,String> query = new HashMap<>();
+        query.put("sort", "[\"id\", \"DESC\"]");
+        query.put("filter", "{\"servicedBy\": \"JIM\"}");
+        query.put("range", "[0,1]");
+
+        Map<String, String> urlParam = new HashMap<>();
+        Answer answer = controller.process(payload, urlParam, query, false);
+
+        String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_range_expect.json").toURI()), "UTF-8");
+        JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
+    }
 }

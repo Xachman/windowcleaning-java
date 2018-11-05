@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ListController extends Controller<EmptyPayload> {
     private Model model;
@@ -27,12 +28,19 @@ public class ListController extends Controller<EmptyPayload> {
         Map<String, String> headers = new HashMap<>();
         try {
             QueryBuilder qb = new QueryBuilder();
-            if(urlParams.get(":field") != null && query.get("filter") != null) {
+            if(urlParams.get(":field") != null || query.get("filter") != null) {
                 String field = urlParams.get(":field");
                 JSONObject filter = (JSONObject) parser.parse(query.get("filter"));
-                if(filter.get("q") != null) {
-                    String q = filter.get("q").toString();
-                    qb.addFilter(field, q);
+                if(filter.size() > 0) {
+                    for(Object key: filter.keySet()) {
+                        if(key.toString().equals("q")) {
+                            String q = filter.get("q").toString();
+                            qb.addFilter(field, q);
+                            continue;
+                        }
+                        qb.addFilter(key.toString(), filter.get(key));
+                    }
+
                 }
             }
             if(query.get("range") != null) {
