@@ -10,8 +10,8 @@ const dataProvider = new Config.getDataProvider()
 const App = () => (
   <Admin appLayout={AppLayout} customRoutes={Routes} dataProvider={dataProvider}>
     <Resource name="customers" list={CustomersList} edit={CustomerEdit} create={CustomerCreate} show={CustomerShow} />
-    
     <Resource name="jobs" list={JobsList} create={CreateJob}  />
+    <Resource name="customers/filter/name" />
   </Admin>
 )
 
