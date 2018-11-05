@@ -9,7 +9,6 @@ import { withRouter } from 'react-router-dom';
 const Menu = ({ resources, onMenuClick, logout }) => (
     <div>
         {resources.map(resource => {
-            console.log(resource)
             if(resource.hasList) {
                 return (
                     <MenuItemLink to={`/`+resource.name} 
