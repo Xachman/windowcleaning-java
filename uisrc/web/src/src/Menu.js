@@ -8,10 +8,16 @@ import { withRouter } from 'react-router-dom';
 
 const Menu = ({ resources, onMenuClick, logout }) => (
     <div>
-        {resources.map(resource => (
-            <MenuItemLink to={`/`+resource.name} 
-            primaryText={`${resource.name.charAt(0).toUpperCase() + resource.name.slice(1)}`} leftIcon={<Icon />} onClick={onMenuClick} />
-        ))}
+        {resources.map(resource => {
+            console.log(resource)
+            if(resource.hasList) {
+                return (
+                    <MenuItemLink to={`/`+resource.name} 
+                    primaryText={`${resource.name.charAt(0).toUpperCase() + resource.name.slice(1)}`} leftIcon={<Icon />} onClick={onMenuClick} />
+                )
+            }
+        }
+        )}
         <MenuItemLink to="/Calendar" primaryText="Calendar" leftIcon={<EventIcon />} onClick={onMenuClick} />
         <Responsive
             small={logout}
