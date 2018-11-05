@@ -1,4 +1,4 @@
-package com.gti.windowcleaning.model.execute.options;
+package com.gti.windowcleaning.storage.querybuilder;
 
 public class Sort {
     String field;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gti.windowcleaning.data;
+package com.gti.windowcleaning.storage;
 
 import java.util.List;
 
@@ -35,4 +35,6 @@ public interface StorageI {
      <T> List<T> getFilter(Class<T> clazz, String field, Object value);
 
      <T> List<T> getFilterSort(Class<T> clazz, String field, Object value, String field1, boolean ascending);
+
+    <T> List<T> execute(Class<T> clazz, QueryBuilder qb);
 }

@@ -7,8 +7,8 @@ package com.gti.windowcleaning;
 
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
-import com.gti.windowcleaning.data.SQLiteStorage;
-import com.gti.windowcleaning.data.StorageI;
+import com.gti.windowcleaning.storage.SQLiteStorage;
+import com.gti.windowcleaning.storage.StorageI;
 import com.gti.windowcleaning.util.Json;
 
 import java.io.File;

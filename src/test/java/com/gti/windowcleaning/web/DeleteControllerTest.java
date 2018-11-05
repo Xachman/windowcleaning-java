@@ -1,10 +1,7 @@
 package com.gti.windowcleaning.web;
 
 import com.gti.windowcleaning.Util;
-import com.gti.windowcleaning.data.Customer;
-import com.gti.windowcleaning.data.Job;
-import com.gti.windowcleaning.data.SQLiteStorage;
-import com.gti.windowcleaning.data.StorageI;
+import com.gti.windowcleaning.storage.StorageI;
 import com.gti.windowcleaning.model.JobsModel;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.controller.DeleteController;
@@ -15,11 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-import java.io.File;
-import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DeleteControllerTest {

@@ -6,7 +6,7 @@
 package com.gti.windowcleaning.model;
 
 import com.gti.windowcleaning.data.Job;
-import com.gti.windowcleaning.data.StorageI;
+import com.gti.windowcleaning.storage.StorageI;
 
 /**
  *

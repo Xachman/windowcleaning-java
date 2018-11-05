@@ -1,10 +1,10 @@
-package com.gti.windowcleaning.model.execute.options;
+package com.gti.windowcleaning.storage.querybuilder;
 
 public class Filter {
     private String field;
-    private String value;
+    private Object value;
 
-    public Filter(String field, String value) {
+    public Filter(String field, Object value) {
         this.field = field;
         this.value = value;
     }
@@ -13,7 +13,7 @@ public class Filter {
         return field;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 }

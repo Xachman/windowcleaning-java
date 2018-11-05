@@ -5,11 +5,9 @@
  */
 package com.gti.windowcleaning.model;
 
-import com.gti.windowcleaning.data.SQLiteStorage;
-import com.gti.windowcleaning.data.StorageI;
-import com.gti.windowcleaning.model.execute.ExecuteOptions;
-import com.gti.windowcleaning.model.execute.options.Range;
-import com.gti.windowcleaning.model.execute.options.Sort;
+import com.gti.windowcleaning.storage.QueryBuilder;
+import com.gti.windowcleaning.storage.SQLiteStorage;
+import com.gti.windowcleaning.storage.StorageI;
 import com.j256.ormlite.field.DatabaseField;
 import java.io.File;
 import java.lang.reflect.Field;
@@ -78,28 +76,8 @@ public abstract class Model<T> {
             throw new MustIncludeException(errorFields.toString());
         }
     } 
-    public List<T> execute(ExecuteOptions executeOptions) {
-        switch(executeOptions.type()) {
-            case ExecuteOptions.RANGE_SORT:
-                return storage.getRangeSort(clazz,
-                        executeOptions.getRange().getStart(),
-                        executeOptions.getRange().getEnd(),
-                        executeOptions.getSort().getField(),
-                        executeOptions.getSort().isAscending());
-            case ExecuteOptions.RANGE:
-                return storage.getRange(clazz, executeOptions.getRange().getStart(),executeOptions.getRange().getEnd());
-            case ExecuteOptions.SORT:
-                return storage.getSort(clazz, executeOptions.getSort().getField(), executeOptions.getSort().isAscending());
-            case ExecuteOptions.BETWEEN:
-                return processBetween(executeOptions);
-            case ExecuteOptions.BETWEEN_SORT:
-                return processBetween(executeOptions);
-            case ExecuteOptions.FILTER:
-                return processFilter(executeOptions);
-            case ExecuteOptions.FILTER_SORT:
-                return processFilter(executeOptions);
-        }
-        return getAll();
+    public List<T> execute(QueryBuilder qb) {
+        return storage.execute(clazz, qb);
     }
     private boolean fieldIsSet(Field field,  Object object) {
         try {
@@ -148,43 +126,7 @@ public abstract class Model<T> {
         return clazz.getDeclaredField(field).getType();
     }
 
-    private List<T> processBetween(ExecuteOptions eo) {
-        String field = eo.getBetween().getField();
-        Object value1 = processField(field, eo.getBetween().getValue1());
-        Object value2 = processField(field, eo.getBetween().getValue2());
-
-
-
-        switch (eo.type()) {
-            case ExecuteOptions.BETWEEN:
-                return storage.getBetween(clazz, field, value1, value2);
-            case ExecuteOptions.BETWEEN_SORT:
-                return storage.getBetweenSort(clazz, field,
-                        value1,
-                        value2,
-                        eo.getSort().getField(),
-                        eo.getSort().isAscending());
-        }
-        return getAll();
-    }
-    private List<T> processFilter(ExecuteOptions eo) {
-        String field = eo.getFilter().getField();
-        Object value = processField(field, eo.getFilter().getValue());
-
-
-        switch (eo.type()) {
-            case ExecuteOptions.FILTER:
-                return storage.getFilter(clazz, field, value);
-            case ExecuteOptions.FILTER_SORT:
-                return storage.getFilterSort(clazz, field,
-                        value,
-                        eo.getSort().getField(),
-                        eo.getSort().isAscending());
-        }
-        return getAll();
-
-    }
-    private Object processField(String field, Object value) {
+    public Object processField(String field, Object value) {
         try {
             String type = getType(field).getTypeName();
             if(type.equals("java.util.Date")) {

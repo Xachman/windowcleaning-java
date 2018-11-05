@@ -6,13 +6,9 @@
 package com.gti.windowcleaning.web;
 
 import com.gti.windowcleaning.Util;
-import com.gti.windowcleaning.data.Customer;
-import com.gti.windowcleaning.data.Job;
-import com.gti.windowcleaning.data.SQLiteStorage;
-import com.gti.windowcleaning.data.StorageI;
+import com.gti.windowcleaning.storage.StorageI;
 import com.gti.windowcleaning.model.JobsModel;
 import com.gti.windowcleaning.web.controller.ListController;
-import com.gti.windowcleaning.web.controller.jobs.JobsController;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
@@ -24,11 +20,8 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.skyscreamer.jsonassert.JSONCompareMode.STRICT;

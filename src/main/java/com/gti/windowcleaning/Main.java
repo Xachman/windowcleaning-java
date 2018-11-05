@@ -7,7 +7,7 @@ package com.gti.windowcleaning;
 
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
-import com.gti.windowcleaning.data.SQLiteStorage;
+import com.gti.windowcleaning.storage.SQLiteStorage;
 import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.model.JobsModel;
 import com.gti.windowcleaning.web.controller.DeleteController;

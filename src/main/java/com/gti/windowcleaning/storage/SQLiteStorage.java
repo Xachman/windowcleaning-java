@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gti.windowcleaning.data;
+package com.gti.windowcleaning.storage;
 
+import com.gti.windowcleaning.storage.querybuilder.Between;
+import com.gti.windowcleaning.storage.querybuilder.Filter;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -212,6 +214,42 @@ public class SQLiteStorage implements StorageI {
             QueryBuilder qb = dao.queryBuilder();
             qb.where().like(field, "%"+value+"%");
             qb.orderBy(field1, ascending);
+            PreparedQuery<T> pq = qb.prepare();
+            result = dao.query(pq);
+            conn.close();
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public <T> List<T> execute(Class<T> clazz, com.gti.windowcleaning.storage.QueryBuilder builder) {
+        List<T> result = new ArrayList<>();
+        try {
+            JdbcConnectionSource conn = getConnectionSrource();
+            Dao dao = getDao(conn, clazz);
+            QueryBuilder qb = dao.queryBuilder();
+            if(builder.getFilters().size() > 0) {
+                for(Filter filter: builder.getFilters()) {
+                    qb.where().like(filter.getField(), "%"+filter.getValue()+"%");
+                }
+            }
+            if(builder.getBetween().size() > 0) {
+                for(Between between: builder.getBetween()) {
+                    qb.where().between(between.getField(), between.getValue1(), between.getValue2());
+                }
+            }
+            if(builder.getSort() != null) {
+                qb.orderBy(builder.getSort().getField(), builder.getSort().isAscending());
+            }
+            if(builder.getRange() != null) {
+                qb.offset(builder.getRange().getStart());
+                qb.limit(builder.getRange().getEnd()-builder.getRange().getStart());
+            }
             PreparedQuery<T> pq = qb.prepare();
             result = dao.query(pq);
             conn.close();

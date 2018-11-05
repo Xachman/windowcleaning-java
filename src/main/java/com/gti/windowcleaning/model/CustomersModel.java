@@ -6,9 +6,8 @@
 package com.gti.windowcleaning.model;
 
 import com.gti.windowcleaning.data.Customer;
-import com.gti.windowcleaning.data.StorageI;
+import com.gti.windowcleaning.storage.StorageI;
 import java.util.List;
-import org.json.simple.JSONArray;
 
 /**
  *

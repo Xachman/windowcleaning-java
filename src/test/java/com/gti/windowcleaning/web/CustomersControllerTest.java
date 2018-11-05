@@ -7,8 +7,8 @@ package com.gti.windowcleaning.web;
 
 import com.gti.windowcleaning.Util;
 import com.gti.windowcleaning.data.Customer;
-import com.gti.windowcleaning.data.SQLiteStorage;
-import com.gti.windowcleaning.data.StorageI;
+import com.gti.windowcleaning.storage.SQLiteStorage;
+import com.gti.windowcleaning.storage.StorageI;
 import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.web.controller.customers.CustomersController;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
