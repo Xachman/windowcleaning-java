@@ -1,8 +1,15 @@
 import React from 'react';
-import { List, Edit, Show, SimpleShowLayout, DisabledInput, EditButton, Datagrid, DateInput, NumberInput, SelectInput, TextField, Create, TextInput, LongTextInput, TabbedForm, FormTab, BooleanInput, TabbedShowLayout, Tab } from 'react-admin';
+import { Filter, List, Edit, Show, SimpleShowLayout, DisabledInput, EditButton, Datagrid, DateInput, NumberInput, SelectInput, TextField, Create, TextInput, LongTextInput, TabbedForm, FormTab, BooleanInput, TabbedShowLayout, Tab } from 'react-admin';
 import Grid from '@material-ui/core/Grid';
+
+const CustomersFilter = (props) => (
+    <Filter {...props}>
+        <TextInput source="name" />
+    </Filter>
+);
+
 export const CustomersList = (props) => (
-    <List {...props}>
+    <List {...props} filters={<CustomersFilter />}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="name" />
