@@ -36,7 +36,7 @@ public class Main {
         workDir = System.getProperty("user.dir");
         startWeb();
        // popUpMessage(workDir, "Working Dir");
-        openBrowser("http://localhost:8080/ui");
+      //  openBrowser("http://localhost:8080/ui");
     }
 
     private static String requestInfoToString(Request request) {
@@ -80,7 +80,7 @@ public class Main {
         });
         options("/*", (req, res) -> "");
         get("/customers",new ListController(new CustomersModel(storage)));
-        get("/customers/filter/:name",new ListController(new CustomersModel(storage)));
+        get("/customers/filter/:field",new ListController(new CustomersModel(storage)));
 
         get("/customers/:id",new CustomerController(new CustomersModel(storage)));
         delete("/customers/:id",new DeleteCustomerController(new CustomersModel(storage)));
