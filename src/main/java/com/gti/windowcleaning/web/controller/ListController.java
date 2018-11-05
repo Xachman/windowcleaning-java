@@ -33,8 +33,10 @@ public class ListController extends Controller<EmptyPayload> {
             if(urlParams.get(":field") != null && query.get("filter") != null) {
                 String field = urlParams.get(":field");
                 JSONObject filter = (JSONObject) parser.parse(query.get("filter"));
-                String q = filter.get("q").toString();
-                executeOptions.setFilter(field, q);
+                if(filter.get("q") != null) {
+                    String q = filter.get("q").toString();
+                    executeOptions.setFilter(field, q);
+                }
             }
             if(query.get("range") != null) {
                 JSONArray range = (JSONArray) parser.parse(query.get("range"));
