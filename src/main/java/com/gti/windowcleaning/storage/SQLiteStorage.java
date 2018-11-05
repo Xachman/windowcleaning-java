@@ -13,6 +13,8 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.TableUtils;
+import org.json.simple.JSONArray;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -235,6 +237,10 @@ public class SQLiteStorage implements StorageI {
             QueryBuilder qb = dao.queryBuilder();
             if(builder.getFilters().size() > 0) {
                 for(Filter filter: builder.getFilters()) {
+                    if(filter.getValue() instanceof List) {
+                        qb.where().in(filter.getField(), ((List) filter.getValue()));
+                        continue;
+                    }
                     qb.where().like(filter.getField(), "%"+filter.getValue()+"%");
                 }
             }

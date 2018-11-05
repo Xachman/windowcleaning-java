@@ -153,4 +153,20 @@ public class ListControllerTest {
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_range_expect.json").toURI()), "UTF-8");
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
     }
+    @Test
+    public void filterArray() throws JSONException, URISyntaxException, IOException {
+        JobsModel model = new JobsModel(storage);
+        EmptyPayload payload = new EmptyPayload();
+
+        ListController controller = new ListController(model);
+
+        Map<String,String> query = new HashMap<>();
+        query.put("filter", "{\"id\": [1,3,5]}");
+
+        Map<String, String> urlParam = new HashMap<>();
+        Answer answer = controller.process(payload, urlParam, query, false);
+
+        String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_array_expect.json").toURI()), "UTF-8");
+        JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
+    }
 }
