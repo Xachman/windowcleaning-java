@@ -1,5 +1,5 @@
 import React from 'react';
-import { Filter, List, Edit, Show, SimpleShowLayout, DisabledInput, EditButton, Datagrid, DateInput, NumberInput, SelectInput, TextField, Create, TextInput, LongTextInput, TabbedForm, FormTab, BooleanInput, TabbedShowLayout, Tab } from 'react-admin';
+import { Filter, Button, List, Edit, Show, SimpleShowLayout, DisabledInput, EditButton, Datagrid, DateInput, NumberInput, SelectInput, TextField, Create, TextInput, LongTextInput, TabbedForm, FormTab, BooleanInput, TabbedShowLayout, Tab } from 'react-admin';
 import Grid from '@material-ui/core/Grid';
 
 const CustomersFilter = (props) => (
@@ -8,16 +8,22 @@ const CustomersFilter = (props) => (
     </Filter>
 );
 
-export const CustomersList = (props) => (
-    <List {...props} filters={<CustomersFilter />}>
-        <Datagrid>
-            <TextField source="id" />
-            <TextField source="name" />
-            <TextField source="location" />
-            <EditButton />
-        </Datagrid>
-    </List>
-);
+export const CustomersList = (props) => {
+    return (
+        <List {...props} filters={<CustomersFilter />}>
+            <Datagrid>
+                <TextField source="id" />
+                <TextField source="name" />
+                <TextField source="location" />
+                <EditButton />
+                <Button onClick={() => {
+                    console.log(this.props) 
+                    //window.open("#/jobs/customer/create/"+props.id)
+                }} label="Create Job" /> 
+            </Datagrid>
+        </List>
+    )
+}
 
 export const CustomerCreate = (props) => (
     <Create {...props}>
