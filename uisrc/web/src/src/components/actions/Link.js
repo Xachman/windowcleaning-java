@@ -13,10 +13,10 @@ class Link extends Component {
         var value = this.props.record[field]
         console.log(value)
         if(value != undefined) {
-            window.open("#"+path+"/"+value)
+            window.location = "#"+path+"/"+value
             return;
         }
-        window.open("#"+path)
+        window.location = "#"+path
 
     }
 
