@@ -6,7 +6,7 @@ WORKDIR /app/src
 
 RUN npm install -g create-react-app
 
-COPY ./src/package.json /app/src/package.json
+COPY ./src/yarn.lock /app/src/yarn.lock
 
 RUN yarn install
 

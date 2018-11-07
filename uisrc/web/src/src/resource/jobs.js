@@ -19,15 +19,21 @@ export const JobsList = (props) => (
 
 
 
-export const CreateEditJob = (props) => {
-    console.log(props.match.params.id)
+export const CreateJob = (props) => {
+    console.log(props.match.params.customer_id)
     return (
         <Create title="Create Job" {...props}>
-         {editCreateForm(customerInput(props.match.params.id))}
+         {editCreateForm(customerInput(props.match.params.customer_id))}
         </Create>
     )
 
 }
+
+export const EditJob = (props) => (
+    <Edit title="Edit Job" {...props}>
+        {editCreateForm(customerInput(props.match.params.customer_id))}
+    </Edit>
+)
 
 const customerInput = (id) => {
     var customerInput = (
