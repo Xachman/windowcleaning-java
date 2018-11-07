@@ -21,16 +21,15 @@ import java.util.logging.Logger;
  *
  * @author xach
  */
-public abstract class Model<T> {
+public class Model<T> {
     protected StorageI storage;
     protected Class<T> clazz;
     public Model(Class<T> clazz) {
-        this(new SQLiteStorage(System.getProperty("user.home")+File.separator+".windowcleaning"+File.separator+"data.db"), clazz);
+        this(clazz, new SQLiteStorage(System.getProperty("user.home")+File.separator+".windowcleaning"+File.separator+"data.db"));
     }
     
-    public Model(StorageI storage, Class<T> clazz) {
+    public Model(Class<T> clazz,StorageI storage) {
         this.clazz = clazz;
-
         this.storage = storage;
     }
 

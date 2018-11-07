@@ -5,8 +5,6 @@
  */
 package com.gti.windowcleaning.util;
 
-import com.gti.windowcleaning.data.Customer;
-import com.gti.windowcleaning.data.Job;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,6 +16,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.gti.windowcleaning.mock.Customer;
+import com.gti.windowcleaning.mock.Job;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

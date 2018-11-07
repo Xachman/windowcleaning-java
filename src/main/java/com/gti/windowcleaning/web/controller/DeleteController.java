@@ -5,7 +5,6 @@
  */
 package com.gti.windowcleaning.web.controller;
 
-import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.Answer;
 import com.gti.windowcleaning.web.Controller;

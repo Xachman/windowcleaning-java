@@ -6,8 +6,6 @@
 package com.gti.windowcleaning.web.controller;
 
 import com.gti.windowcleaning.data.BaseData;
-import com.gti.windowcleaning.data.Customer;
-import com.gti.windowcleaning.model.CustomersModel;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.model.MustIncludeException;
 import com.gti.windowcleaning.web.Answer;

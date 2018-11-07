@@ -1,14 +1,9 @@
-package com.gti.windowcleaning.data;
+package com.gti.windowcleaning.mock;
 
+import com.gti.windowcleaning.data.BaseData;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -157,3 +152,4 @@ public class Job extends BaseData {
         this.autoPrintServiceStatement = autoPrintServiceStatement;
     }
 }
+

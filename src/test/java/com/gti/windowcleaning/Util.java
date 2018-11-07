@@ -5,8 +5,8 @@
  */
 package com.gti.windowcleaning;
 
-import com.gti.windowcleaning.data.Customer;
-import com.gti.windowcleaning.data.Job;
+import com.gti.windowcleaning.mock.Customer;
+import com.gti.windowcleaning.mock.Job;
 import com.gti.windowcleaning.storage.SQLiteStorage;
 import com.gti.windowcleaning.storage.StorageI;
 import com.gti.windowcleaning.util.Json;

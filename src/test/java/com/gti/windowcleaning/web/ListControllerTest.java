@@ -6,8 +6,9 @@
 package com.gti.windowcleaning.web;
 
 import com.gti.windowcleaning.Util;
+import com.gti.windowcleaning.mock.Job;
 import com.gti.windowcleaning.storage.StorageI;
-import com.gti.windowcleaning.model.JobsModel;
+import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.controller.ListController;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 import org.apache.commons.io.FileUtils;
@@ -38,7 +39,7 @@ public class ListControllerTest {
     }
     @Test
     public void listJobs() throws JSONException, URISyntaxException, IOException {
-        JobsModel model = new JobsModel(storage);
+        Model<Job> model = new Model<>(Job.class, storage);
         EmptyPayload payload = new EmptyPayload();
         
         ListController controller = new ListController(model);
@@ -58,7 +59,7 @@ public class ListControllerTest {
     }
     @Test
     public void sortJobs() throws JSONException, URISyntaxException, IOException {
-        JobsModel model = new JobsModel(storage);
+        Model<Job> model = new Model<>(Job.class, storage);
         EmptyPayload payload = new EmptyPayload();
 
         ListController controller = new ListController(model);
@@ -83,7 +84,7 @@ public class ListControllerTest {
     }
     @Test
     public void between() throws JSONException, URISyntaxException, IOException {
-        JobsModel model = new JobsModel(storage);
+        Model<Job> model = new Model<>(Job.class, storage);
         EmptyPayload payload = new EmptyPayload();
 
         ListController controller = new ListController(model);
@@ -100,7 +101,7 @@ public class ListControllerTest {
 
     @Test
     public void filter() throws JSONException, URISyntaxException, IOException {
-        JobsModel model = new JobsModel(storage);
+        Model<Job> model = new Model<>(Job.class, storage);
         EmptyPayload payload = new EmptyPayload();
 
         ListController controller = new ListController(model);
@@ -118,7 +119,7 @@ public class ListControllerTest {
     }
     @Test
     public void filterRange() throws JSONException, URISyntaxException, IOException {
-        JobsModel model = new JobsModel(storage);
+        Model<Job> model = new Model<>(Job.class, storage);
         EmptyPayload payload = new EmptyPayload();
 
         ListController controller = new ListController(model);
@@ -137,7 +138,7 @@ public class ListControllerTest {
     }
     @Test
     public void filterRangeNoUrlParam() throws JSONException, URISyntaxException, IOException {
-        JobsModel model = new JobsModel(storage);
+        Model<Job> model = new Model<>(Job.class, storage);
         EmptyPayload payload = new EmptyPayload();
 
         ListController controller = new ListController(model);
@@ -155,7 +156,7 @@ public class ListControllerTest {
     }
     @Test
     public void filterArray() throws JSONException, URISyntaxException, IOException {
-        JobsModel model = new JobsModel(storage);
+        Model<Job> model = new Model<>(Job.class, storage);
         EmptyPayload payload = new EmptyPayload();
 
         ListController controller = new ListController(model);

@@ -4,7 +4,7 @@ import com.gti.windowcleaning.Util;
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.storage.StorageI;
-import com.gti.windowcleaning.model.JobsModel;
+import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.controller.EditCreateController;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -35,7 +35,7 @@ public class EditCreateControllerTest {
         job.setPrintServiceStatement(true);
         job.setDescription("Clean Windows");
         job.setNotes("Has Big Windows");
-        JobsModel model = new JobsModel(storage);
+        Model<Job> model = new Model(Job.class, storage);
         EditCreateController controller = new EditCreateController(model);
 
         Answer answer = controller.process(job, Collections.emptyMap(), Collections.emptyMap(), false);
@@ -74,7 +74,7 @@ public class EditCreateControllerTest {
         job.setPrintServiceStatement(true);
         job.setDescription("Clean Windows");
         job.setNotes("Has Big Windows");
-        JobsModel model = new JobsModel(storage);
+        Model<Job> model = new Model(Job.class, storage);
         EditCreateController controller = new EditCreateController(model);
         Map<String,String> urlParams = new HashMap<>();
         urlParams.put(":id", "4");

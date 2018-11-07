@@ -7,14 +7,10 @@ package com.gti.windowcleaning;
 
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
+import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.storage.SQLiteStorage;
-import com.gti.windowcleaning.model.CustomersModel;
-import com.gti.windowcleaning.model.JobsModel;
 import com.gti.windowcleaning.web.controller.DeleteController;
 import com.gti.windowcleaning.web.controller.ListController;
-import com.gti.windowcleaning.web.controller.customers.CustomerController;
-import com.gti.windowcleaning.web.controller.customers.DeleteCustomerController;
-import com.gti.windowcleaning.web.controller.customers.EditCreateCustomerController;
 import com.gti.windowcleaning.web.controller.EditCreateController;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -35,8 +31,6 @@ public class Main {
     public static void main(String[] args) {
         workDir = System.getProperty("user.dir");
         startWeb();
-       // popUpMessage(workDir, "Working Dir");
-      //  openBrowser("http://localhost:8080/ui");
     }
 
     private static String requestInfoToString(Request request) {
@@ -78,19 +72,22 @@ public class Main {
             res.redirect("http://localhost:3000");
             return null;
         });
+
         options("/*", (req, res) -> "");
-        get("/customers",new ListController(new CustomersModel(storage)));
-        get("/customers/filter/:field",new ListController(new CustomersModel(storage)));
 
-        get("/customers/:id",new CustomerController(new CustomersModel(storage)));
-        delete("/customers/:id",new DeleteCustomerController(new CustomersModel(storage)));
-        post("/customers",new EditCreateCustomerController(new CustomersModel(storage)));
-        put("/customers/:id",new EditCreateCustomerController(new CustomersModel(storage)));
+        Model<Job> jobModel = new Model<>(Job.class, storage);
+        Model<Customer> customerModel = new Model<>(Customer.class, storage);
 
-        get("/jobs", new ListController(new JobsModel(storage)));
-        post("/jobs", new EditCreateController(new JobsModel(storage)));
-        put("/jobs/:id", new EditCreateController(new JobsModel(storage)));
-        delete("/job/:id",new DeleteController(new JobsModel(storage)));
+        get("/customers",new ListController(customerModel));
+        delete("/customers/:id",new DeleteController(customerModel));
+        post("/customers",new EditCreateController(customerModel));
+        put("/customers/:id",new EditCreateController(customerModel));
+        get("/customers/filter/:field",new ListController(customerModel));
+
+        get("/jobs", new ListController(jobModel));
+        post("/jobs", new EditCreateController(jobModel));
+        put("/jobs/:id", new EditCreateController(jobModel));
+        delete("/job/:id",new DeleteController(jobModel));
 
 
     }

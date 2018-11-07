@@ -1,8 +1,8 @@
 package com.gti.windowcleaning.web;
 
 import com.gti.windowcleaning.Util;
+import com.gti.windowcleaning.mock.Job;
 import com.gti.windowcleaning.storage.StorageI;
-import com.gti.windowcleaning.model.JobsModel;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.controller.DeleteController;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
@@ -26,7 +26,7 @@ public class DeleteControllerTest {
     @Test
     public void deleteItem() throws JSONException {
         EmptyPayload ep = new EmptyPayload();
-        Model model = new JobsModel(storage);
+        Model<Job> model = new Model<>(Job.class, storage);
         DeleteController controller = new DeleteController(model);
         Map<String, String> urlParams = new HashMap<>();
         urlParams.put(":id", "3");
