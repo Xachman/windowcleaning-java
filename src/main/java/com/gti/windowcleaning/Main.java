@@ -10,6 +10,7 @@ import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.storage.SQLiteStorage;
 import com.gti.windowcleaning.web.controller.DeleteController;
+import com.gti.windowcleaning.web.controller.EntityController;
 import com.gti.windowcleaning.web.controller.ListController;
 import com.gti.windowcleaning.web.controller.EditCreateController;
 import java.io.File;
@@ -79,12 +80,14 @@ public class Main {
         Model<Customer> customerModel = new Model<>(Customer.class, storage);
 
         get("/customers",new ListController(customerModel));
+        get("/customers/:id",new EntityController(customerModel));
         delete("/customers/:id",new DeleteController(customerModel));
         post("/customers",new EditCreateController(customerModel));
         put("/customers/:id",new EditCreateController(customerModel));
         get("/customers/filter/:field",new ListController(customerModel));
 
         get("/jobs", new ListController(jobModel));
+        get("/jobs/:id", new EntityController(jobModel));
         post("/jobs", new EditCreateController(jobModel));
         put("/jobs/:id", new EditCreateController(jobModel));
         delete("/job/:id",new DeleteController(jobModel));

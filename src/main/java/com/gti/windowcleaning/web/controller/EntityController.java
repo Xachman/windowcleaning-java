@@ -1,4 +1,4 @@
-package com.gti.windowcleaning.web.controller.customers;
+package com.gti.windowcleaning.web.controller;
 
         import com.gti.windowcleaning.data.Customer;
         import com.gti.windowcleaning.model.Model;
@@ -13,7 +13,7 @@ package com.gti.windowcleaning.web.controller.customers;
  *
  * @author xach
  */
-public class EntitiyController extends Controller<EmptyPayload> {
+public class EntityController extends Controller<EmptyPayload> {
 
     private Model model;
 
