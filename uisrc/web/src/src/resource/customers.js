@@ -1,6 +1,7 @@
 import React from 'react';
 import { Filter, Button, List, Edit, Show, SimpleShowLayout, DisabledInput, EditButton, Datagrid, DateInput, NumberInput, SelectInput, TextField, Create, TextInput, LongTextInput, TabbedForm, FormTab, BooleanInput, TabbedShowLayout, Tab } from 'react-admin';
 import Grid from '@material-ui/core/Grid';
+import Link from '../components/actions/Link'
 
 const CustomersFilter = (props) => (
     <Filter {...props}>
@@ -16,10 +17,7 @@ export const CustomersList = (props) => {
                 <TextField source="name" />
                 <TextField source="location" />
                 <EditButton />
-                <Button onClick={() => {
-                    console.log(this.props) 
-                    //window.open("#/jobs/customer/create/"+props.id)
-                }} label="Create Job" /> 
+                <Link label="Create Job" path="/jobs/customer/create" recordField="id"/> 
             </Datagrid>
         </List>
     )
