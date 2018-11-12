@@ -7,6 +7,7 @@ package com.gti.windowcleaning;
 
 import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.data.Job;
+import com.gti.windowcleaning.data.customer.Order;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.storage.SQLiteStorage;
 import com.gti.windowcleaning.web.controller.DeleteController;
@@ -60,6 +61,7 @@ public class Main {
         SQLiteStorage storage = new SQLiteStorage(storagePath+File.separator+"data.db");
         storage.create(Customer.class);
         storage.create(Job.class);
+        storage.create(Order.class);
         staticFiles.location("/webui");
         port(8080);
         before((request, response) -> {
@@ -78,6 +80,7 @@ public class Main {
 
         Model<Job> jobModel = new Model<>(Job.class, storage);
         Model<Customer> customerModel = new Model<>(Customer.class, storage);
+        Model<Order> orderModel = new Model<>(Order.class, storage);
 
         get("/customers",new ListController(customerModel));
         get("/customers/:id",new EntityController(customerModel));
@@ -92,7 +95,11 @@ public class Main {
         put("/jobs/:id", new EditCreateController(jobModel));
         delete("/job/:id",new DeleteController(jobModel));
 
-
+        get("/orders", new ListController(orderModel));
+        get("/orders/:id", new EntityController(orderModel));
+        post("/orders", new EditCreateController(orderModel));
+        put("/orders/:id", new EditCreateController(orderModel));
+        delete("/order/:id",new DeleteController(orderModel));
     }
 
     

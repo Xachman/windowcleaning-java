@@ -26,7 +26,7 @@ export class Calendar extends React.Component {
 
     getEvents(startDate, endDate, timezone, callback) {
 
-        this.dataProvider(GET_LIST, 'jobs', {
+        this.dataProvider(GET_LIST, 'orders', {
             between: {
                 serviceDate: [startDate.unix()*1000,endDate.unix()*1000]
             }

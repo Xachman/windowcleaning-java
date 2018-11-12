@@ -11,7 +11,6 @@ export const JobsList = (props) => (
             <ReferenceField label="Customer" source="customer.id" reference="customers">
                 <TextField source="name" />
             </ReferenceField>
-            <DateField source="serviceDate" />
             <EditButton />
         </Datagrid>
     </List>
@@ -50,8 +49,6 @@ const editCreateForm = (customerInput) => (
     <SimpleForm>
         <DisabledInput source="id" />
         {customerInput}
-        <TextInput source="servicedBy" />
-        <DateTimeInput source="serviceDate" />
         <NumberInput source="amount" />
         <NumberInput source="daysBetween" />
         <NumberInput source="percent" />

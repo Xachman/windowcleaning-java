@@ -21,11 +21,7 @@ public class Job extends BaseData {
     @DatabaseField(canBeNull = false, foreign = true)
     private Customer customer;
     @DatabaseField(canBeNull = false)
-    private String servicedBy;
-    @DatabaseField(canBeNull = false)
     private double amount;
-    @DatabaseField(canBeNull = false)
-    private Date serviceDate;
     @DatabaseField()
     private int daysBetween;
     @DatabaseField()
@@ -61,13 +57,6 @@ public class Job extends BaseData {
         this.customer = customer;
     }
 
-    public String getServicedBy() {
-        return servicedBy;
-    }
-
-    public void setServicedBy(String servicedBy) {
-        this.servicedBy = servicedBy;
-    }
 
     public double getAmount() {
         return amount;
@@ -75,14 +64,6 @@ public class Job extends BaseData {
 
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public Date getServiceDate() {
-        return serviceDate;
-    }
-
-    public void setServiceDate(Date serviceDate) {
-        this.serviceDate = serviceDate;
     }
 
     public int getDaysBetween() {
