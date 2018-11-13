@@ -59,10 +59,13 @@ public class Main {
         }
          
         System.out.println(storagePath);
+
         SQLiteStorage storage = new SQLiteStorage(storagePath+File.separator+"data.db");
         storage.create(Customer.class);
         storage.create(Job.class);
         storage.create(Order.class);
+        storage.create(Invoice.class);
+
         staticFiles.location("/webui");
         port(8080);
         before((request, response) -> {

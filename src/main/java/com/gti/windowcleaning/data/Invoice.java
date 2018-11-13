@@ -2,9 +2,11 @@ package com.gti.windowcleaning.data;
 
 import com.gti.windowcleaning.data.customer.Order;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
 
+@DatabaseTable(tableName = "invoices")
 public class Invoice extends BaseData {
     @DatabaseField(generatedId = true)
     private int id;
