@@ -6,6 +6,7 @@ import Routes from './Routes';
 import { Config } from './Config';
 import AppLayout from './AppLayout';
 import { OrdersList } from './resource/orders';
+import { InvoicesList } from './resource/invoices';
 const dataProvider = new Config.getDataProvider()
 
 const App = () => (
@@ -13,6 +14,7 @@ const App = () => (
     <Resource name="customers" list={CustomersList} edit={CustomerEdit} create={CustomerCreate} show={CustomerShow} />
     <Resource name="jobs" list={JobsList} create={CreateJob} edit={EditJob}  />
     <Resource name="orders" list={OrdersList}  />
+    <Resource name="invoices" list={InvoicesList}  />
 
     <Resource name="customers/filter/name" />
   </Admin>
