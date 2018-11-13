@@ -6,6 +6,7 @@
 package com.gti.windowcleaning;
 
 import com.gti.windowcleaning.data.Customer;
+import com.gti.windowcleaning.data.Invoice;
 import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.data.customer.Order;
 import com.gti.windowcleaning.model.Model;
@@ -81,6 +82,7 @@ public class Main {
         Model<Job> jobModel = new Model<>(Job.class, storage);
         Model<Customer> customerModel = new Model<>(Customer.class, storage);
         Model<Order> orderModel = new Model<>(Order.class, storage);
+        Model<Invoice> invoiceModel = new Model<>(Invoice.class, storage);
 
         get("/customers",new ListController(customerModel));
         get("/customers/:id",new EntityController(customerModel));
@@ -100,6 +102,12 @@ public class Main {
         post("/orders", new EditCreateController(orderModel));
         put("/orders/:id", new EditCreateController(orderModel));
         delete("/order/:id",new DeleteController(orderModel));
+
+        get("/invoices", new ListController(invoiceModel));
+        get("/invoices/:id", new EntityController(invoiceModel));
+        post("/invoices", new EditCreateController(invoiceModel));
+        put("/invoices/:id", new EditCreateController(invoiceModel));
+        delete("/invoice/:id",new DeleteController(invoiceModel));
     }
 
     
