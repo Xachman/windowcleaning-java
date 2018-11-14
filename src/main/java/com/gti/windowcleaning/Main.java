@@ -113,27 +113,6 @@ public class Main {
         delete("/invoice/:id",new DeleteController(invoiceModel));
     }
 
-    
-
-    public static boolean openBrowser(String uri) {
-        try {
-            // enter code here
-
-
-            Process p = new ProcessBuilder().command(
-                    new File(workDir+"/executables/nw/nw").getAbsolutePath(),
-                    new File(workDir+"/nw").getAbsolutePath()
-            ).inheritIO().start();
-            int exitCode = p.waitFor();
-            System.exit(0);
-            return true;
-            // enter code here
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
-        return false;
-    }
-
     public static void popUpMessage(String infoMessage, String titleBar) {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }

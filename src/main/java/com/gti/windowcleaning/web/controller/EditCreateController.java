@@ -36,6 +36,7 @@ public class EditCreateController extends Controller<BaseData> {
                     Object result = model.save(value);
                     return new Answer(200, dataToJson(result));
                 }
+                System.out.println(value);
                 Object result = model.update(value);
                 return new Answer(200, dataToJson(result));
 

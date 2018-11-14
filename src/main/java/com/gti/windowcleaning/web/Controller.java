@@ -66,6 +66,7 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             V value = null;
+            System.out.println(valueClass);
             if (valueClass != EmptyPayload.class) {
                 value = objectMapper.readValue(request.body(), valueClass);
             }
