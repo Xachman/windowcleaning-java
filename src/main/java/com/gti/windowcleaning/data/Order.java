@@ -1,4 +1,4 @@
-package com.gti.windowcleaning.data.customer;
+package com.gti.windowcleaning.data;
 
 import com.gti.windowcleaning.data.BaseData;
 import com.gti.windowcleaning.data.Customer;
