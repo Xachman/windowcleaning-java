@@ -16,25 +16,11 @@ public interface StorageI {
      void drop(Class clazz);
      <T> List<T> get(Class<T> clazz);
      <T> T get(Class<T> clazz, int id);
-     <T> List<T> getByField(Class<T> clazz, String fieldName);
      <T>  T add(T object);
      <T>  T update(T object);
      <T>  List<T> add(Class<T> clazz, List<T> object);
      <T>  List<T> getRange(Class<T> clazz, long start, long end);
      <T> long getTotalCount(Class<T> clazz);
      boolean remove(Class clazz, int id);
-
-     <T>  List<T> getSort(Class<T> clazz, String field, boolean desending);
-
-     <T> List<T> getRangeSort(Class<T> clazz, long start, long end, String field, boolean ascending);
-
-    <T> List<T> getBetween(Class<T> clazz, String field, Object value1, Object value2);
-
-     <T> List<T> getBetweenSort(Class<T> clazz, String field, Object value1, Object value2, String field1, boolean ascending);
-
-     <T> List<T> getFilter(Class<T> clazz, String field, Object value);
-
-     <T> List<T> getFilterSort(Class<T> clazz, String field, Object value, String field1, boolean ascending);
-
     <T> List<T> execute(Class<T> clazz, QueryBuilder qb);
 }
