@@ -24,7 +24,7 @@ public class EditCreateController extends Controller<BaseData> {
     private Model model;
 
     public EditCreateController(Model model) {
-        super(model.getClazz(), model);
+        super(model.getClazz());
         this.model = model;
     }
 

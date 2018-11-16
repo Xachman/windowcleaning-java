@@ -18,7 +18,7 @@ public class ListController extends Controller<EmptyPayload> {
     private Model model;
 
     public ListController(Model model) {
-        super(EmptyPayload.class, model);
+        super(EmptyPayload.class);
         this.model = model;
     }
 

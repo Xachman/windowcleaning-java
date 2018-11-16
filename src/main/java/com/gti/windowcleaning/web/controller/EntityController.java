@@ -18,7 +18,7 @@ public class EntityController extends Controller<EmptyPayload> {
     private Model model;
 
     public EntityController(Model model) {
-        super(EmptyPayload.class, model);
+        super(EmptyPayload.class);
         this.model = model;
     }
 

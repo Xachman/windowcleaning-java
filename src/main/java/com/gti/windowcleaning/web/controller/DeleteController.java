@@ -22,7 +22,7 @@ public class DeleteController extends Controller<EmptyPayload> {
     private Model model;
 
     public DeleteController(Model model) {
-        super(EmptyPayload.class, model);
+        super(EmptyPayload.class);
         this.model = model;
     }
     

@@ -26,13 +26,11 @@ import java.util.Map.Entry;
 public abstract class Controller<V extends ValidI> implements ControllerI<V>, Route {
 
     private Class<V> valueClass;
-    protected Model model;
 
     private static final int HTTP_BAD_REQUEST = 400;
 
-    public Controller(Class<V> valueClass, Model model){
+    public Controller(Class<V> valueClass){
         this.valueClass = valueClass;
-        this.model = model;
     }
 
     private static boolean shouldReturnHtml(Request request) {
