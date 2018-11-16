@@ -1,6 +1,6 @@
 package com.gti.windowcleaning.data;
 
-import com.gti.windowcleaning.data.customer.Order;
+import com.gti.windowcleaning.data.Order;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
