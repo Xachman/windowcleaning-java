@@ -81,10 +81,6 @@ public class SQLiteStorage implements StorageI {
         throw new NoSuchElementException("No element with "+id+" found");
     }
 
-    @Override
-    public <T> List<T> getByField(Class<T> clazz, String fieldName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public <T> T add(T object) {
@@ -119,114 +115,6 @@ public class SQLiteStorage implements StorageI {
         return false;
     }
 
-    @Override
-    public <T> List<T> getSort(Class<T> clazz, String field, boolean desending) {
-        return null;
-    }
-
-    @Override
-    public <T> List<T> getRangeSort(Class<T> clazz, long start, long end, String field, boolean ascending) {
-        List<T> result = new ArrayList<>();
-        try {
-            JdbcConnectionSource conn = getConnectionSrource();
-            Dao dao = getDao(conn, clazz);
-            QueryBuilder qb = dao.queryBuilder();
-            qb.offset(start);
-            qb.limit(end-start);
-            qb.orderBy(field, ascending);
-            PreparedQuery<T> pq = qb.prepare();
-            result = dao.query(pq);
-            conn.close();
-            return result;
-        } catch (SQLException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
-    }
-
-    @Override
-    public <T> List<T> getBetween(Class<T> clazz, String field, Object value1, Object value2) {
-        List<T> result = new ArrayList<>();
-        try {
-            JdbcConnectionSource conn = getConnectionSrource();
-            Dao dao = getDao(conn, clazz);
-            QueryBuilder qb = dao.queryBuilder();
-            qb.where().between(field, value1, value2);
-            PreparedQuery<T> pq = qb.prepare();
-            result = dao.query(pq);
-            conn.close();
-            return result;
-        } catch (SQLException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
-    }
-
-    @Override
-    public <T> List<T> getBetweenSort(Class<T> clazz, String field, Object value1, Object value2, String field1, boolean ascending) {
-        List<T> result = new ArrayList<>();
-        try {
-            JdbcConnectionSource conn = getConnectionSrource();
-            Dao dao = getDao(conn, clazz);
-            QueryBuilder qb = dao.queryBuilder();
-            qb.where().between(field, value1, value2);
-            qb.orderBy(field1, ascending);
-            PreparedQuery<T> pq = qb.prepare();
-            result = dao.query(pq);
-            conn.close();
-            return result;
-        } catch (SQLException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
-    }
-
-    @Override
-    public <T> List<T> getFilter(Class<T> clazz, String field, Object value) {
-        List<T> result = new ArrayList<>();
-        try {
-            JdbcConnectionSource conn = getConnectionSrource();
-            Dao dao = getDao(conn, clazz);
-            QueryBuilder qb = dao.queryBuilder();
-            qb.where().like(field, "%"+value+"%");
-            PreparedQuery<T> pq = qb.prepare();
-            result = dao.query(pq);
-            conn.close();
-            return result;
-        } catch (SQLException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
-    }
-
-    @Override
-    public <T> List<T> getFilterSort(Class<T> clazz, String field, Object value, String field1, boolean ascending) {
-        List<T> result = new ArrayList<>();
-        try {
-            JdbcConnectionSource conn = getConnectionSrource();
-            Dao dao = getDao(conn, clazz);
-            QueryBuilder qb = dao.queryBuilder();
-            qb.where().like(field, "%"+value+"%");
-            qb.orderBy(field1, ascending);
-            PreparedQuery<T> pq = qb.prepare();
-            result = dao.query(pq);
-            conn.close();
-            return result;
-        } catch (SQLException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SQLiteStorage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
-    }
 
     @Override
     public <T> List<T> execute(Class<T> clazz, com.gti.windowcleaning.storage.QueryBuilder builder) {
