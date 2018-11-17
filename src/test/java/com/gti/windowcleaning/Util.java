@@ -7,6 +7,7 @@ package com.gti.windowcleaning;
 
 import com.gti.windowcleaning.mock.Customer;
 import com.gti.windowcleaning.mock.Job;
+import com.gti.windowcleaning.mock.Order;
 import com.gti.windowcleaning.storage.SQLiteStorage;
 import com.gti.windowcleaning.storage.StorageI;
 import com.gti.windowcleaning.util.Json;
@@ -31,6 +32,12 @@ public class Util {
         return jsonUtil.getJobs(Util.class.getResource("/mocks/data/jobs.json").getFile(), customers);
     }
 
+    static public List<Order> assembleOrders(List<Job> jobs) {
+        Json jsonUtil = new Json();
+
+        return jsonUtil.getOrders(Util.class.getResource("/mocks/data/jobs.json").getFile(), jobs);
+    }
+
     static public StorageI getTestDB() {
         File file = new File("out/test.db");
 
@@ -39,10 +46,13 @@ public class Util {
         storage.drop(Customer.class);
         storage.create(Customer.class);
         storage.create(Job.class);
+        storage.create(Order.class);
         List<Customer> customers = Util.assembleCustomers();
         List<Job> jobs = Util.assembleJobs(customers);
+        List<Order> orders = Util.assembleOrders(jobs);
         storage.add(Customer.class, customers);
         storage.add(Job.class, jobs);
+        storage.add(Order.class, orders);
         return storage;
     }
 }

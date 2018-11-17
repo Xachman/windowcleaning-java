@@ -10,6 +10,7 @@ import 'fullcalendar/dist/fullcalendar.js';
 export class Calendar extends React.Component {
     dataProvider = Config.getDataProvider();
     cal;
+    items = [];
     componentDidMount() {
         this.cal = $(this.refs.calendar).fullCalendar({
             events: this.getEvents.bind(this),
@@ -31,7 +32,23 @@ export class Calendar extends React.Component {
                 serviceDate: [startDate.unix()*1000,endDate.unix()*1000]
             }
         }).then((data) => {
-            callback(this.arrangeEvents(data.data))
+            console.log(data)
+            this.items = []
+            data.data.map((item) => {
+                this.dataProvider(GET_LIST, 'jobs', {
+                    filter: {"id": [item.job.id]}
+                }).then((job) => {
+                    this.dataProvider(GET_LIST, 'customers', {
+                        filter: {"id": [job.data[0].customer.id]}
+                    }).then((customer) => {
+                        item["job"] = job.data[0]
+                        item["customer"] = customer.data[0]
+                        this.items.push(item)
+                        callback(this.arrangeEvents(this.items))
+                    })
+                })
+
+            })
         })
     }
 
@@ -39,9 +56,10 @@ export class Calendar extends React.Component {
         let result = [];
         for(var i = 0; i < data.length; i++ ){
             let item = data[i];
+            console.log(item)
             result.push({
-                title: item.servicedBy,
-                start: new Date(item.serviceDate)
+                start: new Date(item.serviceDate),
+                title: item.customer.name
             })
         }
         return result

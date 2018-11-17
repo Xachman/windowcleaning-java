@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 
 import com.gti.windowcleaning.mock.Customer;
 import com.gti.windowcleaning.mock.Job;
+import com.gti.windowcleaning.mock.Order;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -204,6 +205,45 @@ public class Json {
         }
         return jobs;
 
+    }
+
+    public List<Order> getOrders(String path, List<Job> jobs) {
+        List<Order> orders = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        try {
+            String fileName = path;
+            FileReader r = new FileReader(fileName);
+            Object obj = parser.parse(r);
+            JSONArray jOrders = (JSONArray) obj;
+
+            Iterator<JSONObject> iter = jOrders.iterator();
+
+
+            while(iter.hasNext()) {
+                JSONObject jobj = iter.next();
+                int job_id = new Integer(jobj.get("job_id").toString());
+                Order order = new Order();
+                for(Job job: jobs) {
+                    if(job_id == job.getId()) {
+                        order.setJob(job);
+                    }
+                }
+                order.setId(new Integer(jobj.get("id").toString()));
+                order.setDoneBy(jobj.get("doneBy").toString());
+                order.setServiceDate(new Date((long) jobj.get("serviceDate")));
+                order.setStatus(jobj.get("status").toString());
+                orders.add(order);
+            }
+
+            return orders;
+        } catch (org.json.simple.parser.ParseException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
     private double parseDouble(Object d) {
        if(d == null) return 0.00;
