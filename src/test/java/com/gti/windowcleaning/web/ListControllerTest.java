@@ -35,7 +35,7 @@ public class ListControllerTest {
     StorageI storage;
     @Before
     public void setUp()  {
-        storage = Util.getTestDB();
+        storage = Util.getMockDB();
     }
     @Test
     public void listJobs() throws JSONException, URISyntaxException, IOException {

@@ -48,11 +48,11 @@ public class CalendarControllerTest {
         EmptyPayload payload = new EmptyPayload();
 
 
-        CalendarController controller = new CalendarController(orderModel, jobModel, customerModel);
+        CalendarController controller = new CalendarController(jobModel, customerModel, orderModel);
         Map<String, String> query = new HashMap<>();
         query.put("between", "{\"serviceDate\": [1542240000000, 1542240000000]}");
 
-        controller.process(payload, Collections.emptyMap(), query, false);
+        Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
 
     }
 }

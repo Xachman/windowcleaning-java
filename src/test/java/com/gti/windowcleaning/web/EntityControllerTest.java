@@ -1,7 +1,7 @@
 package com.gti.windowcleaning.web;
 
 import com.gti.windowcleaning.Util;
-import com.gti.windowcleaning.mock.Customer;
+import com.gti.windowcleaning.data.Customer;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 import org.apache.commons.io.FileUtils;

@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.gti.windowcleaning.mock.Customer;
-import com.gti.windowcleaning.mock.Job;
-import com.gti.windowcleaning.mock.Order;
+import com.gti.windowcleaning.data.Customer;
+import com.gti.windowcleaning.data.Job;
+import com.gti.windowcleaning.data.Order;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -160,6 +160,62 @@ public class Json {
             while(iter.hasNext()) {
                 JSONObject jobj = iter.next();
                 int customer_id = new Integer(jobj.get("customer_id").toString());
+                double amount =  parseDouble(jobj.get("amount").toString());
+                int days_between = new Integer(jobj.get("days_between").toString());
+                double precent = parseDouble(jobj.get("percent").toString());
+                boolean print_service_statement = parseBoolean(jobj.get("print_service_statement"));
+                boolean print_invoice = parseBoolean(jobj.get("print_invoice"));
+                boolean payment_expected = parseBoolean(jobj.get("payment_expected"));
+                String description = parseString(jobj.get("description"));
+                int difficulty = new Integer(jobj.get("difficulty").toString());
+                String notes = parseString(jobj.get("notes"));
+                boolean auto_print_service_statement = parseBoolean(jobj.get("auto_print_service_statement"));
+                Job job = new Job();
+
+                job.setAmount(amount);
+                job.setDaysBetween(days_between);
+                job.setPercent(precent);
+                job.setAutoPrintServiceStatement(auto_print_service_statement);
+                job.setDescription(description);
+                job.setPrintServiceStatement(print_service_statement);
+                job.setPaymentExpected(payment_expected);
+                job.setPrintInvoice(print_invoice);
+                job.setDifficulty(difficulty);
+                job.setNotes(notes);
+                
+                for(Customer customer: customers) {
+                    if(customer_id == customer.getId()) {
+                        job.setCustomer(customer);
+                    }
+                }
+                jobs.add(job);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        } catch (org.json.simple.parser.ParseException ex) {
+            Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return jobs;
+
+    }
+
+    public List<com.gti.windowcleaning.mock.Job> getMockJobs(String path, List<Customer> customers) {
+
+        List<com.gti.windowcleaning.mock.Job> jobs = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        try {
+            String fileName = path;
+            FileReader r = new FileReader(fileName);
+            Object obj = parser.parse(r);
+            JSONArray jCustomers = (JSONArray) obj;
+
+            Iterator<JSONObject> iter = jCustomers.iterator();
+            SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+            while(iter.hasNext()) {
+                JSONObject jobj = iter.next();
+                int customer_id = new Integer(jobj.get("customer_id").toString());
                 String servicedBy = jobj.get("serviced_by").toString();
                 double amount =  parseDouble(jobj.get("amount").toString());
                 Date serviceDate = sdf.parse(jobj.get("service_date").toString());
@@ -172,7 +228,7 @@ public class Json {
                 int difficulty = new Integer(jobj.get("difficulty").toString());
                 String notes = parseString(jobj.get("notes"));
                 boolean auto_print_service_statement = parseBoolean(jobj.get("auto_print_service_statement"));
-                Job job = new Job();
+                com.gti.windowcleaning.mock.Job job = new com.gti.windowcleaning.mock.Job();
 
                 job.setServicedBy(servicedBy);
                 job.setServiceDate(serviceDate);
@@ -186,7 +242,7 @@ public class Json {
                 job.setPrintInvoice(print_invoice);
                 job.setDifficulty(difficulty);
                 job.setNotes(notes);
-                
+
                 for(Customer customer: customers) {
                     if(customer_id == customer.getId()) {
                         job.setCustomer(customer);

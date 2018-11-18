@@ -1,8 +1,8 @@
 package com.gti.windowcleaning.web;
 
 import com.gti.windowcleaning.Util;
-import com.gti.windowcleaning.mock.Customer;
-import com.gti.windowcleaning.mock.Job;
+import com.gti.windowcleaning.data.Customer;
+import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.storage.StorageI;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.controller.EditCreateController;
@@ -25,10 +25,8 @@ public class EditCreateControllerTest {
         Customer customer = new Customer();
         customer.setId(5);
         job.setCustomer(customer);
-        job.setServicedBy("Tim");
         job.setAmount(200.00);
         Date date = new Date();
-        job.setServiceDate(date);
         job.setAutoPrintServiceStatement(true);
         job.setPrintInvoice(true);
         job.setPaymentExpected(true);
@@ -47,9 +45,7 @@ public class EditCreateControllerTest {
         Job inJob = model.get(11);
 
         assertEquals(5, inJob.getCustomer().getId());
-        assertEquals("Tim", inJob.getServicedBy());
         assertEquals(200.00, job.getAmount(), 0.0f);
-        assertEquals(date, inJob.getServiceDate());
         assertEquals(true, inJob.isAutoPrintServiceStatement());
         assertEquals(true, inJob.isPaymentExpected());
         assertEquals(true, inJob.isPrintInvoice());
@@ -64,10 +60,8 @@ public class EditCreateControllerTest {
         customer.setId(5);
         job.setId(4);
         job.setCustomer(customer);
-        job.setServicedBy("Tim");
         job.setAmount(200.00);
         Date date = new Date();
-        job.setServiceDate(date);
         job.setAutoPrintServiceStatement(true);
         job.setPrintInvoice(true);
         job.setPaymentExpected(true);
@@ -87,9 +81,7 @@ public class EditCreateControllerTest {
         Job inJob = model.get(4);
 
         assertEquals(5, inJob.getCustomer().getId());
-        assertEquals("Tim", inJob.getServicedBy());
         assertEquals(200.00, job.getAmount(), 0.0f);
-        assertEquals(date, inJob.getServiceDate());
         assertEquals(true, inJob.isAutoPrintServiceStatement());
         assertEquals(true, inJob.isPaymentExpected());
         assertEquals(true, inJob.isPrintInvoice());

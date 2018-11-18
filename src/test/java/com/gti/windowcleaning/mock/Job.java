@@ -1,6 +1,7 @@
 package com.gti.windowcleaning.mock;
 
 import com.gti.windowcleaning.data.BaseData;
+import com.gti.windowcleaning.data.Customer;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
