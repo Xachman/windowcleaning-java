@@ -14,6 +14,7 @@ export class Calendar extends React.Component {
     componentDidMount() {
         this.cal = $(this.refs.calendar).fullCalendar({
             events: this.getEvents.bind(this),
+            displayEventEnd: false,
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -27,28 +28,13 @@ export class Calendar extends React.Component {
 
     getEvents(startDate, endDate, timezone, callback) {
 
-        this.dataProvider(GET_LIST, 'orders', {
+        this.dataProvider(GET_LIST, 'calendar', {
             between: {
                 serviceDate: [startDate.unix()*1000,endDate.unix()*1000]
             }
         }).then((data) => {
-            console.log(data)
-            this.items = []
-            data.data.map((item) => {
-                this.dataProvider(GET_LIST, 'jobs', {
-                    filter: {"id": [item.job.id]}
-                }).then((job) => {
-                    this.dataProvider(GET_LIST, 'customers', {
-                        filter: {"id": [job.data[0].customer.id]}
-                    }).then((customer) => {
-                        item["job"] = job.data[0]
-                        item["customer"] = customer.data[0]
-                        this.items.push(item)
-                        callback(this.arrangeEvents(this.items))
-                    })
-                })
-
-            })
+            let result = this.arrangeEvents(data.data)
+            callback(result)
         })
     }
 
@@ -56,10 +42,9 @@ export class Calendar extends React.Component {
         let result = [];
         for(var i = 0; i < data.length; i++ ){
             let item = data[i];
-            console.log(item)
             result.push({
                 start: new Date(item.serviceDate),
-                title: item.customer.name
+                title: "\nCustomer: "+item.job.customer.name+"\nTech: "+item.doneBy
             })
         }
         return result

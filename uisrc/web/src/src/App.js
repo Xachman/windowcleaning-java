@@ -17,6 +17,7 @@ const App = () => (
     <Resource name="invoices" list={InvoicesList}  />
 
     <Resource name="customers/filter/name" />
+    <Resource name="calendar" />
   </Admin>
 )
 
