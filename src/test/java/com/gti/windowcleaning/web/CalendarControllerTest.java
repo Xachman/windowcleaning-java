@@ -58,6 +58,7 @@ public class CalendarControllerTest {
 
         // 1544383319341 - 1544803188591
         assertEquals(200, answer.getCode());
+        assertEquals("1-2/2", answer.getHeaders().get("Content-Range"));
         String expect = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/calendar_expect.json").toURI()), "UTF-8");
         JSONAssert.assertEquals(expect, answer.getBody(), JSONCompareMode.STRICT);
     }

@@ -53,7 +53,8 @@ public class CalendarController extends Controller<EmptyPayload> {
                 order.setJob(jobsModel.get(order.getJob().getId()));
                 order.getJob().setCustomer(customersModel.get(order.getJob().getCustomer().getId()));
             }
-            return new Answer(200, dataToJson(orders));
+            headers.put("Content-Range", "1-"+orders.size()+"/"+orders.size());
+            return new Answer(200, dataToJson(orders), headers);
 
         } catch (ParseException e) {
             e.printStackTrace();

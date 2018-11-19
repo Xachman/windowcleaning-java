@@ -11,10 +11,8 @@ import com.gti.windowcleaning.data.Job;
 import com.gti.windowcleaning.data.Order;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.storage.SQLiteStorage;
-import com.gti.windowcleaning.web.controller.DeleteController;
-import com.gti.windowcleaning.web.controller.EntityController;
-import com.gti.windowcleaning.web.controller.ListController;
-import com.gti.windowcleaning.web.controller.EditCreateController;
+import com.gti.windowcleaning.web.controller.*;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -111,6 +109,8 @@ public class Main {
         post("/invoices", new EditCreateController(invoiceModel));
         put("/invoices/:id", new EditCreateController(invoiceModel));
         delete("/invoice/:id",new DeleteController(invoiceModel));
+
+        get("/calendar", new CalendarController(jobModel,customerModel,orderModel));
     }
 
     public static void popUpMessage(String infoMessage, String titleBar) {
