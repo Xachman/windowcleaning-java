@@ -52,7 +52,7 @@ public class CalendarControllerTest {
 
         CalendarController controller = new CalendarController(jobModel, customerModel, orderModel);
         Map<String, String> query = new HashMap<>();
-        query.put("between", "{\"serviceDate\": [1542240000000, 1542240000000]}");
+        query.put("between", "{\"serviceDate\": [1544383319341, 1544803188591]}");
 
         Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
 

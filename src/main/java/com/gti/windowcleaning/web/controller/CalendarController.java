@@ -48,6 +48,7 @@ public class CalendarController extends Controller<EmptyPayload> {
             }
 
             List<Order> orders = ordersModel.execute(qb);
+
             for(Order order: orders) {
                 order.setJob(jobsModel.get(order.getJob().getId()));
                 order.getJob().setCustomer(customersModel.get(order.getJob().getCustomer().getId()));

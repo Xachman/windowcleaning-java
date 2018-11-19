@@ -48,9 +48,7 @@
                     "quarterlyBill": false,
                     "billNotes": ""
                 },
-            "servicedBy": "Terry",
             "amount": 209.99,
-            "serviceDate": 1531886400000,
             "daysBetween": 184,
             "percent": 0.47,
             "printServiceStatement": false,
@@ -64,7 +62,8 @@
         },
         "serviceDate":1544383319341,
         "doneBy":"Bill",
-        "status":"D"
+        "status":"D",
+        "valid": true
     },
     {
         "id":9,
@@ -114,9 +113,7 @@
                     "quarterlyBill": true,
                     "billNotes": ""
                 },
-            "servicedBy": "Terry",
             "amount": 151.35,
-            "serviceDate": 1477108800000,
             "daysBetween": 5,
             "percent": 0.02,
             "printServiceStatement": true,
@@ -130,6 +127,7 @@
         },
         "serviceDate":1544803188591,
         "doneBy":"Jim",
-        "status":"M"
+        "status":"M",
+        "valid": true
     }
 ]
