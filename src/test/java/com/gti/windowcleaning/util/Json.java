@@ -172,6 +172,7 @@ public class Json {
                 boolean auto_print_service_statement = parseBoolean(jobj.get("auto_print_service_statement"));
                 Job job = new Job();
 
+                job.setId(new Integer(jobj.get("id").toString()));
                 job.setAmount(amount);
                 job.setDaysBetween(days_between);
                 job.setPercent(precent);

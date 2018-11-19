@@ -14,10 +14,15 @@ import com.gti.windowcleaning.storage.QueryBuilder;
 import com.gti.windowcleaning.storage.StorageI;
 import com.gti.windowcleaning.web.controller.CalendarController;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
+import static junit.framework.Assert.*;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -31,9 +36,6 @@ import static org.mockito.Mockito.*;
  */
 public class CalendarControllerTest {
     StorageI storage;
-    List<Job> jobs;
-    List<Customer> customers;
-    List<Order> orders;
 
     @Before
     public void setUp()  {
@@ -55,6 +57,8 @@ public class CalendarControllerTest {
         Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
 
         // 1544383319341 - 1544803188591
-
+        assertEquals(200, answer.getCode());
+        String expect = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/calendar_expect.json").toURI()), "UTF-8");
+        JSONAssert.assertEquals(expect, answer.getBody(), JSONCompareMode.STRICT);
     }
 }
