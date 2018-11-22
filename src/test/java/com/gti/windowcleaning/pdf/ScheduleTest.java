@@ -23,6 +23,7 @@ public class ScheduleTest {
         item1.put("amount", "600.00");
         item1.put("dateTime", "11/12/2018 8:00AM");
         item1.put("invoice", "123456");
+        item1.put("payment", "600.00");
         item1.put("totals", "600.00");
         items.add(item1);
 
@@ -32,7 +33,9 @@ public class ScheduleTest {
         item2.put("location", "Dover");
         item2.put("dateTime", "11/12/2018 9:00AM");
         item2.put("notes", "Some notes about this job2");
+        item2.put("invoice", "");
         item2.put("amount", "400.00");
+        item2.put("payment", "400.00");
         item2.put("totals", "400.00");
         items.add(item2);
 
@@ -44,6 +47,7 @@ public class ScheduleTest {
         item3.put("amount", "1600.00");
         item3.put("dateTime", "11/12/2018 10:00AM");
         item3.put("totals", "1600.00");
+        item3.put("payment", "");
         item3.put("invoice", "123457");
         items.add(item3);
 

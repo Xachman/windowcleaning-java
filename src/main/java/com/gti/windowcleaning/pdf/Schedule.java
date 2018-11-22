@@ -44,14 +44,32 @@ public class Schedule implements PDFI {
         try {
             contentStream = new PDPageContentStream(document, page);
             int count = 0;
-            int boxStart = 50;
+            int boxStart = 75;
             PDRectangle rect = page.getMediaBox();
             int topMargin = 15;
+            int line = 12;
             for(Map<String,String> item : schedule) {
-                addText(item.get("doneBy"), page, document, 12, 10 , rect.getHeight() - 12 - topMargin - boxStart*count);
-                addText(item.get("customer"), page, document, 12, 10, rect.getHeight() - 24 - topMargin - boxStart*count);
-                addText(item.get("location"), page, document, 12, 150, rect.getHeight() - 24 - topMargin - boxStart*count);
-                addText(item.get("notes"), page, document, 12, 10, rect.getHeight() - 36 - topMargin - boxStart*count);
+                addText(item.get("doneBy"), page, document, 12, 10 , rect.getHeight() - line - topMargin - boxStart*count);
+                addText(item.get("dateTime"), page, document, 12, 200, rect.getHeight() - line - topMargin - boxStart*count);
+                addText("Customer", page, document, 12, 10, rect.getHeight() - line*2 - topMargin - boxStart*count);
+                addText("Location", page, document, 12, 150, rect.getHeight() - line*2 - topMargin - boxStart*count);
+                addText("Amount", page, document, 12, 350, rect.getHeight() - line*2 - topMargin - boxStart*count);
+                addText("Invoice", page, document, 12, 250, rect.getHeight() - line*2 - topMargin - boxStart*count);
+                addText("Payment", page, document, 12, 400, rect.getHeight() - line*2 - topMargin - boxStart*count);
+                addText("Amnt. Coll.", page, document, 12, 475, rect.getHeight() - line*2 - topMargin - boxStart*count);
+                drawLine(475,rect.getHeight() - line*4 - topMargin - boxStart*count, 540, rect.getHeight() - line*4 - topMargin - boxStart*count);
+                addText("Code", page, document, 12, 550, rect.getHeight() - line*2 - topMargin - boxStart*count);
+                drawLine(550,rect.getHeight() - line*4 - topMargin - boxStart*count, 600, rect.getHeight() - line*4 - topMargin - boxStart*count);
+                addText(item.get("invoice"), page, document, 12, 250, rect.getHeight() - line*3 - topMargin - boxStart*count);
+                addText(item.get("customer"), page, document, 12, 10, rect.getHeight() - line*3 - topMargin - boxStart*count);
+                addText(item.get("location"), page, document, 12, 150, rect.getHeight() - line*3 - topMargin - boxStart*count);
+                addText(item.get("amount"), page, document, 12, 350, rect.getHeight() - line*3 - topMargin - boxStart*count);
+                addText(item.get("payment"), page, document, 12, 400, rect.getHeight() - line*3 - topMargin - boxStart*count);
+                addText(item.get("notes"), page, document, 12, 10, rect.getHeight() - line*4 - topMargin - boxStart*count);
+                addText("Totals", page, document, 12, 250, rect.getHeight() - line*5 - topMargin - boxStart*count);
+                drawLine(350,rect.getHeight()+2 - line*4 - topMargin - boxStart*count, 450, rect.getHeight()+2 - line*4 - topMargin - boxStart*count);
+                addText(item.get("totals"), page, document, 12, 350, rect.getHeight() - line*5 - topMargin - boxStart*count);
+                addText(item.get("payment"), page, document, 12, 400, rect.getHeight() - line*5 - topMargin - boxStart*count);
                 count++;
             }
             contentStream.saveGraphicsState();
@@ -62,6 +80,7 @@ public class Schedule implements PDFI {
             setText(document);
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             document.save(output);
+            document.save("/home/xach/testpdfbox.pdf");
             document.close();
             return output;
         } catch (IOException e) {
@@ -90,6 +109,10 @@ public class Schedule implements PDFI {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void drawLine(float startX, float startY, float endX, float endY) throws IOException {
+        contentStream.drawLine(startX, startY, endX, endY);
     }
 
 }
