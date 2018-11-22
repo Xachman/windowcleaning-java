@@ -80,7 +80,6 @@ public class Schedule implements PDFI {
             setText(document);
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             document.save(output);
-            document.save("/home/xach/testpdfbox.pdf");
             document.close();
             return output;
         } catch (IOException e) {
