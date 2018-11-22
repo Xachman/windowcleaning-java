@@ -20,8 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import spark.Request;
 
-import javax.swing.*;
-
 import static spark.Spark.*;
 /**
  *
@@ -111,9 +109,5 @@ public class Main {
         delete("/invoice/:id",new DeleteController(invoiceModel));
 
         get("/calendar", new CalendarController(jobModel,customerModel,orderModel));
-    }
-
-    public static void popUpMessage(String infoMessage, String titleBar) {
-        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 }

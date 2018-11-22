@@ -80,7 +80,6 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
             } else {
                 response.type("application/json");
             }
-            response.body(answer.getBody());
             for(Entry<String,String> entry: answer.getHeaders().entrySet()) {
                 response.header(entry.getKey(), entry.getValue());
             }

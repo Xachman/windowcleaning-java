@@ -44,7 +44,7 @@ public class Answer {
         return "Answer(code=" + code + ", body=" + body + ")";
     }
 
-    public String getBody() {
+    public Object getBody() {
         return body;
     }
 
