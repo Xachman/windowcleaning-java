@@ -44,7 +44,7 @@ public class ScheduleTest {
         item3.put("amount", "1600.00");
         item3.put("dateTime", "11/12/2018 10:00AM");
         item3.put("totals", "1600.00");
-        item1.put("invoice", "123457");
+        item3.put("invoice", "123457");
         items.add(item3);
 
         data.put("schedule", items);
@@ -61,10 +61,29 @@ public class ScheduleTest {
         assertTrue(result.contains("Burk, David"));
         assertTrue(result.contains("Tim"));
         assertTrue(result.contains("Salisbury"));
+        assertTrue(result.contains("600.00"));
+        assertTrue(result.contains("11/12/2018 8:00AM"));
+        assertTrue(result.contains("123456"));
+        assertTrue(result.contains("600.00"));
         assertTrue(result.contains("Some notes about this job"));
-        assertTrue(result.contains("Some notes about this job2"));
-        assertTrue(result.contains("Some notes about this job3"));
+
 
         assertTrue(result.contains("Williams, Terry"));
+        assertTrue(result.contains("Tim"));
+        assertTrue(result.contains("Dover"));
+        assertTrue(result.contains("11/12/2018 9:00AM"));
+        assertTrue(result.contains("Some notes about this job2"));
+        assertTrue(result.contains("400.00"));
+        assertTrue(result.contains("400.00"));
+
+
+        assertTrue(result.contains("Hanks, Tom"));
+        assertTrue(result.contains("Tim"));
+        assertTrue(result.contains("Stanford"));
+        assertTrue(result.contains("Some notes about this job3"));
+        assertTrue(result.contains("1600.00"));
+        assertTrue(result.contains("11/12/2018 10:00AM"));
+        assertTrue(result.contains("1600.00"));
+        assertTrue(result.contains("123457"));
     }
 }
