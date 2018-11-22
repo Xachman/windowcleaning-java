@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CalendarController extends Controller<EmptyPayload> {
+public class CalendarController extends Controller<EmptyPayload,String> {
     Model<Job> jobsModel;
     Model<Customer> customersModel;
     Model<Order> ordersModel;

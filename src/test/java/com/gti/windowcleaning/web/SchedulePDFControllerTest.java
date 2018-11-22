@@ -7,10 +7,12 @@ import com.gti.windowcleaning.data.Order;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.controller.SchedulePDFController;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
+import org.apache.pdfbox.pdfparser.PDFParser;
 import org.junit.Before;
 import org.junit.Test;
 import com.gti.windowcleaning.storage.StorageI;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +24,7 @@ public class SchedulePDFControllerTest {
         storage = Util.getTestDB();
     }
     @Test
-    public void getSchedule() {
+    public void getSchedule() throws IOException {
         Model<Job> jobs = new Model<>(Job.class, storage);
         Model<Customer> customers = new Model<>(Customer.class, storage);
         Model<Order> orders = new Model<>(Order.class, storage);
@@ -35,6 +37,6 @@ public class SchedulePDFControllerTest {
 
         Answer answer = controller.process(new EmptyPayload(), Collections.emptyMap(),  query, false);
 
-        answer.getBody();
+       // PDFParser parser = new PDFParser(Buanswer.getBody());
     }
 }

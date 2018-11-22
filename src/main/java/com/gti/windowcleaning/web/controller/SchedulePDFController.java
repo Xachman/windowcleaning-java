@@ -8,9 +8,10 @@ import com.gti.windowcleaning.web.Answer;
 import com.gti.windowcleaning.web.Controller;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Map;
 
-public class SchedulePDFController extends Controller<EmptyPayload> {
+public class SchedulePDFController extends Controller<EmptyPayload, ByteArrayOutputStream> {
     Model<Customer> customerModel;
     Model<Job> jobModel;
     Model<Order> orderModel;

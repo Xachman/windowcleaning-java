@@ -23,7 +23,7 @@ import com.gti.windowcleaning.web.valid.EmptyPayload;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-public abstract class Controller<V extends ValidI> implements ControllerI<V>, Route {
+public abstract class Controller<V extends ValidI,T extends Object> implements ControllerI<V>, Route {
 
     private Class<V> valueClass;
 
@@ -48,7 +48,7 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
     }
 
     @Override
-    public final Answer process(V value, Map<String, String> urlParams, Map<String,String> query, boolean shouldReturnHtml) {
+    public final Answer<T> process(V value, Map<String, String> urlParams, Map<String,String> query, boolean shouldReturnHtml) {
         if (value != null && !value.isValid()) {
             return new Answer(HTTP_BAD_REQUEST);
         } else {
@@ -56,7 +56,7 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
         }
     }
 
-    protected abstract Answer processImpl(V value, Map<String, String> urlParams, Map<String,String> query, boolean shouldReturnHtml);
+    protected abstract Answer<T> processImpl(V value, Map<String, String> urlParams, Map<String,String> query, boolean shouldReturnHtml);
 
 
     @Override
@@ -73,7 +73,7 @@ public abstract class Controller<V extends ValidI> implements ControllerI<V>, Ro
             request.queryParams().forEach((key) -> {
                 query.put(key, request.queryParams(key));
             });
-            Answer answer = process(value, urlParams, query, shouldReturnHtml(request));
+            Answer<T> answer = process(value, urlParams, query, shouldReturnHtml(request));
             response.status(answer.getCode());
             if (shouldReturnHtml(request)) {
                 response.type("text/html");

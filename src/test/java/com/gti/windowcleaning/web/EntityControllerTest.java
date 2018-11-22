@@ -36,7 +36,7 @@ public class EntityControllerTest {
         com.gti.windowcleaning.web.controller.EntityController controller = new EntityController(model);
         Map<String, String> urlParams = new HashMap<>();
         urlParams.put(":id", "1");
-        Answer answer = controller.process(ep, urlParams, Collections.emptyMap(), false);
+        Answer<String> answer = controller.process(ep, urlParams, Collections.emptyMap(), false);
         String expect = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/customer_expect.json").toURI()), "UTF-8");
         Assert.assertEquals(200, answer.getCode());
         JSONAssert.assertEquals(expect, answer.getBody(), false);

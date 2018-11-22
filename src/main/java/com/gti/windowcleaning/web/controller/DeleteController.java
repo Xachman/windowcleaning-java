@@ -17,7 +17,7 @@ import java.util.Map;
  *
  * @author xach
  */
-public class DeleteController extends Controller<EmptyPayload> {
+public class DeleteController extends Controller<EmptyPayload,String> {
 
     private Model model;
 

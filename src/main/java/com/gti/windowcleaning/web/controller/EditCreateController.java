@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author xach
  */
-public class EditCreateController extends Controller<BaseData> {
+public class EditCreateController extends Controller<BaseData,String> {
     private Model model;
 
     public EditCreateController(Model model) {

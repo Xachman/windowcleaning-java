@@ -13,7 +13,7 @@ package com.gti.windowcleaning.web.controller;
  *
  * @author xach
  */
-public class EntityController extends Controller<EmptyPayload> {
+public class EntityController extends Controller<EmptyPayload,String> {
 
     private Model model;
 

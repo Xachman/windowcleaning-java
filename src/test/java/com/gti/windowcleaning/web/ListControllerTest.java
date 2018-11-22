@@ -43,15 +43,14 @@ public class ListControllerTest {
         EmptyPayload payload = new EmptyPayload();
         
         ListController controller = new ListController(model);
-        Answer answer = controller.process(payload, Collections.emptyMap(), Collections.emptyMap(), false);
-        
+        Answer<String> answer = controller.process(payload, Collections.emptyMap(), Collections.emptyMap(), false);
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_expect.json").toURI()), "UTF-8");
         Assert.assertEquals("1-10/10", answer.getHeaders().get("Content-Range"));
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
        
         Map<String,String> query = new HashMap<>();
         query.put("range", "[2,5]");
-        Answer answer2 = controller.process(payload, Collections.emptyMap(), query, false);
+        Answer<String> answer2 = controller.process(payload, Collections.emptyMap(), query, false);
        
         String actual2 = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_expect2.json").toURI()), "UTF-8");
         Assert.assertEquals("3-6/10", answer2.getHeaders().get("Content-Range"));
@@ -67,7 +66,7 @@ public class ListControllerTest {
         Map<String,String> query = new HashMap<>();
         query.put("range", "[0,2]");
         query.put("sort", "[\"serviceDate\", \"DESC\"]");
-        Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
+        Answer<String> answer = controller.process(payload, Collections.emptyMap(), query, false);
 
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_sort_expect.json").toURI()), "UTF-8");
         Assert.assertEquals("1-3/10", answer.getHeaders().get("Content-Range"));
@@ -76,7 +75,7 @@ public class ListControllerTest {
         Map<String,String> query2 = new HashMap<>();
         query2.put("range", "[0,2]");
         query2.put("sort", "[\"serviceDate\", \"ASC\"]");
-        Answer answer2 = controller.process(payload, Collections.emptyMap(), query2, false);
+        Answer<String> answer2 = controller.process(payload, Collections.emptyMap(), query2, false);
 
         String actual2 = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_sort_ASC_expect.json").toURI()), "UTF-8");
         Assert.assertEquals("1-3/10", answer2.getHeaders().get("Content-Range"));
@@ -92,7 +91,7 @@ public class ListControllerTest {
         Map<String,String> query = new HashMap<>();
         query.put("sort", "[\"serviceDate\", \"ASC\"]");
         query.put("between", "{\"serviceDate\": [1401336000000, 1419570000000]}");
-        Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
+        Answer<String> answer = controller.process(payload, Collections.emptyMap(), query, false);
 
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_between_expect.json").toURI()), "UTF-8");
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
@@ -112,7 +111,7 @@ public class ListControllerTest {
 
         Map<String, String> urlParam = new HashMap<>();
         urlParam.put(":field", "servicedBy");
-        Answer answer = controller.process(payload, urlParam, query, false);
+        Answer<String> answer = controller.process(payload, urlParam, query, false);
 
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_expect.json").toURI()), "UTF-8");
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
@@ -131,7 +130,7 @@ public class ListControllerTest {
 
         Map<String, String> urlParam = new HashMap<>();
         urlParam.put(":field", "servicedBy");
-        Answer answer = controller.process(payload, urlParam, query, false);
+        Answer<String> answer = controller.process(payload, urlParam, query, false);
 
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_range_expect.json").toURI()), "UTF-8");
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
@@ -149,7 +148,7 @@ public class ListControllerTest {
         query.put("range", "[0,1]");
 
         Map<String, String> urlParam = new HashMap<>();
-        Answer answer = controller.process(payload, urlParam, query, false);
+        Answer<String> answer = controller.process(payload, urlParam, query, false);
 
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_range_expect.json").toURI()), "UTF-8");
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);
@@ -165,7 +164,7 @@ public class ListControllerTest {
         query.put("filter", "{\"id\": [1,3,5]}");
 
         Map<String, String> urlParam = new HashMap<>();
-        Answer answer = controller.process(payload, urlParam, query, false);
+        Answer<String> answer = controller.process(payload, urlParam, query, false);
 
         String actual = FileUtils.readFileToString(new File(getClass().getResource("/mocks/data/web/jobs_filter_array_expect.json").toURI()), "UTF-8");
         JSONAssert.assertEquals(actual, answer.getBody(), STRICT);

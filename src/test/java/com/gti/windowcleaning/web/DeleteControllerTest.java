@@ -31,7 +31,7 @@ public class DeleteControllerTest {
         Map<String, String> urlParams = new HashMap<>();
         urlParams.put(":id", "3");
 
-        Answer answer = controller.process(ep, urlParams, Collections.emptyMap(), false);
+        Answer<String> answer = controller.process(ep, urlParams, Collections.emptyMap(), false);
 
         Assert.assertEquals(200, answer.getCode());
         Assert.assertEquals(9, model.getAll().size());

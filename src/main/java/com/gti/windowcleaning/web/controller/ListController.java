@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class ListController extends Controller<EmptyPayload> {
+public class ListController extends Controller<EmptyPayload,String> {
     private Model model;
 
     public ListController(Model model) {
@@ -23,7 +23,7 @@ public class ListController extends Controller<EmptyPayload> {
     }
 
     @Override
-    protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, Map<String, String> query, boolean shouldReturnHtml) {
+    protected Answer<String> processImpl(EmptyPayload value, Map<String, String> urlParams, Map<String, String> query, boolean shouldReturnHtml) {
         JSONParser parser = new JSONParser();
         Map<String, String> headers = new HashMap<>();
         try {

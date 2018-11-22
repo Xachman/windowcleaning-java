@@ -54,7 +54,7 @@ public class CalendarControllerTest {
         Map<String, String> query = new HashMap<>();
         query.put("between", "{\"serviceDate\": [1544383319341, 1544803188591]}");
 
-        Answer answer = controller.process(payload, Collections.emptyMap(), query, false);
+        Answer<String> answer = controller.process(payload, Collections.emptyMap(), query, false);
 
         // 1544383319341 - 1544803188591
         assertEquals(200, answer.getCode());

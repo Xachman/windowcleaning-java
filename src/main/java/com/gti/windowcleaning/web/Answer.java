@@ -12,11 +12,26 @@ import java.util.Map;
  *
  * @author xach
  */
-public class Answer {
+public class Answer<T> {
     private Map<String,String> headers = new HashMap<>();
+    private int code;
+    private T body;
+
+    public Answer(int code, T body) {
+       this.code = code;
+       this.body = body;
+    }
+    public Answer(int code, T body, Map<String,String> headers) {
+        this(code, body);
+        this.headers = headers;
+    }
+
+    public static Answer ok(String body) {
+        return new Answer(200, body);
+    }
     public Answer(int code) {
         this.code = code;
-        this.body = "";
+        this.body = (T) "";
     }
 
     @Override
@@ -44,7 +59,7 @@ public class Answer {
         return "Answer(code=" + code + ", body=" + body + ")";
     }
 
-    public Object getBody() {
+    public T getBody() {
         return body;
     }
 
@@ -52,22 +67,6 @@ public class Answer {
         return code;
     }
 
-    private int code;
-    private String body;
-
-    public Answer(int code, String body){
-        this.code = code;
-        this.body = body;
-    }
-
-    public Answer(int code, String body, Map<String,String> headers) {
-        this(code, body);
-        this.headers = headers;
-    }
-
-    public static Answer ok(String body) {
-        return new Answer(200, body);
-    }
 
     public Map<String, String> getHeaders() {
         return headers;
