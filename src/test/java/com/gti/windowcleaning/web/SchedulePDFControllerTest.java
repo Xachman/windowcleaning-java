@@ -7,12 +7,16 @@ import com.gti.windowcleaning.data.Order;
 import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.controller.SchedulePDFController;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
+import org.apache.pdfbox.io.RandomAccessBuffer;
 import org.apache.pdfbox.pdfparser.PDFParser;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import com.gti.windowcleaning.storage.StorageI;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,8 +39,20 @@ public class SchedulePDFControllerTest {
         query.put("between", "{\"serviceDate\": [1544383319341, 1544803188591]}");
         query.put("filter", "{\"doneBy\": Tim}");
 
-        Answer answer = controller.process(new EmptyPayload(), Collections.emptyMap(),  query, false);
+        Answer<ByteArrayOutputStream> answer = controller.process(new EmptyPayload(), Collections.emptyMap(),  query, false);
 
-       // PDFParser parser = new PDFParser(Buanswer.getBody());
+        PDFParser parser = new PDFParser(new RandomAccessBuffer(answer.getBody().toByteArray()));
+
+        parser.parse();
+        PDDocument doc = parser.getPDDocument();
+
+        String text = "";
+        try {
+            text = new PDFTextStripper().getText(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals("Totals", text.contains("Totals"));
     }
 }
