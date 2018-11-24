@@ -37,7 +37,7 @@ public class SchedulePDFControllerTest {
 
         Map<String,String> query = new HashMap<>();
         query.put("between", "{\"serviceDate\": [1544383319341, 1544803188591]}");
-        query.put("filter", "{\"doneBy\": Tim}");
+        query.put("filter", "{\"doneBy\": \"Jim\"}");
 
         Answer<ByteArrayOutputStream> answer = controller.process(new EmptyPayload(), Collections.emptyMap(),  query, false);
 
@@ -53,6 +53,6 @@ public class SchedulePDFControllerTest {
             e.printStackTrace();
         }
 
-        assertEquals("Totals", text.contains("Totals"));
+        assertTrue(text.contains("Totals"));
     }
 }
