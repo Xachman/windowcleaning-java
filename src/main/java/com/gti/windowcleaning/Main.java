@@ -109,5 +109,7 @@ public class Main {
         delete("/invoice/:id",new DeleteController(invoiceModel));
 
         get("/calendar", new CalendarController(jobModel,customerModel,orderModel));
+
+        get("/pdf/schedule", new SchedulePDFController(customerModel,jobModel,orderModel));
     }
 }

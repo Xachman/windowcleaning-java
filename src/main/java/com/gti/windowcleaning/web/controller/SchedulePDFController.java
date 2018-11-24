@@ -75,7 +75,8 @@ public class SchedulePDFController extends Controller<EmptyPayload, ByteArrayOut
                 item1.put("customer", order.getJob().getCustomer().getName());
                 item1.put("doneBy", order.getDoneBy());
                 item1.put("location",  order.getJob().getCustomer().getLocation());
-                item1.put("notes", order.getJob().getNotes().replace("\n", "").replace("\r", ""));
+                item1.put("notes", (order.getJob().getNotes() != null)?
+                        order.getJob().getNotes().replace("\n", "").replace("\r", "") : "");
                 item1.put("amount", ""+order.getJob().getAmount());
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy H:mma");
                 item1.put("dateTime", sdf.format(order.getServiceDate()));
@@ -85,12 +86,12 @@ public class SchedulePDFController extends Controller<EmptyPayload, ByteArrayOut
                 items.add(item1);
             }
             data.put("schedule", items);
-            headers.put("Content-Range", "1-"+orders.size()+"/"+orders.size());
 
             Schedule scheduleGenerator = new Schedule();
             scheduleGenerator.setData(data);
             ByteArrayOutputStream pdfOutSteam = scheduleGenerator.process();
-            return new Answer(200, pdfOutSteam);
+            headers.put("Content-Type", "application/pdf");
+            return new Answer(200, pdfOutSteam, headers);
 
         } catch (ParseException e) {
             e.printStackTrace();

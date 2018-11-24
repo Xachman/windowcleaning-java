@@ -52,7 +52,7 @@ public class SchedulePDFControllerTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        assertEquals("application/pdf", answer.getHeaders().get("Content-Type"));
         assertTrue(text.contains("Totals"));
     }
 }

@@ -79,6 +79,7 @@ public class Schedule implements PDFI {
             cat.setMetadata(metadata);
             setText(document);
             ByteArrayOutputStream output = new ByteArrayOutputStream();
+            document.save("/home/xach/testpdfbox.pdf");
             document.save(output);
             document.close();
             return output;
