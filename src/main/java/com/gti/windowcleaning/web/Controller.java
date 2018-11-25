@@ -9,7 +9,10 @@ package com.gti.windowcleaning.web;
  *
  * @author xach
  */
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
 
 import spark.Request;
@@ -18,8 +21,8 @@ import spark.Route;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gti.windowcleaning.model.Model;
 import com.gti.windowcleaning.web.valid.EmptyPayload;
+
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -83,7 +86,16 @@ public abstract class Controller<V extends ValidI,T extends Object> implements C
             for(Entry<String,String> entry: answer.getHeaders().entrySet()) {
                 response.header(entry.getKey(), entry.getValue());
             }
+            if(answer.getBody().getClass().getTypeName().equals("java.lang.String")) {
+                response.body((String) answer.getBody());
+                return answer.getBody();
+            }
+            ByteArrayOutputStream os = (ByteArrayOutputStream) answer.getBody();
+            response.raw().getOutputStream().write(os.toByteArray(), 0, os.toByteArray().length);
+            response.body(new String(os.toByteArray()));
+
             return answer.getBody();
+
         } catch (JsonMappingException e) {
             response.status(400);
             response.body(e.getMessage());
