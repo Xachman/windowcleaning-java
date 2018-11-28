@@ -54,5 +54,7 @@ public class SchedulePDFControllerTest {
         }
         assertEquals("application/pdf", answer.getHeaders().get("Content-Type"));
         assertTrue(text.contains("Totals"));
+        assertTrue(!text.contains("Bill"));
+        assertTrue(!text.contains("John"));
     }
 }
