@@ -12,6 +12,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.TableUtils;
 import org.json.simple.JSONArray;
 
@@ -123,18 +124,26 @@ public class SQLiteStorage implements StorageI {
             JdbcConnectionSource conn = getConnectionSrource();
             Dao dao = getDao(conn, clazz);
             QueryBuilder qb = dao.queryBuilder();
-            if(builder.getFilters().size() > 0) {
-                for(Filter filter: builder.getFilters()) {
-                    if(filter.getValue() instanceof List) {
-                        qb.where().in(filter.getField(), ((List) filter.getValue()));
-                        continue;
+            boolean hasWhere = false;
+            if(builder.getFilters().size() > 0 || builder.getBetween().size() > 0) {
+                Where where = qb.where();
+                if (builder.getFilters().size() > 0) {
+                    for (Filter filter : builder.getFilters()) {
+                        if (filter.getValue() instanceof List) {
+                            where.in(filter.getField(), ((List) filter.getValue()));
+                            continue;
+                        }
+                        where.like(filter.getField(), "%" + filter.getValue() + "%");
                     }
-                    qb.where().like(filter.getField(), "%"+filter.getValue()+"%");
+                    hasWhere = true;
                 }
-            }
-            if(builder.getBetween().size() > 0) {
-                for(Between between: builder.getBetween()) {
-                    qb.where().between(between.getField(), between.getValue1(), between.getValue2());
+                if (builder.getBetween().size() > 0) {
+                    for (Between between : builder.getBetween()) {
+                        if (hasWhere) {
+                            where.and();
+                        }
+                        where.between(between.getField(), between.getValue1(), between.getValue2());
+                    }
                 }
             }
             if(builder.getSort() != null) {
