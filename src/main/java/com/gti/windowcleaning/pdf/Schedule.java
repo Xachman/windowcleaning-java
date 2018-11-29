@@ -46,8 +46,9 @@ public class Schedule extends PDFAbstract {
             drawLine(350, 450, curLine+3);
             addText(item.get("totals"), 350,curLine+4);
             addText(item.get("payment"), 400,curLine+4);
-            addText(item.get("notes"), 10,curLine+5);
-            line = line + 7;
+            int noteLines = addText(item.get("notes"), 10,curLine+5);
+
+            line = line + 7 +(noteLines-1);
             count++;
         }
     }

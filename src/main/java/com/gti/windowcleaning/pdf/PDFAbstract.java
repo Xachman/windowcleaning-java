@@ -21,28 +21,35 @@ abstract class PDFAbstract implements PDFI {
     protected PDDocument document;
     protected PDPage page;
     protected String text;
-    protected int TOP_MARGIN = 12;
+    protected int TOP_MARGIN = 15;
     protected int FONT_SIZE = 12;
     protected int LINE_SIZE = 12;
     private PDRectangle rect;
 
-    protected void addText(String text, float start, float line , float fontSize) {
-        float y = rect.getHeight() - line*LINE_SIZE - TOP_MARGIN;
+    protected int addText(String text, float start, float lineN , float fontSize) {
         float x = start;
-        try {
-            PDFont font = PDType1Font.HELVETICA;
-            contentStream.beginText();
-            contentStream.setFont(font, fontSize);
-            contentStream.moveTextPositionByAmount(x, y);
-            contentStream.drawString(text);
-            contentStream.endText();
-        } catch (IOException e) {
-            e.printStackTrace();
+        int linesAdded = 0;
+        String lines[] = text.split("\\r?\\n");
+        for(int i = 0; i < lines.length; i++) {
+            String line = lines[i];
+            float y = rect.getHeight() - (linesAdded+lineN)*LINE_SIZE - TOP_MARGIN;
+            try {
+                PDFont font = PDType1Font.HELVETICA;
+                contentStream.beginText();
+                contentStream.setFont(font, fontSize);
+                contentStream.moveTextPositionByAmount(x, y);
+                contentStream.drawString(line);
+                contentStream.endText();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            linesAdded++;
         }
+        return linesAdded;
     }
 
-    protected void addText(String text, float start, float line) {
-        addText(text, start, line, FONT_SIZE);
+    protected int addText(String text, float start, float line) {
+        return addText(text, start, line, FONT_SIZE);
     }
 
     @Override
@@ -88,4 +95,13 @@ abstract class PDFAbstract implements PDFI {
         contentStream.drawLine(startX, y, endX, y);
     }
     abstract void addContent() throws IOException;
+
+    private int[] possibleWrapPoints(String text) {
+        String[] split = text.split("(?<=\\W)");
+        int[] ret = new int[split.length];
+        ret[0] = split[0].length();
+        for ( int i = 1 ; i < split.length ; i++ )
+            ret[i] = ret[i-1] + split[i].length();
+        return ret;
+    }
 }

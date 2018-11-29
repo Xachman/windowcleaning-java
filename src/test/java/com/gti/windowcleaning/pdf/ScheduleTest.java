@@ -19,7 +19,7 @@ public class ScheduleTest {
         item1.put("customer", "Burk, David");
         item1.put("doneBy", "Tim");
         item1.put("location", "Salisbury");
-        item1.put("notes", "Some notes about this job");
+        item1.put("notes", "Some notes about this job this job note happens to be really long so that we can test line wrapping.  Its important to know if we can calculate the lines that are wrapped and where to wrap.");
         item1.put("amount", "600.00");
         item1.put("dateTime", "11/12/2018 8:00AM");
         item1.put("invoice", "123456");
@@ -32,7 +32,7 @@ public class ScheduleTest {
         item2.put("doneBy", "Tim");
         item2.put("location", "Dover");
         item2.put("dateTime", "11/12/2018 9:00AM");
-        item2.put("notes", "Some notes about this job2");
+        item2.put("notes", "Some notes about this job2\nNext line job2 notes\nLine 3 for job2");
         item2.put("invoice", "");
         item2.put("amount", "400.00");
         item2.put("payment", "400.00");
@@ -69,14 +69,14 @@ public class ScheduleTest {
         assertTrue(result.contains("11/12/2018 8:00AM"));
         assertTrue(result.contains("123456"));
         assertTrue(result.contains("600.00"));
-        assertTrue(result.contains("Some notes about this job"));
+        assertTrue(result.contains("Some notes about this job this job note happens to be really long so that we can test line wrapping.  Its\nimportant to know if we can calculate the lines that are wrapped and where to wrap."));
 
 
         assertTrue(result.contains("Williams, Terry"));
         assertTrue(result.contains("Tim"));
         assertTrue(result.contains("Dover"));
         assertTrue(result.contains("11/12/2018 9:00AM"));
-        assertTrue(result.contains("Some notes about this job2"));
+        assertTrue(result.contains("Some notes about this job2\nNext line job2 notes\nLine 3 for job2"));
         assertTrue(result.contains("400.00"));
         assertTrue(result.contains("400.00"));
 
